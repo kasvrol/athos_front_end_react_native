@@ -44,7 +44,7 @@ yarn install
 
 Execute o projeto:
 ```bash
-expo start
+yarn start
 ```
 
 Acesse o aplicativo:
