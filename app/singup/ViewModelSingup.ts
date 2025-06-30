@@ -2,10 +2,10 @@ import { useRouter } from "expo-router";
 import {
 	SignUpFormData,
 	singUpFormSchema,
-} from "@/app/utils/zod-schemas/singup";
+} from "@/utils/zod-schemas/singup";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { ViewModelInterface } from "@/app/utils/interfaces/singup";
+import { ViewModelInterface } from "@/utils/interfaces/singup";
 import { useState } from "react";
 
 export const ViewModelSingup = (): ViewModelInterface => {
