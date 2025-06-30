@@ -1,0 +1,34 @@
+.container {
+  flex: 1;
+}
+
+.innerContainer {
+  flex: 1;
+  justify-content: 'center';
+  padding: 20;
+  background-color: '#fff';
+}
+
+.logo {
+  width: 150;
+  height: 150;
+  align-self: 'center';
+  margin-bottom: 10;
+}
+
+.title {
+  text-align: 'center';
+  margin-bottom: 30;
+  font-weight: 'bold';
+  color: '#003B73'; /*Azul escuro */
+  letter-spacing: 5;
+}
+
+.input {
+  margin-bottom: 15;
+}
+
+.button {
+  margin-top: 10;
+  padding: 4 0;
+}
