@@ -4,7 +4,7 @@ import { View, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import styles from './login.module.css';
-import logo from '../../../assets/images/logo.png';
+import logo from '../assets/images/logo.png';
 
 export default function LoginScreen() {
     const router = useRouter();
