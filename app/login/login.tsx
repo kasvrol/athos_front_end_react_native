@@ -1,10 +1,9 @@
-// app/login.tsx
 import React from 'react';
 import { View, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { TextInput, Button, Text } from 'react-native-paper';
 import { useRouter } from 'expo-router';
 import styles from './login.module.css';
-import logo from '../assets/images/logo.png';
+const logo = require('../../assets/images/logo.png');
 
 export default function LoginScreen() {
     const router = useRouter();
@@ -33,7 +32,7 @@ export default function LoginScreen() {
 
                 {/* Ao pressionar "Entrar", usamos `replace` para navegar para o grupo de abas. */}
                 {/* `replace` impede que o usuário volte para o login com o botão "voltar". */}
-                <Button mode="contained" onPress={() => router.replace('/home')} className={styles.button}>
+                <Button mode="contained" onPress={() => router.replace('/(tabs)/home')} className={styles.button}>
                     Entrar
                 </Button>
 

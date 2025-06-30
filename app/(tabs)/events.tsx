@@ -1,5 +1,3 @@
-// app/(tabs)/events.tsx
-
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { Text, Card, Title, Button, Modal, Portal, Provider, TextInput, RadioButton } from 'react-native-paper';
