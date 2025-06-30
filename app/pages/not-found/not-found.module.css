@@ -1,0 +1,18 @@
+.container {
+  gap: 1;
+  align-items: 'center';
+  justify-content: 'center';
+  padding: 20;
+}
+.title {
+  font-size: 20;
+  font-weight: 'bold';
+}
+.link {
+  margin-top: 15;
+  padding: 15 0;
+}
+.linkText {
+  font-size: 14;
+  color: '#2e78b7';
+}
