@@ -1,22 +1,95 @@
-import { createTamagui } from 'tamagui'
-import { lightTheme, darkTheme } from './themes'
+import { createFont, createTamagui, createTokens } from 'tamagui';
+import { createInterFont } from '@tamagui/font-inter';
+import { shorthands } from '@tamagui/shorthands';
+import { themes as tamaguiThemes, tokens as tamaguiTokens } from '@tamagui/themes';
 
-const config = createTamagui({
-  theme: {
-    custom_light: lightTheme,
-    custom_dark: darkTheme,
+const headingFont = createInterFont({
+  size: {
+    6: 15,
   },
-  themes: {
-    custom_light: lightTheme,
-    custom_dark: darkTheme,
+  transform: {
+    6: 'uppercase',
+    7: 'none',
   },
-  defaultTheme: 'custom_light',
-})
+});
 
-export type AppConfig = typeof config
+const bodyFont = createInterFont({ size: { 6: 15 } });
+
+const vibrantLime = '#aaee1f';
+const deepBlue = '#0a53de';
+const mutedCyan = '#5ea1aa';
+const paleYellowGreen = '#e7fa84';
+
+const darkBg = '#121212';
+const darkBg2 = '#1E1E1E';
+const darkBg3 = '#2a2a2a';
+
+export const dark_cyberLime = {
+  background: darkBg,
+  backgroundHover: darkBg2,
+  backgroundPress: darkBg3,
+  backgroundFocus: darkBg2,
+  color: '#FFFFFF',
+  colorHover: paleYellowGreen,
+  colorPress: paleYellowGreen,
+  colorFocus: paleYellowGreen,
+  colorTranslucent: '#FFFFFF99',
+  borderColor: darkBg3,
+  borderColorHover: mutedCyan,
+  borderColorPress: vibrantLime,
+  borderColorFocus: vibrantLime,
+  shadowColor: '#000000',
+  shadowColorHover: '#000000',
+  color1: darkBg,
+  color2: darkBg2,
+  color3: darkBg3,
+  color4: mutedCyan,
+  color5: '#FFFFFF40',
+  color6: '#FFFFFF60',
+  color7: deepBlue,
+  color8: '#FFFFFF',
+  color9: vibrantLime,
+  color10: paleYellowGreen,
+  color11: vibrantLime,
+  color12: paleYellowGreen,
+}
+
+const themes = {
+  dark: dark_cyberLime,
+  dark_cyberLime: dark_cyberLime,
+};
+
+export const config = createTamagui({
+  themes,
+
+  tokens: tamaguiTokens, 
+  shorthands,
+  fonts: {
+    heading: headingFont,
+    body: bodyFont,
+  },
+  media: {
+    xs: { maxWidth: 660 },
+    sm: { maxWidth: 800 },
+    md: { maxWidth: 1020 },
+    lg: { maxWidth: 1280 },
+    xl: { maxWidth: 1420 },
+    xxl: { maxWidth: 1600 },
+    gtXs: { minWidth: 660 + 1 },
+    gtSm: { minWidth: 800 + 1 },
+    gtMd: { minWidth: 1020 + 1 },
+    gtLg: { minWidth: 1280 + 1 },
+    short: { maxHeight: 820 },
+    tall: { minHeight: 820 },
+    hoverNone: { hover: 'none' },
+    pointerCoarse: { pointer: 'coarse' },
+  },
+});
+
+export type AppConfig = typeof config;
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 
-export default config
+export default config;
