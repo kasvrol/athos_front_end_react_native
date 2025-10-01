@@ -1,35 +1,36 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { useTheme } from "tamagui";
+import { postUser } from '@/middleware/usuario/login'
+import { UserLogin } from '@/utils/interfaces/user'
+import { useRouter } from 'expo-router'
+import { useState } from 'react'
+import { useTheme } from 'tamagui'
 
-export const ModelViewLogin = () =>{
-    const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
-const theme = useTheme();
-  const handleLogin = () => {
-    setError('');
-    setIsLoading(true);
+export const ModelViewLogin = () => {
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
+  const router = useRouter()
+  const theme = useTheme()
 
-    setTimeout(() => {
-      if (email.toLowerCase() === 'user@tamagui.dev' && password === '123456') {
-        router.replace('/(tabs)'); 
-      } else {
-        setError('E-mail ou senha inválidos. Tente novamente.');
-      }
-      setIsLoading(false);
-    }, 1500);
-  };
+  const handleLogin = async () => {
+    setError('')
+    setIsLoading(true)
+    // const response = await postUser({login:email, password })
+    // console.log(response)
+    // if(response){
+    //   setIsLoading(false);
+    //   router.push('home/id=1111')
+    // }
+    setIsLoading(false)
+    setError('Senha ou e-mail inválido')
+  }
 
-  // Desabilita o botão se os campos estiverem vazios ou durante o loading
-  const isButtonDisabled = !email || !password || isLoading;
+  const isButtonDisabled = !email || !password || isLoading
 
-  return{
+  return {
     isButtonDisabled,
-        password,
+    password,
     showPassword,
     email,
     error,
@@ -39,6 +40,6 @@ const theme = useTheme();
     handleLogin,
     setShowPassword,
     setEmail,
-    setPassword
+    setPassword,
   }
 }
