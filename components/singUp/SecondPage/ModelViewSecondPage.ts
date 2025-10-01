@@ -1,44 +1,54 @@
-import { useRouter } from "expo-router";
-import { useState } from "react";
-import { useTheme } from "tamagui";
+import { getAdress, getBairros } from '@/middleware/usuario/singup'
+import { useState } from 'react'
 
-export const ModelViewLogin = () =>{
-    const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-  const router = useRouter();
-const theme = useTheme();
-  const handleLogin = () => {
-    setError('');
-    setIsLoading(true);
+export const ModelViewSecondPage = () => {
+  const [dataCEP, setDataCEP] = useState<any>(null)
+  const [cep, setCEP] = useState<null | string>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [bairros, setBairros] = useState<any[]>([])
+  const [error, setError] = useState<null | string>(null)
 
-    setTimeout(() => {
-      if (email.toLowerCase() === 'user@tamagui.dev' && password === '123456') {
-        router.replace('/(tabs)'); 
-      } else {
-        setError('E-mail ou senha inválidos. Tente novamente.');
-      }
-      setIsLoading(false);
-    }, 1500);
-  };
+  const buscarBairros = async (ibgeCode: string) => {
+    const response = await getBairros(ibgeCode)
 
-  // Desabilita o botão se os campos estiverem vazios ou durante o loading
-  const isButtonDisabled = !email || !password || isLoading;
+    if (response && response?.result.length) {
+      setBairros(response?.result)
+      return null
+    }
 
-  return{
-    isButtonDisabled,
-        password,
-    showPassword,
-    email,
-    error,
-    router,
+    setError('Erro ao buscar bairros da sua região. Tente novamente mais tarde.')
+  }
+
+  const transformAdressData = async (cep: string) => {
+    setIsLoading(true)
+    const response: any = await getAdress(cep)
+
+    if (response) {
+      setDataCEP(response)
+      await buscarBairros(response.ibge)
+      setIsLoading(false)
+      return null
+    }
+
+    setIsLoading(false)
+    setError('Erro ao buscar seu CEP. Tente novamente mais tarde.')
+  }
+
+  const handleCEP = async (value?: any) => {
+    setCEP(value)
+    const cepArray = value.trim().split('').length()
+    if (cepArray > 8) {
+      transformAdressData(cepArray.join('')[0])
+    }
+  }
+
+  const isButtonDisabled = isLoading
+
+  return {
     isLoading,
-    theme,
-    handleLogin,
-    setShowPassword,
-    setEmail,
-    setPassword
+    handleCEP,
+    cep,
+    dataCEP,
+    bairros,
   }
 }
