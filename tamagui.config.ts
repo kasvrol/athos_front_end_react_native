@@ -1,9 +1,10 @@
-import { createFont, createTamagui, createTokens } from 'tamagui';
-import { createInterFont } from '@tamagui/font-inter';
-import { shorthands } from '@tamagui/shorthands';
-import { themes as tamaguiThemes, tokens as tamaguiTokens } from '@tamagui/themes';
+import { createFont, createTamagui, createTokens } from 'tamagui'
+import { createInterFont } from '@tamagui/font-inter'
+import { shorthands } from '@tamagui/shorthands'
+import { themes as tamaguiThemes, tokens as tamaguiTokens } from '@tamagui/themes'
 
-const headingFont = createInterFont({
+const bodyFont = createFont({
+  family: 'Oswald, sans-serif',
   size: {
     6: 15,
   },
@@ -11,18 +12,17 @@ const headingFont = createInterFont({
     6: 'uppercase',
     7: 'none',
   },
-});
+})
 
-const bodyFont = createInterFont({ size: { 6: 15 } });
+const vibrantLime = '#aaee1f'
+const deepBlue = '#0a53de'
+const mutedCyan = '#5ea1aa'
+const paleYellowGreen = '#e7fa84'
+const errorRed = '#FF2C2C'
 
-const vibrantLime = '#aaee1f';
-const deepBlue = '#0a53de';
-const mutedCyan = '#5ea1aa';
-const paleYellowGreen = '#e7fa84';
-
-const darkBg = '#121212';
-const darkBg2 = '#1E1E1E';
-const darkBg3 = '#2a2a2a';
+const darkBg = '#121212'
+const darkBg2 = '#1E1E1E'
+const darkBg3 = '#2a2a2a'
 
 export const dark_cyberLime = {
   background: darkBg,
@@ -38,6 +38,9 @@ export const dark_cyberLime = {
   borderColorHover: mutedCyan,
   borderColorPress: vibrantLime,
   borderColorFocus: vibrantLime,
+  colorError: errorRed,
+  borderColorError: errorRed,
+  backgroundError: '#FF9E99',
   shadowColor: '#000000',
   shadowColorHover: '#000000',
   color1: darkBg,
@@ -57,15 +60,14 @@ export const dark_cyberLime = {
 const themes = {
   dark: dark_cyberLime,
   dark_cyberLime: dark_cyberLime,
-};
+}
 
 export const config = createTamagui({
   themes,
-
-  tokens: tamaguiTokens, 
+  tokens: tamaguiTokens,
   shorthands,
   fonts: {
-    heading: headingFont,
+    heading: bodyFont,
     body: bodyFont,
   },
   media: {
@@ -84,12 +86,12 @@ export const config = createTamagui({
     hoverNone: { hover: 'none' },
     pointerCoarse: { pointer: 'coarse' },
   },
-});
+})
 
-export type AppConfig = typeof config;
+export type AppConfig = typeof config
 
 declare module 'tamagui' {
   interface TamaguiCustomConfig extends AppConfig {}
 }
 
-export default config;
+export default config
