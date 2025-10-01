@@ -1,52 +1,146 @@
-import React from 'react';
-import { YStack, Input, Label, Text } from 'tamagui';
-import { Control, Controller, FieldErrors } from 'react-hook-form';
-import { SignupFormData } from '../SignupModel';
+import React from 'react'
+import { YStack, Input, Label, Text, Form, XStack, H1, Square, Paragraph, H2 } from 'tamagui'
+import { Eye, EyeOff } from '@tamagui/lucide-icons'
+import { ModelViewFirstPage } from './ModelViewFirstPage'
 
-interface Props {
-  control: Control<SignupFormData>;
-  errors: FieldErrors<SignupFormData>;
+const singUpHeader = () => {
+  return (
+    <Text color="$color10" textAlign="center" fontSize="$5" fontFamily="$bodyFont" fontWeight="700">
+      Venha fazer parte desse grande time. Cadastre-se!
+    </Text>
+  )
 }
 
-export default function Step1({ control, errors }: Props) {
+export default function Step1() {
+  const {
+    showPassword,
+    formValues,
+    showConfirmPassword,
+    erros,
+    showError,
+    handleBlur,
+    setShowPassword,
+    setShowConfirmPassword,
+    handleChange,
+    submitForm,
+  } = ModelViewFirstPage()
+
+  const isSingUp = true
   return (
-    <YStack gap="$3">
-      <Controller
-        control={control}
-        name="name"
-        render={({ field: { onChange, onBlur, value } }) => (
-          <YStack>
-            <Label htmlFor="name" color="$color">Nome</Label>
+    <YStack flex={1} justifyContent="center" padding="$4" gap="$4" backgroundColor="$background">
+      {isSingUp ? singUpHeader() : null}
+      <YStack gap="$3">
+        <Form minWidth={300} gap="$3" onSubmit={submitForm}>
+          <YStack gap="$1">
+            <Label htmlFor="name" color="$color">
+              Nome completo:
+            </Label>
             <Input
               id="name"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="Seu nome completo"
+              onChangeText={(text: string) => handleChange('name', text)}
+              value={formValues.name}
+              size="$4"
+              placeholder="Fulano da Silva"
+              autoComplete="name"
+              borderColor="$borderColorFocus"
+              onBlur={() => handleBlur('name')}
             />
-            {errors.name && <Text color="$red10" fontSize={12} mt="$1">{errors.name.message}</Text>}
+            {showError('name') && (
+              <Text color="$red10" fontSize="$2" textAlign="center" paddingHorizontal="$2">
+                {erros.name}
+              </Text>
+            )}
           </YStack>
-        )}
-      />
-      
-      <Controller
-        control={control}
-        name="phone"
-        render={({ field: { onChange, onBlur, value } }) => (
-          <YStack>
-            <Label htmlFor="phone" color="$color">Telefone</Label>
+          <YStack gap="$1">
+            <Label htmlFor="email" color="$color">
+              E-mail:
+            </Label>
             <Input
-              id="phone"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              placeholder="(99) 99999-9999"
-              keyboardType="phone-pad"
+              id="email"
+              onChangeText={(text: string) => handleChange('email', text)}
+              value={formValues.email}
+              size="$4"
+              placeholder="fulano@email.com"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              autoComplete="email"
+              borderColor="$borderColorFocus"
+              onBlur={() => handleBlur('email')}
             />
-            {errors.phone && <Text color="$red10" fontSize={12} mt="$1">{errors.phone.message}</Text>}
+            {showError('email') && (
+              <Text color="$red10" fontSize="$2" textAlign="center" paddingHorizontal="$2">
+                {erros.email}
+              </Text>
+            )}
           </YStack>
-        )}
-      />
+          <YStack gap="$1">
+            <Label htmlFor="password" color="$color">
+              Senha:
+            </Label>
+            <XStack alignItems="center" position="relative">
+              <Input
+                id="password"
+                onChangeText={(text: string) => handleChange('password', text)}
+                value={formValues.password}
+                flex={1}
+                size="$4"
+                placeholder="********"
+                secureTextEntry={!showPassword}
+                autoComplete="new-password"
+                borderColor="$borderColorFocus"
+                onBlur={() => handleBlur('password')}
+              />
+              <Square
+                position="absolute"
+                right="$2.5"
+                onPress={() => setShowPassword(!showPassword)}
+                padding="$2"
+                pressStyle={{ opacity: 0.5 }}
+              >
+                {showPassword ? <EyeOff color="$color" /> : <Eye color="$color" />}
+              </Square>
+            </XStack>
+            {showError('password') && (
+              <Text color="$red10" fontSize="$2" textAlign="center" paddingHorizontal="$2">
+                {erros.password}
+              </Text>
+            )}
+          </YStack>
+          <YStack gap="$1">
+            <Label htmlFor="confirmPassword" color="$color">
+              Senha:
+            </Label>
+            <XStack alignItems="center" position="relative">
+              <Input
+                id="confirmPassword"
+                flex={1}
+                size="$4"
+                placeholder="********"
+                onChangeText={(text: string) => handleChange('senha', text)}
+                value={formValues.confirmPassword}
+                secureTextEntry={!showConfirmPassword}
+                autoComplete="new-password"
+                borderColor="$borderColorFocus"
+                onBlur={() => handleBlur('confirmPassword')}
+              />
+              <Square
+                position="absolute"
+                right="$2.5"
+                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                padding="$2"
+                pressStyle={{ opacity: 0.5 }}
+              >
+                {showConfirmPassword ? <EyeOff color="$color" /> : <Eye color="$color" />}
+              </Square>
+            </XStack>
+            {showError('confirmPassword') && (
+              <Text color="$red10" fontSize="$2" textAlign="center" paddingHorizontal="$2">
+                {erros.confirmPassword}
+              </Text>
+            )}
+          </YStack>
+        </Form>
+      </YStack>
     </YStack>
-  );
+  )
 }

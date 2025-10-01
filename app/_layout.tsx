@@ -42,9 +42,7 @@ export default function App() {
       <Theme name={'dark_cyberLime'}>
         <Stack>
           <Stack.Screen name="login" options={{ headerShown: false }} />
-
-          {/* A tela de cadastro terá um cabeçalho com título e botão de voltar. */}
-          {/* <Stack.Screen name="signup" options={{ title: 'Cadastro' }} /> */}
+          <Stack.Screen name="singup" options={{ headerShown: false }} />
 
           {/*
                O "(tabs)" é uma tela especial que contém sua própria navegação (as abas).

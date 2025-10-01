@@ -1,32 +1,56 @@
-import React from 'react';
-import { Form, YStack, XStack, Button, Spinner, Text, Theme } from 'tamagui';
-import { useSignupViewModel } from './SignupViewModel';
-import Step1 from './components/Step1';
-import Step2 from './components/Step2';
-import Step3 from './components/Step3';
+import React from 'react'
+import { Form, YStack, XStack, Button, Spinner, Text, Theme } from 'tamagui'
+// import { useSignupViewModel } from './SignupViewModel';
+// import Step1 from './components/Step1';
+// import Step2 from './components/Step2';
+// import Step3 from './components/Step3';
 
-export default function SignupView() {
-  const { form, currentStep, isLoading, submitError, handleNext, handleBack } = useSignupViewModel();
-  const { control, formState: { errors }, setValue, watch } = form;
-  
-  const selectedSports = watch('selectedSports'); // Observa o valor para o Step3
+export default function SignupScreen() {
+  // const { form, currentStep, isLoading, submitError, handleNext, handleBack } = useSignupViewModel();
+  // const { control, formState: { errors }, setValue, watch } = form;
 
-  const renderStep = () => {
-    switch (currentStep) {
-      case 1:
-        return <Step1 control={control} errors={errors} />;
-      case 2:
-        return <Step2 control={control} errors={errors} />;
-      case 3:
-        return <Step3 control={control} errors={errors} setValue={setValue} currentValues={selectedSports} />;
-      default:
-        return null;
-    }
-  };
+  // const selectedSports = watch('selectedSports'); // Observa o valor para o Step3
+
+  // const renderStep = () => {
+  //   switch (currentStep) {
+  //     case 1:
+  //       return <Step1 control={control} errors={errors} />;
+  //     case 2:
+  //       return <Step2 control={control} errors={errors} />;
+  //     case 3:
+  //       return <Step3 control={control} errors={errors} setValue={setValue} currentValues={selectedSports} />;
+  //     default:
+  //       return null;
+  //   }
+  // };
+
+  {
+    /* 4. Botão de Ação Principal
+      <Button
+        size="$4"
+        backgroundColor={isButtonDisabled ? "$backgroundPress" : "$color9"}
+        color={isButton-disabled ? "$color" : "$background"}
+        pressStyle={{
+          backgroundColor: isButtonDisabled ? "$backgroundPress" : "$color10",
+        }}
+        onPress={handleSignUp}
+        disabled={isButtonDisabled}
+        icon={isLoading ? () => <Spinner color={isButtonDisabled ? "$color" : "$background"} /> : undefined}
+      >
+        {isLoading ? 'Cadastrando...' : 'Cadastrar'}
+      </Button> */
+  }
+
+  {
+    /* 5. Ação Secundária
+      <Button chromeless onPress={() => router.back()} color="$color7" marginTop="$2">
+        Já tem uma conta? Faça login
+      </Button> */
+  }
 
   return (
     <Theme name="sporty">
-      <YStack f={1} bg="$background" ai="center" jc="center" p="$4">
+      {/* <YStack f={1} bg="$background" ai="center" jc="center" p="$4">
         <Form onSubmit={handleNext} w="100%" maxWidth={400} gap="$4">
           <Text fontSize={28} fontWeight="700" color="$primary" mb="$2" ta="center">
             Cadastro
@@ -37,7 +61,7 @@ export default function SignupView() {
           </Text>
 
           {renderStep()}
-          
+
           {submitError && (
             <Text color="$danger" textAlign="center" mt="$3">
               {submitError}
@@ -49,24 +73,26 @@ export default function SignupView() {
               <Button size="$4" theme="alt2" onPress={handleBack} br="$2">
                 Voltar
               </Button>
-            ) : <YStack flex={1} />}
+            ) : (
+              <YStack flex={1} />
+            )}
 
             <Form.Trigger asChild>
-                <Button
-                  size="$5"
-                  br="$2"
-                  disabled={isLoading}
-                  onPress={handleNext}
-                  flex={1}
-                  ml={currentStep > 1 ? '$3' : 0}
-                  icon={isLoading ? () => <Spinner color="white" /> : undefined}
-                >
-                  {currentStep === 3 ? 'Finalizar' : 'Próximo'}
-                </Button>
+              <Button
+                size="$5"
+                br="$2"
+                disabled={isLoading}
+                onPress={handleNext}
+                flex={1}
+                ml={currentStep > 1 ? '$3' : 0}
+                icon={isLoading ? () => <Spinner color="white" /> : undefined}
+              >
+                {currentStep === 3 ? 'Finalizar' : 'Próximo'}
+              </Button>
             </Form.Trigger>
           </XStack>
         </Form>
-      </YStack>
+      </YStack> */}
     </Theme>
-  );
+  )
 }
