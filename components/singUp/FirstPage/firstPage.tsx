@@ -5,7 +5,7 @@ import { ModelViewFirstPage } from './ModelViewFirstPage'
 
 const singUpHeader = () => {
   return (
-    <Text color="$color10" textAlign="center" fontSize="$5" fontFamily="$bodyFont" fontWeight="700">
+    <Text color="$color10" textAlign="center" fontSize="$5" fontFamily="$body" fontWeight="700">
       Venha fazer parte desse grande time. Cadastre-se!
     </Text>
   )

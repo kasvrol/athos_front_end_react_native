@@ -1,11 +1,11 @@
-import { TamaguiProvider, Theme } from 'tamagui'
-import config from '../tamagui.config'
+import { Theme } from 'tamagui'
 import { Stack } from 'expo-router'
 import { useColorScheme } from 'react-native'
 import { useFonts } from 'expo-font'
 import { useEffect } from 'react'
 import * as SplashScreen from 'expo-splash-screen'
 import { Oswald_400Regular } from '@expo-google-fonts/oswald'
+import { Provider } from '@/components/tamagui-provider'
 
 export const unstable_settings = {
   initialRouteName: 'login',
@@ -14,7 +14,6 @@ export const unstable_settings = {
 SplashScreen.preventAutoHideAsync()
 
 export default function App() {
-  const colorScheme = useColorScheme()
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
@@ -38,7 +37,7 @@ export default function App() {
   }
 
   return (
-    <TamaguiProvider config={config}>
+    <Provider>
       <Theme name={'dark_cyberLime'}>
         <Stack>
           <Stack.Screen name="login" options={{ headerShown: false }} />
@@ -54,6 +53,6 @@ export default function App() {
           {/* <Stack.Screen name="modal" options={{ presentation: 'modal' }} /> */}
         </Stack>
       </Theme>
-    </TamaguiProvider>
+    </Provider>
   )
 }

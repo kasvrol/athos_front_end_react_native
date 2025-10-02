@@ -1,18 +1,5 @@
 import { createFont, createTamagui, createTokens } from 'tamagui'
-import { createInterFont } from '@tamagui/font-inter'
 import { shorthands } from '@tamagui/shorthands'
-import { themes as tamaguiThemes, tokens as tamaguiTokens } from '@tamagui/themes'
-
-const bodyFont = createFont({
-  family: 'Oswald, sans-serif',
-  size: {
-    6: 15,
-  },
-  transform: {
-    6: 'uppercase',
-    7: 'none',
-  },
-})
 
 const vibrantLime = '#aaee1f'
 const deepBlue = '#0a53de'
@@ -23,6 +10,63 @@ const errorRed = '#FF2C2C'
 const darkBg = '#121212'
 const darkBg2 = '#1E1E1E'
 const darkBg3 = '#2a2a2a'
+
+const tokens = createTokens({
+  size: {
+    0: 0,
+    1: 4,
+    2: 8,
+    3: 12,
+    4: 16,
+    5: 20,
+    6: 24,
+    7: 32,
+    8: 40,
+  },
+  space: {
+    0: 0,
+    1: 4,
+    2: 8,
+    3: 12,
+    4: 16,
+    5: 20,
+    6: 24,
+  },
+  fontSize: {
+    1: 12,
+    2: 14,
+    3: 16,
+    4: 18,
+    5: 20,
+    6: 24,
+    7: 28,
+    8: 32,
+  },
+  radius: {
+    0: 0,
+    1: 2,
+    2: 4,
+    3: 8,
+    4: 12,
+  },
+  zIndex: {
+    0: 0,
+    1: 10,
+    2: 20,
+    3: 30,
+    4: 40,
+    5: 50,
+  },
+})
+
+const bodyFont = createFont({
+  family: 'Oswald, sans-serif',
+  size: tokens.fontSize,
+  transform: {
+    6: 'uppercase',
+    7: 'none',
+  },
+})
 
 export const dark_cyberLime = {
   background: darkBg,
@@ -64,10 +108,9 @@ const themes = {
 
 export const config = createTamagui({
   themes,
-  tokens: tamaguiTokens,
+  tokens,
   shorthands,
   fonts: {
-    heading: bodyFont,
     body: bodyFont,
   },
   media: {
