@@ -1,4 +1,5 @@
 import { getAdress, getBairros } from '@/middleware/usuario/singup'
+import { cidades } from '@/mock/cidades'
 import { useState } from 'react'
 
 export const ModelViewSecondPage = () => {
@@ -7,12 +8,23 @@ export const ModelViewSecondPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bairros, setBairros] = useState<any[]>([])
   const [error, setError] = useState<null | string>(null)
+  const [selectedBairros, setSelectedBairros] = useState<string[]>([])
+
+  const toggleBairro = (bairroName: string) => {
+    const isSelected = selectedBairros.includes(bairroName)
+
+    if (isSelected) {
+      setSelectedBairros(current => current.filter(name => name !== bairroName))
+    } else {
+      setSelectedBairros(current => [...current, bairroName])
+    }
+  }
 
   const buscarBairros = async (ibgeCode: string) => {
-    const response = await getBairros(ibgeCode)
+    //const response = await getBairros(ibgeCode)
 
-    if (response && response?.result.length) {
-      setBairros(response?.result)
+    if (true) {
+      setBairros(cidades)
       return null
     }
 
@@ -36,9 +48,19 @@ export const ModelViewSecondPage = () => {
 
   const handleCEP = async (value?: any) => {
     setCEP(value)
-    const cepArray = value.trim().split('').length()
-    if (cepArray > 8) {
-      transformAdressData(cepArray.join('')[0])
+    const cepArray = value
+      .trim()
+      .replace(/[^\w\s]/gi, '')
+      .split('')
+
+    if (cepArray.length == 8) {
+
+      transformAdressData(
+        cepArray
+          .join()
+          .replace(/[^\w\s]/gi, '')
+          .trim(),
+      )
     }
   }
 
@@ -47,8 +69,11 @@ export const ModelViewSecondPage = () => {
   return {
     isLoading,
     handleCEP,
+    toggleBairro,
     cep,
     dataCEP,
     bairros,
+    selectedBairros,
+    error
   }
 }

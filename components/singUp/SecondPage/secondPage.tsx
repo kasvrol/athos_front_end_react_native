@@ -1,46 +1,22 @@
-import React from 'react'
-import { YStack, Checkbox, Text, XStack, Form, Label, Input } from 'tamagui'
+import React, { useState } from 'react'
+import { YStack, Checkbox, Text, XStack, Form, Label, Input, ScrollView, Paragraph } from 'tamagui'
 import { ModelViewSecondPage } from './ModelViewSecondPage'
 
 export default function Step2() {
-  const { isLoading, bairros, handleCEP, cep, dataCEP } = ModelViewSecondPage()
-  // const toggleSport = (sport: string) => {
-  //   const newSports = currentValues.includes(sport)
-  //     ? currentValues.filter(s => s !== sport)
-  //     : [...currentValues, sport]
-  //   setValue('selectedSports', newSports, { shouldValidate: true })
-  // }
-
-  // return (
-  //   <YStack gap="$3">
-  //     <Text color="$color" fontWeight="600" mb="$2">
-  //       Escolha os esportes de seu interesse
-  //     </Text>
-  //     {sportsList.map(sport => (
-  //       <XStack ai="center" gap="$3" key={sport}>
-  //         <Checkbox
-  //           id={sport}
-  //           checked={currentValues.includes(sport)}
-  //           onCheckedChange={() => toggleSport(sport)}
-  //           size="$4"
-  //         >
-  //           <Checkbox.Indicator />
-  //         </Checkbox>
-  //         <Label htmlFor={sport}>{sport}</Label>
-  //       </XStack>
-  //     ))}
-  //     {errors.selectedSports && (
-  //       <Text color="$red10" fontSize={12} mt="$1">
-  //         {errors.selectedSports.message}
-  //       </Text>
-  //     )}
-  //   </YStack>
-  // )
+  const { isLoading, bairros, handleCEP, cep, dataCEP, toggleBairro, selectedBairros, error } =
+    ModelViewSecondPage()
 
   return (
-    <YStack flex={1} justifyContent="center" padding="$4" gap="$4" backgroundColor="$background">
-      <Text color="$color" fontWeight="600" mb="$2">
-        Digite seu CEP e buscaremos bairros da sua cidade
+    <YStack
+      flex={1}
+      justifyContent="center"
+      padding="$4"
+      gap="$4"
+      backgroundColor="$background"
+      marginTop="$8"
+    >
+      <Text color="$colorFocus" fontWeight="600" mb="$2" fontSize="$6" textAlign="center">
+        Digite seu CEP e buscaremos os bairros da sua cidade
       </Text>
       <Form minWidth={300} gap="$3">
         <YStack gap="$1">
@@ -51,11 +27,13 @@ export default function Step2() {
             id="cep"
             onChangeText={(text: string) => handleCEP(text)}
             value={cep ? cep : ''}
-            size="$4"
+            height="$9"
+            fontSize="$3"
             placeholder="00000000"
             borderColor="$borderColorFocus"
             autoComplete="postal-address"
             keyboardType="numeric"
+            color="$color"
           />
           {/* {showError('name') && (
               <Text color="$red10" fontSize="$2" textAlign="center" paddingHorizontal="$2">
@@ -64,44 +42,56 @@ export default function Step2() {
             )} */}
         </YStack>
         <YStack gap="$1">
-          <Label htmlFor="adress" color="$color">
-            Logradouro:
-          </Label>
-          <Input id="adress" value={dataCEP?.logradouro} size="$4" placeholder="Rua" disabled />
-        </YStack>
-        <YStack gap="$1">
-          <Label htmlFor="bairro" color="$color">
-            Bairro:
-          </Label>
-          <Input id="bairro" value={dataCEP?.bairro} size="$4" placeholder="Bairro" disabled />
-        </YStack>
-        <YStack gap="$1">
           <Label htmlFor="city" color="$color">
-            Bairro:
+            Cidade:
           </Label>
-          <Input id="city" value={dataCEP?.localidade} size="$4" placeholder="Cidade" disabled />
+          <Input
+            id="city"
+            color="$color"
+            fontSize="$3"
+            value={dataCEP?.localidade}
+            height="$9"
+            placeholder="Cidade"
+            disabled
+          />
         </YStack>
       </Form>
-      <YStack gap="$1">
-        {bairros.map(bairro => (
-          <XStack ai="center" gap="$3" key={bairro.id}>
-            <Checkbox
-              id={bairro.id}
-              //  checked={currentValues.includes(sport)}
-              //  onCheckedChange={() => toggleSport(sport)}
-              size="$4"
-            >
-              <Checkbox.Indicator />
-            </Checkbox>
-            <Label htmlFor={bairro.name}>{bairro.name}</Label>
-          </XStack>
-        ))}
-        {/* {errors.selectedSports && (
-         <Text color="$red10" fontSize={12} mt="$1">
-           {errors.selectedSports.message}
-         </Text>
-       )} */}
-      </YStack>
+      <Text fontWeight="500" mb="$2" fontSize="$5" textAlign="center">
+        Selecione ao menos um bairro que você possui interesse em participar de equipes:
+      </Text>
+      <ScrollView>
+        <XStack gap="$3" flexWrap="wrap" justifyContent="flex-start">
+          {bairros.map(bairro => {
+            const isChecked = selectedBairros.includes(bairro.name)
+
+            return (
+              <XStack
+                key={bairro.id}
+                onPress={() => toggleBairro(bairro.name)}
+                alignItems="center"
+                gap="$3"
+                paddingVertical="$2"
+                paddingHorizontal="$3"
+                borderRadius="$4"
+                borderWidth={1}
+                borderColor={isChecked ? '$colorFocus' : '$borderColor'}
+                backgroundColor={isChecked ? '$backgroundFocus' : 'transparent'}
+                pressStyle={{ backgroundColor: '$backgroundHover' }}
+              >
+                <Checkbox
+                  id={bairro.name}
+                  checked={isChecked}
+                  onCheckedChange={() => toggleBairro(bairro.name)}
+                  size="$4"
+                >
+                  <Checkbox.Indicator />
+                </Checkbox>
+                <Label htmlFor={bairro.name}>{bairro.name}</Label>
+              </XStack>
+            )
+          })}
+        </XStack>
+      </ScrollView>
     </YStack>
   )
 }
