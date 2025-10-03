@@ -54,7 +54,6 @@ export const ModelViewSecondPage = () => {
       .split('')
 
     if (cepArray.length == 8) {
-
       transformAdressData(
         cepArray
           .join()
@@ -74,6 +73,6 @@ export const ModelViewSecondPage = () => {
     dataCEP,
     bairros,
     selectedBairros,
-    error
+    error,
   }
 }
