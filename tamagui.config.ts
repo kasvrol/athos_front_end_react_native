@@ -25,6 +25,7 @@ const tokens = createTokens({
     8: 40,
     9: 48,
     10: 56,
+    minWidth: 44,
   },
   space: {
     0: 0,
@@ -35,6 +36,12 @@ const tokens = createTokens({
     4: 16,
     5: 20,
     6: 24,
+    7: 28,
+    8: 32,
+    9: 36,
+    10: 40,
+    11: 44,
+    12: 48,
   },
   fontSize: {
     1: 12,
