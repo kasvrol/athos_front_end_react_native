@@ -148,6 +148,7 @@ export default function LoginScreen() {
             fontFamily="$body"
             fontWeight="700"
             disabled={isLoading}
+            width="100%"
           >
             CADASTRE-SE
           </Button>
