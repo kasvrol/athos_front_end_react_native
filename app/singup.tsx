@@ -1,4 +1,6 @@
-import ManterUsuarioStep1Screen from '@/components/manterUsuario/manterUsuarioStep1'
+import ManterUsuarioStep1Screen from '@/components/manterUsuario/ManterUsuarioStep1/manterUsuarioStep1'
+import ManterUsuarioStep2Screen from '@/components/manterUsuario/ManterUsuarioStep2/ManterUsuarioStep2Screen'
+import ManterUsuarioStep3Screen from '@/components/manterUsuario/ManterUsuarioStep3/ModelViewManterUsuarioStep3'
 import { useEffect, useState } from 'react'
 import { Text, YStack } from 'tamagui'
 
@@ -17,7 +19,7 @@ export default function Signup() {
         <YStack
           flex={1}
           justifyContent="center"
-          paddingTop="$9"
+          paddingTop={100}
           paddingHorizontal="$4"
           gap="$2"
           backgroundColor="$background"
@@ -42,20 +44,42 @@ export default function Signup() {
         </YStack>
       )}
       {currentStep === 2 && (
-        <ManterUsuarioStep1Screen
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          values={values}
-          setValues={setValues}
-        />
+        <YStack
+          flex={1}
+          justifyContent="center"
+          paddingTop={50}
+          paddingHorizontal="$4"
+          gap="$2"
+          backgroundColor="$background"
+          alignItems="flex-start"
+          jc="flex-start"
+        >
+          <ManterUsuarioStep2Screen
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            values={values}
+            setValues={setValues}
+          />
+        </YStack>
       )}
       {currentStep === 3 && (
-        <ManterUsuarioStep1Screen
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          values={values}
-          setValues={setValues}
-        />
+        <YStack
+          flex={1}
+          justifyContent="center"
+          paddingTop={50}
+          paddingHorizontal="$4"
+          gap="$2"
+          backgroundColor="$background"
+          alignItems="flex-start"
+          jc="flex-start"
+        >
+          <ManterUsuarioStep3Screen
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            values={values}
+            setValues={setValues}
+          />
+        </YStack>
       )}
     </>
   )
