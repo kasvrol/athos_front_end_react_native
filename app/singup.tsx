@@ -1,6 +1,6 @@
 import ManterUsuarioStep1Screen from '@/components/manterUsuario/ManterUsuarioStep1/manterUsuarioStep1'
 import ManterUsuarioStep2Screen from '@/components/manterUsuario/ManterUsuarioStep2/ManterUsuarioStep2Screen'
-import ManterUsuarioStep3Screen from '@/components/manterUsuario/ManterUsuarioStep3/ModelViewManterUsuarioStep3'
+import ManterUsuarioStep3Screen from '@/components/manterUsuario/ManterUsuarioStep3/ManterUsuarioStep3Screen'
 import { useEffect, useState } from 'react'
 import { Text, YStack } from 'tamagui'
 
