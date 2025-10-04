@@ -1,13 +1,19 @@
 import { getAdress, getBairros } from '@/middleware/usuario/singup'
 import { cidades } from '@/mock/cidades'
+import { ManterUsuarioViewProps } from '@/utils/types/user'
 import { useState } from 'react'
 
-export const ModelViewSecondPage = () => {
+export const ModelViewSecondPage = ({
+  setCurrentStep,
+  currentStep,
+  values,
+  setValues,
+}: ManterUsuarioViewProps) => {
   const [dataCEP, setDataCEP] = useState<any>(null)
   const [cep, setCEP] = useState<null | string>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [bairros, setBairros] = useState<any[]>([])
   const [error, setError] = useState<null | string>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selectedBairros, setSelectedBairros] = useState<string[]>([])
 
   const toggleBairro = (bairroName: string) => {
@@ -18,6 +24,8 @@ export const ModelViewSecondPage = () => {
     } else {
       setSelectedBairros(current => [...current, bairroName])
     }
+
+    //setIsButtonDisabled(selectedBairros.length == 0)
   }
 
   const buscarBairros = async (ibgeCode: string) => {
@@ -28,6 +36,7 @@ export const ModelViewSecondPage = () => {
       return null
     }
 
+    //setIsButtonDisabled(true)
     setError('Erro ao buscar bairros da sua região. Tente novamente mais tarde.')
   }
 
@@ -42,6 +51,7 @@ export const ModelViewSecondPage = () => {
       return null
     }
 
+    //setIsButtonDisabled(true)
     setIsLoading(false)
     setError('Erro ao buscar seu CEP. Tente novamente mais tarde.')
   }
@@ -63,16 +73,27 @@ export const ModelViewSecondPage = () => {
     }
   }
 
-  const isButtonDisabled = isLoading
+  const handleSubmit = () => {
+    if (!selectedBairros.length) {
+      setError('Selecione ao menos um bairro')
+      return null
+    }
+
+    setValues({ ...values, bairros: selectedBairros })
+    setError(null)
+    setCurrentStep(currentStep + 1)
+    return true
+  }
 
   return {
-    isLoading,
     handleCEP,
     toggleBairro,
+    handleSubmit,
     cep,
     dataCEP,
     bairros,
     selectedBairros,
+    isLoading,
     error,
   }
 }

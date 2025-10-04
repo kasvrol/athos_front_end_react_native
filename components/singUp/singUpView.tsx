@@ -1,11 +1,12 @@
 import React, { Dispatch, ReactNode } from 'react'
-import { YStack, XStack, Button } from 'tamagui'
+import { YStack, XStack, Button, Text } from 'tamagui'
 import { useSignupViewModel } from './signupViewModel'
 import { UserInformations } from '@/utils/interfaces/user'
-import { RunningPlayer } from '../loading/runner'
+import { BasketballLoading } from '../loading/basketball'
 import { router } from 'expo-router'
 import { CanceledButton } from '../atoms/buttons/canceledButton'
 import { SingUpViewProps } from '@/utils/types/user'
+import { isLoading } from 'expo-font'
 
 export default function SignupScreen(props: SingUpViewProps) {
   const { currentStep, isThereUser, handleNext, handleBack, setIsButtonDisabled } =
@@ -17,17 +18,22 @@ export default function SignupScreen(props: SingUpViewProps) {
       setCurrentStep: props.setCurrentStep,
     })
 
+  if (props.isLoading) {
+    return (
+      <YStack justifyContent="center">
+        <BasketballLoading />
+      </YStack>
+    )
+  }
+
   return (
     <YStack>
-      <YStack>
-        {props.children}
-        {props.isLoading && <RunningPlayer />}
-      </YStack>
+      <YStack>{props.children}</YStack>
       <XStack width="100%" justifyContent="flex-end" marginVertical="$5">
         <CanceledButton
           disabled={props.isLoading}
           onPress={handleBack}
-          width="50%"
+          width="48%"
           message="Voltar"
           display={currentStep === 1 && !isThereUser ? 'none' : 'flex'}
         />
@@ -35,7 +41,7 @@ export default function SignupScreen(props: SingUpViewProps) {
           disabled={props.isLoading}
           onPress={handleNext}
           height="$10"
-          width="50%"
+          width="48%"
           minWidth="$minWidth"
           backgroundColor="$backgroundFocus"
           fontSize="$5"
