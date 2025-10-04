@@ -1,6 +1,6 @@
 import React from 'react'
 import { YStack, Checkbox, Text, XStack, Label, ScrollView } from 'tamagui'
-import { ModelViewThirdPage } from './ManterUsuarioStep3Screen'
+import { ModelViewThirdPage } from './ModelViewManterUsuarioStep3'
 import { UserInformations } from '@/utils/interfaces/user'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import SignupScreen from '@/components/singUp/singUpView'
