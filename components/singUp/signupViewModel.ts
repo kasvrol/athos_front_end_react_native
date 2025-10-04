@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { ModelViewLogin } from '../manterUsuario/ModelViewManterUsuarioStep1'
 import { SingUpModelViewProps } from '@/utils/types/user'
 
 export function useSignupViewModel({
