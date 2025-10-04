@@ -3,9 +3,8 @@ import ManterUsuarioStep1Screen from '@/components/manterUsuario/ManterUsuarioSt
 import ManterUsuarioStep2Screen from '@/components/manterUsuario/ManterUsuarioStep2/ManterUsuarioStep2Screen'
 import ManterUsuarioStep3Screen from '@/components/manterUsuario/ManterUsuarioStep3/ManterUsuarioStep3Screen'
 import { useEffect, useState } from 'react'
-import { Text } from 'tamagui'
 
-export default function Signup() {
+export default function AtualizarPerfil() {
   const [currentStep, setCurrentStep] = useState(1)
   const [values, setValues] = useState(null)
 
@@ -18,15 +17,6 @@ export default function Signup() {
     <>
       {currentStep === 1 && (
         <LayoutComponent>
-          <Text
-            color="$color10"
-            textAlign="center"
-            fontSize="$6"
-            fontFamily="$body"
-            fontWeight="700"
-          >
-            Venha fazer parte desse grande time. Cadastre-se!
-          </Text>
           <ManterUsuarioStep1Screen
             setCurrentStep={setCurrentStep}
             currentStep={currentStep}
