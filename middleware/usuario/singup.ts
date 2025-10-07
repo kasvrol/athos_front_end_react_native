@@ -1,4 +1,5 @@
 import axios from 'axios'
+require('dotenv').config()
 
 export const getAdress = async (cep: string) => {
   return await axios
@@ -11,7 +12,7 @@ export const getBairros = async (ibgeCode: string) => {
   return await axios
     .get(`https://api.brasilaberto.com/v1/districts-by-ibge-code/${ibgeCode}`, {
       headers: {
-        Authorization: `Bearer 3dP9KKi8UaSkr2jOCs8YB3iquvB6meHMXNjhP8tLg5dvpBYFGz93kjNcKhm8SBW4`,
+        Authorization: `Bearer ${process.env.TOKEN_BRASIL_ABERTO}`,
       },
     })
     .then(res => res.data)
