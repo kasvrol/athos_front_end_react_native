@@ -16,18 +16,6 @@ export const ManterUsuarioStep2 = ({
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selectedBairros, setSelectedBairros] = useState<string[]>([])
 
-  const toggleBairro = (bairroName: string) => {
-    const isSelected = selectedBairros.includes(bairroName)
-
-    if (isSelected) {
-      setSelectedBairros(current => current.filter(name => name !== bairroName))
-    } else {
-      setSelectedBairros(current => [...current, bairroName])
-    }
-
-    //setIsButtonDisabled(selectedBairros.length == 0)
-  }
-
   const buscarBairros = async (ibgeCode: string) => {
     //const response = await getBairros(ibgeCode)
 
@@ -85,10 +73,12 @@ export const ManterUsuarioStep2 = ({
     return true
   }
 
+    //setIsButtonDisabled(selectedBairros.length == 0)
+
   return {
     handleCEP,
-    toggleBairro,
     handleSubmit,
+    setSelectedBairros,
     cep,
     dataCEP,
     bairros,
