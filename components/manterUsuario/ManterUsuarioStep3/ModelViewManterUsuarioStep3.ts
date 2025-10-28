@@ -25,21 +25,23 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
     if (isSelected) {
       let filtrarEsportes = selectedSports.filter(name => name !== sportName)
       setSelectedSports(filtrarEsportes)
-      props.setValues({ ...props.values, sportList: filtrarEsportes })
     } else {
       let selecionarEsporte = [...selectedSports, sportName]
       setSelectedSports(selecionarEsporte)
-      props.setValues({ ...props.values, sportList: selecionarEsporte })
     }
   }
 
-  const handleSubmit = () =>{ return null}
+  const handleSubmit = () => {
+    props.setValues({ ...props.values, sportList: selectedSports })
+    return null
+  }
 
   return {
     toggleSport,
     handleSubmit,
+    setSelectedSports,
     selectedSports,
     sportList,
-    isLoading
+    isLoading,
   }
 }

@@ -1,18 +1,19 @@
 import { YStack, Checkbox, Text, XStack,  Label,  ScrollView,  View } from 'tamagui'
 import { CheckBairrosViewModel } from './CheckBairrosViewModel'
+import { CheckBairrosInterface } from '@/utils/interfaces/bairros'
 
 export default function CheckBairros({
   bairros,
   message,
   selectedBairros, setSelectedBairros
-}) {
+}: CheckBairrosInterface) {
   const {
     toggleBairro,
   } = CheckBairrosViewModel({selectedBairros, setSelectedBairros})
 
   return (    
       <View>
-        {bairros.length && (
+        {bairros?.length && (
         <YStack maxHeight="52%">
           {message && (<Text fontWeight="500" mb="$2" fontSize="$4" textAlign="center" marginVertical="$4">
             {message}

@@ -1,14 +1,15 @@
+import { bairros, CheckBairrosInterface } from '@/utils/interfaces/bairros'
 import { useState } from 'react'
 
-export const CheckBairrosViewModel = ({selectedBairros, setSelectedBairros}) => {
+export const CheckBairrosViewModel = ({selectedBairros, setSelectedBairros}: CheckBairrosInterface) => {
 
   const toggleBairro = (bairroName: string) => {
     const isSelected = selectedBairros.includes(bairroName)
 
     if (isSelected) {
-      setSelectedBairros(current => current.filter(name => name !== bairroName))
+      setSelectedBairros((current: bairros[]) => current.filter(name => name !== bairroName))
     } else {
-      setSelectedBairros(current => [...current, bairroName])
+      setSelectedBairros((current: bairros[]) => [...current, bairroName])
     }
   }
 
