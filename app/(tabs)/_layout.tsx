@@ -1,45 +1,60 @@
+// app/(tabs)/_layout.tsx
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { BarChart, CalendarSearch, Home, Menu, Star, Trophy } from '@tamagui/lucide-icons'; 
 
 export default function TabLayout() {
+
+    const activeColor = '#FFD700';
+    const inactiveColor = '#FFFFFF';
+    const backgroundColor = '#005A9C'; 
+
     return (
         <Tabs
             screenOptions={{
                 tabBarStyle: {
-                    backgroundColor: '#005A9C',
-                    borderTopColor: '#E0E0E0',
+                    backgroundColor: backgroundColor,
+                    borderTopColor: '#E0E0E0', 
                     borderTopWidth: 1,
                 },
-                tabBarInactiveTintColor: '#fff',
-                tabBarActiveTintColor: '#005A9C',
+                tabBarInactiveTintColor: inactiveColor,
+                tabBarActiveTintColor: activeColor,
                 headerShown: false,
             }}
         >
-            <Tabs.Screen
-                name="home"
-                options={{
-                    title: 'Home',
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="home-outline" color={color} size={size} />
-                    ),
-                }}
-            />
             <Tabs.Screen
                 name="events"
                 options={{
                     title: 'Eventos',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="calendar-search" color={color} size={size} />
+                        <CalendarSearch color={color} size={size} />
                     ),
                 }}
             />
             <Tabs.Screen
-                name="profile"
+                name="championships"
                 options={{
-                    title: 'Perfil',
+                    title: 'Campeonatos',
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="account-outline" color={color} size={size} />
+                        <Trophy color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="recommendations"
+                options={{
+                    title: 'Recomendações',
+                    tabBarIcon: ({ color, size }) => (
+                        <Star color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tabs.Screen
+                name="menu"
+                options={{
+                    title: 'Menu',
+                    tabBarIcon: ({ color, size }) => (
+                        <Menu color={color} size={size} />
                     ),
                 }}
             />
