@@ -1,14 +1,14 @@
 import React from 'react'
-import { Checkbox, XStack, Label, ScrollView } from 'tamagui'
+import { Checkbox, XStack, Label, ScrollView, YStack } from 'tamagui'
 import { CheckEsportesViewModel } from './CheckEsportesViewModel'
+import { CheckEsportesScreenProps } from '@/utils/interfaces/esportes'
 
-export default function CheckEsportesScreen({
- sportList, selectedSports, setSelectedSports
-}) {
-  const { toggleSport } = CheckEsportesViewModel({selectedSports, setSelectedSports})
+export default function CheckEsportesScreen({ sportList, selectedSports, setSelectedSports }: CheckEsportesScreenProps) {
+  const { toggleSport } = CheckEsportesViewModel({ setSelectedSports })
 
   return (
-     <ScrollView>
+    <YStack maxHeight="100%">
+      <ScrollView>
         <XStack gap="$3" flexWrap="wrap" justifyContent="flex-start">
           {sportList.map(sport => {
             const isChecked = selectedSports.includes(sport.name)
@@ -41,5 +41,6 @@ export default function CheckEsportesScreen({
           })}
         </XStack>
       </ScrollView>
+    </YStack>
   )
 }

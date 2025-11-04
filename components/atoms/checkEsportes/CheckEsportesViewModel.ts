@@ -1,14 +1,16 @@
-export const CheckEsportesViewModel = ({selectedSports, setSelectedSports}) => {
-  const toggleSport = (sportName: string) => {
-    const isSelected = selectedSports.includes(sportName)
+import { CheckEsportesViewModelProps } from "@/utils/interfaces/esportes"
 
-    if (isSelected) {
-      let filtrarEsportes = selectedSports.filter(name => name !== sportName)
-      setSelectedSports(filtrarEsportes)
-    } else {
-      let selecionarEsporte = [...selectedSports, sportName]
-      setSelectedSports(selecionarEsporte)
-    }
+export const CheckEsportesViewModel = ({ setSelectedSports }: CheckEsportesViewModelProps) => {
+
+  const toggleSport = (sportName: string) => {
+    setSelectedSports(currentSports => {
+      const isSelected = currentSports.includes(sportName)
+      if (isSelected) {
+        return currentSports.filter(name => name !== sportName)
+      } else {
+        return [...currentSports, sportName]
+      }
+    })
   }
 
   return {
