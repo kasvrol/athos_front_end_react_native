@@ -1,5 +1,5 @@
 import { getAdress, getBairros } from '@/middleware/usuario/singup'
-import { cidades } from '@/mock/cidades'
+import { bairrosCuritiba } from '@/mock/bairrosCuritiba'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import { useState } from 'react'
 
@@ -20,7 +20,7 @@ export const ManterUsuarioStep2 = ({
     //const response = await getBairros(ibgeCode)
 
     if (true) {
-      setBairros(cidades)
+      setBairros(bairrosCuritiba)
       return null
     }
 

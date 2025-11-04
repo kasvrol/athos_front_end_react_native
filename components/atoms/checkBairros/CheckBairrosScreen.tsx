@@ -12,9 +12,9 @@ export default function CheckBairros({
   } = CheckBairrosViewModel({selectedBairros, setSelectedBairros})
 
   return (    
-      <View>
+      <View maxHeight="50%">
         {bairros?.length && (
-        <YStack maxHeight="52%">
+        <YStack>
           {message && (<Text fontWeight="500" mb="$2" fontSize="$4" textAlign="center" marginVertical="$4">
             {message}
           </Text>)}
