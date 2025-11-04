@@ -81,7 +81,14 @@ export default function ManterUsuarioStep2Screen({
           />
         </YStack>
       </Form>
-      <CheckBairros message={' Selecione ao menos um bairro que você possui interesse em participar de equipes:'} bairros={bairros} selectedBairros={selectedBairros} setSelectedBairros={setSelectedBairros}/> 
+      <CheckBairros
+        message={
+          ' Selecione ao menos um bairro que você possui interesse em participar de equipes:'
+        }
+        bairros={bairros}
+        selectedBairros={selectedBairros}
+        setSelectedBairros={setSelectedBairros}
+      />
     </SignupScreen>
   )
 }

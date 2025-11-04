@@ -1,1 +1,4 @@
-export interface Option { id: string; name: string; }
+export interface Option {
+  id: string
+  name: string
+}

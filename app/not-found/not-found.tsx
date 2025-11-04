@@ -1,18 +1,16 @@
-import { Link, Stack } from 'expo-router';
-import { Text, View } from '@/components/Themed';
-import styles from './not-found.module.css'
+import { Text, View, Stack } from 'tamagui'
+import { Link } from 'expo-router'
 
 export default function NotFoundScreen() {
   return (
     <>
-      <Stack.Screen options={{ title: 'Oops!' }} />
-      <View className={styles.container}>
-        <Text className={styles.title}>Essa tela não existe</Text>
-        <Link href="/" className={styles.link}>
-          <Text className={styles.linkText}>Volte para a tela principal!</Text>
+      <Stack />
+      <View>
+        <Text>Essa tela não existe</Text>
+        <Link href="/login">
+          <Text>Volte para a tela principal!</Text>
         </Link>
       </View>
     </>
-  );
+  )
 }
-

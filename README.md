@@ -1,10 +1,13 @@
 # Athos
+
 Athos é um aplicativo móvel para conectar pessoas através de eventos esportivos. Encontre e participe de jogos, organize suas próprias equipes, campeonatos e conheça outros atletas na sua região.
 
 ## 😊 Motivação
-Este repositório faz parte trabalho de conclusão de curso para o curso de Técnologo em Análise e Desenvolvimento de Sistemas 
+
+Este repositório faz parte trabalho de conclusão de curso para o curso de Técnologo em Análise e Desenvolvimento de Sistemas
 
 ## ✨ Funcionalidades
+
 Com base na estrutura atual do protótipo, as seguintes funcionalidades estão presentes:
 
 - Autenticação de Usuário: Telas de Login e Cadastro com validação de formulário.
@@ -14,6 +17,7 @@ Com base na estrutura atual do protótipo, as seguintes funcionalidades estão p
 - Navegação por Abas: Navegação principal utilizando abas na parte inferior da tela.
 
 ## 🚀 Tecnologias Utilizadas
+
 O projeto foi construído utilizando as seguintes tecnologias:
 
 - React Native: Estrutura para desenvolvimento de aplicativos nativos.
@@ -31,18 +35,22 @@ O projeto foi construído utilizando as seguintes tecnologias:
 - Aplicativo Expo Go no seu smartphone
 
 ## ▶️ Como Rodar o Projeto
+
 Clone o repositório:
+
 ```bash
 git clone https://github.com/kasvrol/athos_front_end_react_native
 cd athos_front_end_react_native
 ```
 
 Instale as dependências:
+
 ```bash
 yarn install
 ```
 
 Execute o projeto:
+
 ```bash
 yarn start
 ```
@@ -51,7 +59,9 @@ Acesse o aplicativo:
 Após executar o comando acima, um QR code será exibido no seu terminal. Abra o aplicativo Expo Go no seu celular e escaneie o QR code para iniciar o aplicativo. Você também pode optar por executá-lo em um simulador de iOS ou Android.
 
 ## 📂 Estrutura de Arquivos
+
 O projeto utiliza uma estrutura de pastas organizada para facilitar a manutenção e escalabilidade.
+
 ```bash
 ├── app/                  # Diretório principal da aplicação (todas as rotas e telas)
 │   ├── (tabs)/           # Grupo de rotas para a navegação por abas

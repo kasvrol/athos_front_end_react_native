@@ -13,7 +13,7 @@ export const getAdress = async (cep: string) => {
 
 export const getBairros = async (ibgeCode: string) => {
   const token = process.env.EXPO_PUBLIC_TOKEN_BRASIL_ABERTO
-  return await axios  
+  return await axios
     .get(`https://api.brasilaberto.com/v1/districts-by-ibge-code/${ibgeCode}`, {
       headers: {
         Authorization: `Bearer ${token}`,

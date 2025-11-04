@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text} from 'tamagui'
+import { Text, YStack } from 'tamagui'
 import { ModelViewThirdPage } from './ModelViewManterUsuarioStep3'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import SignupScreen from '@/components/singUp/singUpView'
@@ -11,12 +11,13 @@ export default function ManterUsuarioStep3Screen({
   values,
   setValues,
 }: ManterUsuarioViewProps) {
-  const { selectedSports, sportList, handleSubmit, isLoading, setSelectedSports } = ModelViewThirdPage({
-    setCurrentStep,
-    currentStep,
-    values,
-    setValues,
-  })
+  const { selectedSports, sportList, handleSubmit, isLoading, setSelectedSports } =
+    ModelViewThirdPage({
+      setCurrentStep,
+      currentStep,
+      values,
+      setValues,
+    })
 
   const props = {
     onPress: handleSubmit,
@@ -32,7 +33,13 @@ export default function ManterUsuarioStep3Screen({
       <Text color="$colorFocus" fontWeight="600" mb="$2" fontSize="$6" textAlign="center">
         Selecione ao menos um esporte do seu interesse
       </Text>
-      <CheckEsportesScreen setSelectedSports={setSelectedSports} selectedSports={selectedSports} sportList={sportList}/>
+      <YStack maxHeight="75%">
+        <CheckEsportesScreen
+          setSelectedSports={setSelectedSports}
+          selectedSports={selectedSports}
+          sportList={sportList}
+        />
+      </YStack>
     </SignupScreen>
   )
 }

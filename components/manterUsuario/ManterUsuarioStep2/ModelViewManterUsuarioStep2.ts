@@ -73,7 +73,7 @@ export const ManterUsuarioStep2 = ({
     return true
   }
 
-    //setIsButtonDisabled(selectedBairros.length == 0)
+  //setIsButtonDisabled(selectedBairros.length == 0)
 
   return {
     handleCEP,
