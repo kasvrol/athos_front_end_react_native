@@ -1,4 +1,4 @@
-export const cidades = [
+export const bairrosCuritiba = [
   { id: '46572', name: 'Rebouças' },
   { id: '46573', name: 'Centro' },
   { id: '46574', name: 'São Francisco' },
