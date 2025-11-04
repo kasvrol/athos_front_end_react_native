@@ -1,9 +1,9 @@
 import { Input, Label, XStack, YStack, Text, Square } from 'tamagui'
 import { ModelViewLogin } from './ModelViewManterUsuarioStep1'
-import SignupScreen from '../singUp/singUpView'
 import { router } from 'expo-router'
 import { Eye, EyeOff } from '@tamagui/lucide-icons'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
+import SignupScreen from '@/components/singUp/singUpView'
 
 const MensagemErro = ({ texto }: { texto: string }) => (
   <XStack
