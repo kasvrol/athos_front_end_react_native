@@ -3,16 +3,17 @@ import { useState } from 'react'
 
 export const CheckBairrosViewModel = ({selectedBairros, setSelectedBairros}: CheckBairrosInterface) => {
 
-  const toggleBairro = (bairroName: string) => {
-    const isSelected = selectedBairros.includes(bairroName)
+ const toggleBairro = (bairroName: string) => {
+    setSelectedBairros(currentSelected => {
+      const isSelected = currentSelected.includes(bairroName)
 
-    if (isSelected) {
-      setSelectedBairros((current: bairros[]) => current.filter(name => name !== bairroName))
-    } else {
-      setSelectedBairros((current: bairros[]) => [...current, bairroName])
-    }
+      if (isSelected) {
+        return currentSelected.filter(name => name !== bairroName)
+      } else {
+        return [...currentSelected, bairroName]
+      }
+    })
   }
-
 
   return {
     toggleBairro,

@@ -1,4 +1,4 @@
-import { Dispatch } from "react"
+import { Dispatch, SetStateAction } from 'react'
 
 export type bairros = {
     name: string
@@ -9,5 +9,5 @@ export interface CheckBairrosInterface {
 bairros?: bairros[]
   message?: string,
   selectedBairros: any[]
-  setSelectedBairros: (current: bairros[]) => (string | bairros)[]
+  setSelectedBairros: Dispatch<SetStateAction<string[]>>
 }
