@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, YStack } from 'tamagui'
 import { ModelViewThirdPage } from './ModelViewManterUsuarioStep3'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
-import CheckEsportesScreen from '@/components/atoms/checkEsportes/CheckEsportesScreen'
+import CheckEsportesScreen from '@/components/molecules/checkEsportes/CheckEsportesScreen'
 import SignupScreen from '@/components/molecules/singUp/singUpView'
 
 export default function ManterUsuarioStep3Screen({
