@@ -1,8 +1,8 @@
 import { YStack, Checkbox, Text, XStack, Form, Label, Input, ScrollView, Paragraph } from 'tamagui'
 import { ManterUsuarioStep2 } from './ModelViewManterUsuarioStep2'
-import SignupScreen from '../../singUp/singUpView'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import CheckBairros from '@/components/atoms/checkBairros/CheckBairrosScreen'
+import SignupScreen from '@/components/molecules/singUp/singUpView'
 
 export default function ManterUsuarioStep2Screen({
   setCurrentStep,

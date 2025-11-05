@@ -1,7 +1,7 @@
 import LayoutComponent from '@/components/atoms/layout'
-import ManterUsuarioStep1Screen from '@/components/manterUsuario/ManterUsuarioStep1/manterUsuarioStep1'
-import ManterUsuarioStep2Screen from '@/components/manterUsuario/ManterUsuarioStep2/ManterUsuarioStep2Screen'
-import ManterUsuarioStep3Screen from '@/components/manterUsuario/ManterUsuarioStep3/ManterUsuarioStep3Screen'
+import ManterUsuarioStep1Screen from '@/components/organisms/ManterUsuarioStep1/manterUsuarioStep1'
+import ManterUsuarioStep2Screen from '@/components/organisms/ManterUsuarioStep2/ManterUsuarioStep2Screen'
+import ManterUsuarioStep3Screen from '@/components/organisms/ManterUsuarioStep3/ManterUsuarioStep3Screen'
 import { useEffect, useState } from 'react'
 import { Text } from 'tamagui'
 
