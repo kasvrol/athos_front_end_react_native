@@ -1,22 +1,25 @@
 import React from 'react'
 import { YStack, XStack, Label, Input, Button } from 'tamagui'
 import { UserPlus, X, Trash2 } from '@tamagui/lucide-icons'
+import { FormConvidadosViewModel } from './viewModel'
 
 interface ConvidadosFormProps {
   listaConvidados: string[]
-  onAdicionar: () => void
-  onRemover: (index: number) => void
-  onChange: (text: string, index: number) => void
-  onCancelar: () => void
+  setOpenConvites: (value: boolean) => void
+  setListaConvidados: (prev: any) => void
 }
 
 export function ConvidadosForm({
   listaConvidados,
-  onAdicionar,
-  onRemover,
-  onChange,
-  onCancelar,
+  setListaConvidados,
+  setOpenConvites,
 }: ConvidadosFormProps) {
+  const {
+    handleConvidadoChange,
+    handleAdicionarConvidado,
+    handleRemoverConvidado,
+    handleCancelarConvites,
+  } = FormConvidadosViewModel({ listaConvidados, setListaConvidados, setOpenConvites })
 
   return (
     <YStack gap="$4" borderWidth={1} borderColor="$borderColor" borderRadius="$4" padding="$4">
@@ -28,7 +31,7 @@ export function ConvidadosForm({
         {listaConvidados.map((email, index) => (
           <XStack key={index} gap="$2" alignItems="center">
             <Input
-              flex={1} 
+              flex={1}
               id={`convidado-${index}`}
               height="$9"
               placeholder="email@exemplo.com"
@@ -36,16 +39,16 @@ export function ConvidadosForm({
               autoCapitalize="none"
               borderColor="$borderColorFocus"
               color="$color"
-              value={email} 
-              onChangeText={text => onChange(text, index)} 
+              value={email}
+              onChangeText={text => handleConvidadoChange(text, index)}
             />
-            
+
             {listaConvidados.length > 1 && (
               <Button
                 icon={Trash2}
                 size="$4"
-                circular 
-                onPress={() => onRemover(index)} 
+                circular
+                onPress={() => handleRemoverConvidado(index)}
                 backgroundColor="$backgroundPress"
                 pressStyle={{ backgroundColor: '$backgroundHover' }}
                 borderColor="$borderColorError"
@@ -58,7 +61,7 @@ export function ConvidadosForm({
       <YStack gap="$3" marginTop="$2">
         <Button
           icon={UserPlus}
-          onPress={onAdicionar} 
+          onPress={handleAdicionarConvidado}
           backgroundColor="$backgroundPress"
           pressStyle={{ backgroundColor: '$backgroundHover' }}
           borderColor="$borderColorFocus"
@@ -68,8 +71,8 @@ export function ConvidadosForm({
         </Button>
         <Button
           icon={X}
-          onPress={onCancelar} 
-          variant="outlined" 
+          onPress={handleCancelarConvites}
+          variant="outlined"
           borderColor="$borderColorError"
           color="$borderColorError"
           pressStyle={{ backgroundColor: '$backgroundHover' }}
