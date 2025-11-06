@@ -1,7 +1,6 @@
-import { CheckEsportesViewModelProps } from "@/utils/interfaces/esportes"
+import { CheckEsportesViewModelProps } from '@/utils/interfaces/esportes'
 
 export const CheckEsportesViewModel = ({ setSelectedSports }: CheckEsportesViewModelProps) => {
-
   const toggleSport = (sportName: string) => {
     setSelectedSports(currentSports => {
       const isSelected = currentSports.includes(sportName)

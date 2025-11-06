@@ -29,13 +29,13 @@ import { CriarEventoModelView } from './criarEventoModelView'
 import { BasketballLoading } from '@/components/atoms/loading/basketball'
 import { ConvidadosForm } from '@/components/organisms/formConvidados'
 
-
-function Convidados(){
-    const listaConvidados: string[] = ['']
-    return(
-        <YStack>{listaConvidados.map((convidadeo,index)=>{
-            return(
-                <YStack gap="$1" key={index}>
+function Convidados() {
+  const listaConvidados: string[] = ['']
+  return (
+    <YStack>
+      {listaConvidados.map((convidadeo, index) => {
+        return (
+          <YStack gap="$1" key={index}>
             <Label htmlFor="titulo" color="$color" alignItems="center">
               <Edit3 size={16} color="$borderColorFocus" /> {`Convidado ${index}`}
             </Label>
@@ -48,12 +48,12 @@ function Convidados(){
               color="$color"
             />
           </YStack>
-            )
-        })}
-            <Button onPress={()=>{}}>Adicionar Convidado</Button>
-            <Button onPress={()=>{}}>Cencelar convites</Button>
-            </YStack>
-    )
+        )
+      })}
+      <Button onPress={() => {}}>Adicionar Convidado</Button>
+      <Button onPress={() => {}}>Cencelar convites</Button>
+    </YStack>
+  )
 }
 
 function CriarEventoView() {
@@ -65,7 +65,9 @@ function CriarEventoView() {
     showTimePicker,
     hour,
     isLoading,
-    selectedSports,openConvites, setOpenConvites,
+    selectedSports,
+    openConvites,
+    setOpenConvites,
     setSelectedSports,
     setListaConvidados,
     listaConvidados,
@@ -138,7 +140,11 @@ function CriarEventoView() {
               borderWidth={1}
               borderRadius="$4"
               padding="$3"
-              borderColor={(!selectedSports.length || selectedSports.length > 1) ? '$borderColorError' : '$borderColorFocus'}
+              borderColor={
+                !selectedSports.length || selectedSports.length > 1
+                  ? '$borderColorError'
+                  : '$borderColorFocus'
+              }
             >
               <CheckEsportesScreen
                 sportList={esportes}
@@ -147,7 +153,7 @@ function CriarEventoView() {
               />
             </YStack>
 
-            {(!selectedSports.length || selectedSports.length > 1)&& (
+            {(!selectedSports.length || selectedSports.length > 1) && (
               <Text color="$borderColorError" fontSize="$4" paddingLeft="$1">
                 Selecione um esporte!
               </Text>
@@ -302,24 +308,26 @@ function CriarEventoView() {
             />
           </YStack>
 
-          {openConvites? (
+          {openConvites ? (
             <ConvidadosForm
-              listaConvidados={listaConvidados} setListaConvidados={setListaConvidados} setOpenConvites={setOpenConvites}
+              listaConvidados={listaConvidados}
+              setListaConvidados={setListaConvidados}
+              setOpenConvites={setOpenConvites}
             />
-          ): ( <Button
-            height="$9"
-            onPress={()=>setOpenConvites(true)}
-            disabled={isLoading}
-            backgroundColor={isLoading ? '$backgroundPress' : '$color9'}
-            color={isLoading ? '$color' : '$background'}
-            fontFamily="$body"
-            fontWeight="bold"
-            pressStyle={{ backgroundColor: '$color11' }}
-          >
-            CONVIDAR JOGADORES
-          </Button>)}
-
-         
+          ) : (
+            <Button
+              height="$9"
+              onPress={() => setOpenConvites(true)}
+              disabled={isLoading}
+              backgroundColor={isLoading ? '$backgroundPress' : '$color9'}
+              color={isLoading ? '$color' : '$background'}
+              fontFamily="$body"
+              fontWeight="bold"
+              pressStyle={{ backgroundColor: '$color11' }}
+            >
+              CONVIDAR JOGADORES
+            </Button>
+          )}
 
           <Button
             height="$9"

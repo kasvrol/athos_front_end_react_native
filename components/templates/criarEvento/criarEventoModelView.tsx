@@ -31,8 +31,6 @@ export const CriarEventoModelView = () => {
   })
   const [selectedSports, setSelectedSports] = useState<any[]>([])
 
-  
-
   const onDateChange = (_: DateTimePickerEvent, selectedDate?: Date) => {
     if (selectedDate) {
       setDate(selectedDate)
@@ -118,7 +116,8 @@ export const CriarEventoModelView = () => {
     isLoading,
     showTimePicker,
     hour,
-    openConvites, setOpenConvites,
+    openConvites,
+    setOpenConvites,
     setShowTimePicker,
     onDateChange,
     setShowDatePicker,
@@ -126,7 +125,7 @@ export const CriarEventoModelView = () => {
     onTimeChange,
     selectedSports,
     setSelectedSports,
-     setListaConvidados,
+    setListaConvidados,
     listaConvidados,
   }
 }
