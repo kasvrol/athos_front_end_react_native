@@ -11,7 +11,7 @@ export type SingUpViewProps = {
 }
 
 export type SingUpModelViewProps = {
-  onPress: () => boolean | null
+  onPress: () => any
   values: any
   setValues: Dispatch<any>
   currentStep: number
