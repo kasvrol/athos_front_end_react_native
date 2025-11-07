@@ -9,7 +9,6 @@ export default function LayoutComponent({ children }: AtualizarPerfilProps) {
   return (
     <YStack
       flex={1}
-      justifyContent="center"
       paddingTop={100}
       paddingHorizontal="$4"
       gap="$2"
