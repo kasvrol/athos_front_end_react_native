@@ -8,7 +8,7 @@ const paleYellowGreen = '#e7fa84'
 const errorRed = '#FF2C2C'
 
 const darkBg = '#121212'
-const darkBg2 = '#1E1E1E'
+const clearBg2 = '#F1F1F1'
 const darkBg3 = '#2a2a2a'
 
 const tokens = createTokens({
@@ -88,9 +88,9 @@ const bodyFont = createFont({
 
 export const dark_cyberLime = {
   background: darkBg,
-  backgroundHover: darkBg2,
+  backgroundHover: clearBg2,
   backgroundPress: darkBg3,
-  backgroundFocus: darkBg2,
+  backgroundFocus: clearBg2,
   color: '#FFFFFF',
   colorHover: paleYellowGreen,
   colorPress: paleYellowGreen,
@@ -106,7 +106,7 @@ export const dark_cyberLime = {
   shadowColor: '#000000',
   shadowColorHover: '#000000',
   color1: darkBg,
-  color2: darkBg2,
+  color2: clearBg2,
   color3: darkBg3,
   color4: mutedCyan,
   color5: '#FFFFFF40',
