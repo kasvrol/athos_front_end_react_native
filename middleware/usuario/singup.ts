@@ -1,14 +1,24 @@
 import axios from 'axios'
 
-const request = async (url: string) => {
+const getRequest = async (url: string) => {
   return await axios
-    .get(`${url}`)
+    .get(url)
     .then(res => res.data)
     .catch(err => console.error(err.response?.status, err.message))
 }
 
+const postRequest = async (url: string, information: any) => {
+  return await axios
+    .post(url, information)
+    .then(function (response) {
+      console.log(response)
+      return response
+    })
+    .catch(err => console.error(err.response?.status, err.message))
+}
+
 export const getAdress = async (cep: string) => {
-  return await request(`https://viacep.com.br/ws/${cep}/json/`)
+  return await getRequest(`https://viacep.com.br/ws/${cep}/json/`)
 }
 
 export const getBairros = async (ibgeCode: string) => {
@@ -21,4 +31,8 @@ export const getBairros = async (ibgeCode: string) => {
     })
     .then(res => res.data)
     .catch(err => console.error(err.response?.status, err.message))
+}
+
+export const postInformationUser = async (user: any) => {
+  return await postRequest('', user)
 }

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { SingUpModelViewProps } from '@/utils/types/user'
+import { postInformationUser } from '@/middleware/usuario/singup'
+import { router } from 'expo-router'
 
 export function useSignupViewModel({
   onPress,
@@ -8,9 +10,14 @@ export function useSignupViewModel({
   setCurrentStep,
   currentStep,
 }: SingUpModelViewProps) {
-  const [isThereUser, setIsThereUser] = useState(null)
+  const [isThereUser, setIsThereUser] = useState<any>(null)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [submitError, setSubmitError] = useState<string | null>(null)
+
+  const handleSubmit = async (user: any) => {
+    const result = await postInformationUser(user)
+    return result
+  }
 
   const handleNext = async () => {
     setSubmitError(null)
@@ -21,11 +28,19 @@ export function useSignupViewModel({
     }
 
     if (currentStep == 3 && isThereUser) {
-      //atualizar usuario(values)
+      const result = onPress()
+      if (result) {
+        await handleSubmit({ ...isThereUser, ...result })
+      }
+      return
     }
 
     if (currentStep == 3 && !isThereUser) {
-      //criarUsuario(values)
+      const result = onPress()
+      // if(result){
+      //   await handleSubmit(result)
+      // }
+      router.push('/criarEvento')
     }
 
     return
