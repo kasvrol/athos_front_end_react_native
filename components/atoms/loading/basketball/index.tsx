@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-import LottieView from 'lottie-react-native'
 import { Text } from 'tamagui'
 
 export const BasketballLoading = () => {
@@ -15,7 +14,7 @@ export const BasketballLoading = () => {
       >
         Mais que um app, somos um time!
       </Text>
-      <Image style={styles.animation} source={require('@/assets/icons/baketball.gif')} />
+      <Image style={styles.animation} source={require('@/assets/icons/basketball.gif')} />
       <Text color="$borderColorFocus" fontSize="$5" fontWeight="600" marginTop={10}>
         Carregando...
       </Text>
