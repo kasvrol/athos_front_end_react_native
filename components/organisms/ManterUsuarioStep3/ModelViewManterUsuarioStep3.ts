@@ -1,3 +1,4 @@
+import { postInformationUser } from '@/middleware/usuario/singup'
 import { esportes } from '@/mock/esportes'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import { useEffect, useState } from 'react'
@@ -6,6 +7,7 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
   const [selectedSports, setSelectedSports] = useState<string[]>([])
   const [sportList, setSportList] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [error, setError] = useState<string>('')
 
   useEffect(() => {
     setIsLoading(true)
@@ -32,8 +34,12 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
   }
 
   const handleSubmit = () => {
-    props.setValues({ ...props.values, sportList: selectedSports })
-    return null
+    if (selectedSports.length > 1) {
+      return { ...props.values, sportList: selectedSports }
+    } else {
+      setError('Selecione ao menos um esporte')
+      return null
+    }
   }
 
   return {
