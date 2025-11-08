@@ -1,4 +1,4 @@
-import LayoutComponent from '@/components/atoms/layout'
+import dayjs from 'dayjs'
 import {
   BadgeDollarSign,
   CalendarDays,
@@ -19,6 +19,12 @@ export type CardEventoProps = {
   horario: string
 }
 
+enum StatusEvento {
+  PENDENTE = 'PENDENTE',
+  OCORRENDO = 'OCORRENDO',
+  PASSADO = 'PASSADO',
+}
+
 export const CardEvento = ({
   titulo,
   descricao,
@@ -31,6 +37,24 @@ export const CardEvento = ({
   let arrayLittleDescription: string[] = descricao.split(' ')
   arrayLittleDescription = arrayLittleDescription.splice(0, 10)
   let littleDescription: string = arrayLittleDescription.join(' ')
+
+  function getStatusEvento(dataReferencia: string, horarioReferencia: string): StatusEvento {
+    const dateTimeStr = `${dataReferencia}T${horarioReferencia}:00`
+    const dataCompleta = new Date(dateTimeStr)
+    const agora = new Date()
+    const diffMs = agora.getTime() - dataCompleta.getTime()
+    const diffHoras = diffMs / (1000 * 60 * 60)
+
+    if (diffHoras < 0) {
+      return StatusEvento.PENDENTE
+    } else if (diffHoras <= 24) {
+      return StatusEvento.OCORRENDO
+    } else {
+      return StatusEvento.PASSADO
+    }
+  }
+
+  const statusEvento = getStatusEvento(data, horario)
 
   return (
     <YStack
@@ -57,7 +81,8 @@ export const CardEvento = ({
           <XStack alignItems="center" gap="$2" justifyContent="flex-start">
             <BadgeDollarSign fontSize="$1" color={'$borderColorFocus'} />
             <Text textAlign="justify" fontSize="$4">
-              Participação: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor)}
+              Participação:{' '}
+              {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valor)}
             </Text>
           </XStack>
         </XStack>
@@ -65,7 +90,7 @@ export const CardEvento = ({
           <XStack alignItems="center" gap="$2" justifyContent="flex-start">
             <CalendarDays fontSize="$1" color={'$borderColorFocus'} />
             <Text textAlign="justify" fontSize="$4">
-              Data: {data}
+              Data: {dayjs(data).format('DD/MM/YYYY')}
             </Text>
           </XStack>
           <XStack alignItems="center" gap="$2" justifyContent="flex-start">
@@ -83,18 +108,35 @@ export const CardEvento = ({
 
       <XStack alignItems="center" gap="$2">
         <MapPinHouse fontSize="$1" color={'$borderColorFocus'} />
-        <Text textAlign="left" width={'90%'}>{endereco}</Text>
+        <Text textAlign="left" width={'90%'}>
+          {endereco}
+        </Text>
       </XStack>
-      <Button
-        width={'100%'}
-        height={'$9'}
-        fontSize={'$4'}
-        fontWeight={'500'}
-        backgroundColor={'$colorPress'}
-        color={'$color1'}
-      >
-        VER MAIS
-      </Button>
+      {statusEvento === StatusEvento.OCORRENDO ? (
+        <Button
+          width={'100%'}
+          height={'$9'}
+          fontSize={'$4'}
+          fontWeight={'500'}
+          backgroundColor={'$colorPress'}
+          color={'$color1'}
+        >
+          AVALIAR
+        </Button>
+      ) : statusEvento === StatusEvento.PENDENTE ? (
+        <Button
+          width={'100%'}
+          height={'$9'}
+          fontSize={'$4'}
+          fontWeight={'500'}
+          backgroundColor={'$colorPress'}
+          color={'$color1'}
+        >
+          VER MAIS
+        </Button>
+      ) : (
+        ''
+      )}
     </YStack>
   )
 }
