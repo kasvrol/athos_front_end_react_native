@@ -1,96 +1,100 @@
-import { CardEventoProps } from '@/components/atoms/cardJogo/index'
-
-const esportes = [
-  'Corrida de Rua',
-  'Futebol Amador',
-  'Vôlei de Praia',
-  'Basquete 3x3',
-  'Ciclismo de Estrada',
-  'Skate Street',
-  'Trail Run',
-  'Jiu-Jitsu',
-  'Natação em Águas Abertas',
-  'Treino Funcional',
-  'Beach Tennis',
-  'Capoeira',
-]
-
-const tiposDeEvento = [
-  'Circuito',
-  'Copa',
-  'Torneio',
-  'Desafio',
-  'Aulão Aberto',
-  'Campeonato',
-  'Etapa Classificatória',
-  'Revezamento',
-  'Encontro',
-]
-
-const locais = [
-  { local: 'Parque Barigui', cidade: 'Curitiba' },
-  { local: 'Parque São Lourenço', cidade: 'Curitiba' },
-  { local: 'Aterro do Flamengo', cidade: 'Rio de Janeiro' },
-  { local: 'Orla de Copacabana', cidade: 'Rio de Janeiro' },
-  { local: 'Parque Ibirapuera', cidade: 'São Paulo' },
-  { local: 'Ginásio do Tarumã', cidade: 'Curitiba' },
-  { local: 'Praia de Ipanema', cidade: 'Rio de Janeiro' },
-  { local: 'Pista de Skate do Gaúcho', cidade: 'Curitiba' },
-  { local: 'Serra da Graciosa', cidade: 'Morretes' },
-  { local: 'Praça Afonso Botelho', cidade: 'Curitiba' },
-]
-
-const descricoesBase = [
-  'Evento aberto para atletas de todas as idades e níveis. Venha participar e superar seus limites!',
-  'Traga sua equipe e compita pelo troféu. Inscrições limitadas, garanta sua vaga.',
-  'Uma ótima oportunidade para praticar seu esporte favorito e conhecer novas pessoas. Teremos música e food trucks.',
-  'Competição de alto nível com os melhores atletas da região. A entrada para espectadores é gratuita.',
-  'Percurso desafiador com belas paisagens. Kit atleta incluso com camiseta e medalha de participação.',
-]
-
-export const mockEventos: CardEventoProps[] = []
-
-for (let i = 1; i <= 30; i++) {
-  // Seleciona itens aleatórios dos arrays de base
-  const esporte = esportes[i % esportes.length]
-  const tipo = tiposDeEvento[i % tiposDeEvento.length]
-  const loc = locais[i % locais.length]
-  const descricao = descricoesBase[i % descricoes.length]
-
-  mockEventos.push({
-    id: i,
-    titulo: `${tipo} de ${esporte}`,
-    descricao: descricao,
-    endereco: `${loc.local}, ${loc.cidade}`,
-    valor: i % 5 === 0 ? 0 : parseFloat((Math.random() * 150 + 20).toFixed(2)),
-  })
-}
-
-mockEventos[0].titulo = 'Circuito das Estações - Etapa Primavera'
-mockEventos[0].descricao =
-  'A corrida mais esperada do ano está de volta! Percursos de 5km, 10km e 21km.'
-mockEventos[0].valor = 99.9
-
-mockEventos[5].titulo = 'Rei da Praia de Vôlei'
-mockEventos[5].endereco = 'Praia de Caiobá, Matinhos'
-mockEventos[5].descricao =
-  'Atletas profissionais disputam o título em um fim de semana de muito sol e esporte.'
-
-mockEventos[12].titulo = 'Aulão de Funcional no Parque'
-mockEventos[12].valor = 0
-mockEventos[12].descricao =
-  'Comece o seu sábado com energia! Aulão gratuito aberto ao público. Traga sua garrafa de água.'
-
-export const LOCAIS_DISPONIVEIS: Option[] = [
-  { id: 'curitiba', name: 'Curitiba' },
-  { id: 'sao_paulo', name: 'São Paulo' },
-  { id: 'rio_de_janeiro', name: 'Rio de Janeiro' },
-  { id: 'belo_horizonte', name: 'Belo Horizonte' },
-]
-
-export const ESPORTES_DISPONIVEIS: Option[] = [
-  { id: 'futebol', name: 'Futebol' },
-  { id: 'volei', name: 'Vôlei' },
-  { id: 'corrida', name: 'Corrida' },
-  { id: 'ciclismo', name: 'Ciclismo' },
+export const todosEventos = [
+  {
+    titulo: 'Torneio de Futebol Society',
+    esporte: 'Futebol',
+    data: '2025-11-06',
+    horario: '18:30',
+    descricao:
+      'Campeonato entre equipes locais em formato 7x7. Premiação para os três primeiros colocados.',
+    endereco: 'Arena Bola Show - Rua das Palmeiras, 1200, São Paulo - SP',
+    valor: 200,
+  },
+  {
+    titulo: 'Circuito de Corrida de Revezamento',
+    esporte: 'Corrida',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Equipes de 4 corredores participam de um circuito urbano de 10 km. Medalhas para todos os participantes.',
+    endereco: 'Parque do Ibirapuera - Av. Pedro Álvares Cabral, São Paulo - SP',
+    valor: 80,
+  },
+  {
+    titulo: 'Campeonato de Vôlei de Praia',
+    esporte: 'Vôlei',
+    data: '2025-11-04',
+    horario: '18:30',
+    descricao: 'Duplas e quartetos competem em jogos eliminatórios ao longo do fim de semana.',
+    endereco: 'Praia de Copacabana - Rio de Janeiro - RJ',
+    valor: 150,
+  },
+  {
+    titulo: 'Desafio de Basquete 3x3',
+    esporte: 'Basquete',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Torneio amistoso de basquete em trios. Ideal para grupos de amigos que gostam de competir de forma descontraída.',
+    endereco: 'Quadra do Centro Esportivo Municipal, Belo Horizonte - MG',
+    valor: 100,
+  },
+  {
+    titulo: 'Trilha em Equipe - Serra da Cantareira',
+    esporte: 'Trilha',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Atividade guiada de trilha em grupo, com dinâmicas de cooperação e desafios ao longo do percurso.',
+    endereco: 'Parque Estadual da Cantareira - São Paulo - SP',
+    valor: 120,
+  },
+  {
+    titulo: 'Campeonato de Paintball',
+    esporte: 'Paintball',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao: 'Equipes disputam partidas em diferentes cenários. Equipamento incluso.',
+    endereco: 'Paintball Zone - Estrada da Serra, 800, Curitiba - PR',
+    valor: 180,
+  },
+  {
+    titulo: 'Corrida de Obstáculos em Equipe',
+    esporte: 'Corrida',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Prova de superação em grupo, com obstáculos naturais e artificiais. Trabalho em equipe é essencial!',
+    endereco: 'Fazenda EcoPark - Campinas - SP',
+    valor: 160,
+  },
+  {
+    titulo: 'Torneio de Queimada',
+    esporte: 'Queimada',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Competição divertida para grupos de amigos ou empresas. Ideal para integração e descontração.',
+    endereco: 'Ginásio Municipal de Esportes, Porto Alegre - RS',
+    valor: 90,
+  },
+  {
+    titulo: 'Festival de Canoagem em Grupo',
+    esporte: 'Canoagem',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Equipes disputam corridas de canoas em um belo lago. Equipamentos e instrutores inclusos.',
+    endereco: 'Lago Azul - Florianópolis - SC',
+    valor: 140,
+  },
+  {
+    titulo: 'Desafio de Escalada em Duplas',
+    esporte: 'Escalada',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Competição amistosa de escalada indoor com rotas desafiadoras para todos os níveis.',
+    endereco: 'Climb Zone - Av. das Nações, 45, Brasília - DF',
+    valor: 110,
+  },
 ]
