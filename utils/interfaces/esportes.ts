@@ -1,7 +1,7 @@
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from 'react'
 
 export type Sport = {
-  id: number | string 
+  id: number | string
   name: string
 }
 

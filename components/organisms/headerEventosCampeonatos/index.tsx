@@ -14,7 +14,13 @@ function HeaderEventosCampeonatosView({
 }: HeaderEventosCampeonatosProps) {
   const [openSearch, setOpenSearch] = useState<boolean>(false)
   return (
-    <XStack height={'$10'} marginHorizontal={'$2'} justifyContent="space-between" alignItems='center' gap={'$3'}>
+    <XStack
+      height={'$10'}
+      marginHorizontal={'$2'}
+      justifyContent="space-between"
+      alignItems="center"
+      gap={'$3'}
+    >
       <Button
         onPress={() => {
           router.push(`${routerButton}`)
