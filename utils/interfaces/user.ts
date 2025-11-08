@@ -11,3 +11,10 @@ export interface UserInformations {
   values: any
   setIsButtonDisabled: Dispatch<boolean>
 }
+
+export interface UserData {
+  id: string; 
+  nome: string;
+  email: string;
+  ibgeCode: string; 
+}
