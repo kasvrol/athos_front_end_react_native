@@ -13,8 +13,8 @@ export interface UserInformations {
 }
 
 export interface UserData {
-  id: string; 
-  nome: string;
-  email: string;
-  ibgeCode: string; 
+  id: string
+  nome: string
+  email: string
+  ibgeCode: string
 }
