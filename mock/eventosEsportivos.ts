@@ -98,3 +98,85 @@ export const todosEventos = [
     valor: 110,
   },
 ]
+
+export const eventosCompletos = [
+  {
+    titulo: 'Circuito de Corrida de Revezamento',
+    esporte: 'Corrida',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Equipes de 4 corredores participam de um circuito urbano de 10 km, com revezamento a cada 2,5 km. O percurso passa por pontos icônicos do Parque do Ibirapuera e conta com estrutura completa de hidratação, sinalização e cronometragem eletrônica. Medalhas garantidas para todos os participantes e troféus para as 3 melhores equipes.',
+    endereco: 'Parque do Ibirapuera - Av. Pedro Álvares Cabral, Vila Mariana, São Paulo - SP',
+    valor: 80,
+    qtdVagas: 200,
+    user: 'Equipe RunSP - Organização de Corridas Urbanas',
+    organizador: {
+      idOrganizador: 'xxxx',
+      nomeOrganizador: 'Equipe RunSP - Organização de Corridas Urbanas',
+      avaliacaoOrganizador: 0.0,
+    },
+  },
+  {
+    titulo: 'Trilha em Equipe - Serra da Cantareira',
+    esporte: 'Trilha',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Atividade guiada em grupo pelo Parque Estadual da Cantareira, com dinâmicas de cooperação, reconhecimento ambiental e desafios leves ao longo do percurso. O trajeto de aproximadamente 6 km passa por mirantes e trechos de mata nativa. Inclui acompanhamento de guia especializado e seguro de participante.',
+    endereco: 'Parque Estadual da Cantareira - Rua do Horto, 1799, Horto Florestal, São Paulo - SP',
+    valor: 120,
+    qtdVagas: 50,
+    user: 'EcoAventura Brasil - Trilhas e Expedições',
+    organizador: {
+      idOrganizador: 'xxxx',
+      nomeOrganizador: 'EcoAventura Brasil - Trilhas e Expedições',
+      avaliacaoOrganizador: 0.0,
+    },
+  },
+  {
+    titulo: 'Campeonato de Paintball',
+    esporte: 'Paintball',
+    data: '2025-11-26',
+    horario: '18:30',
+    descricao:
+      'Campeonato em formato de equipes com rodadas eliminatórias em diferentes arenas temáticas. Equipamento completo incluso (máscara, marcador e colete). Premiação para as três melhores equipes e troféu para o MVP do torneio. Indicado para maiores de 16 anos.',
+    endereco: 'Paintball Zone - Estrada da Serra, 800, Curitiba - PR',
+    valor: 180,
+    qtdVagas: 100,
+    user: 'Adrenalina Sports - Organização de Eventos Outdoor',
+    organizador: {
+      idOrganizador: 'xxxx',
+      nomeOrganizador: 'Adrenalina Sports - Organização de Eventos Outdoor',
+      avaliacaoOrganizador: 0.0,
+    },
+  },
+]
+
+export const participantesEvento = [
+  {
+    idParticipante: 'p1',
+    nomeParticipante: 'Lucas Andrade',
+    avaliacaoParticipante: 5,
+  },
+  {
+    idParticipante: 'p2',
+    nomeParticipante: 'Mariana Souza',
+    avaliacaoParticipante: 4,
+  },
+  {
+    idParticipante: 'p3',
+    nomeParticipante: 'Rafael Lima',
+    avaliacaoParticipante: 5,
+  },
+  {
+    idParticipante: 'p4',
+    nomeParticipante: 'Beatriz Silva',
+    avaliacaoParticipante: 4,
+  },
+  {
+    idParticipante: 'p5',
+    nomeParticipante: 'João Pedro Alves',
+    avaliacaoParticipante: 5,
+  },
+]
