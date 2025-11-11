@@ -1,16 +1,4 @@
-import {
-  YStack,
-  H1,
-  Input,
-  Button,
-  Text,
-  Spinner,
-  XStack,
-  useTheme,
-  Paragraph,
-  Square,
-  Label,
-} from 'tamagui'
+import { YStack, H1, Input, Button, Text, Spinner, XStack, Paragraph, Square, Label } from 'tamagui'
 import { Eye, EyeOff } from '@tamagui/lucide-icons'
 import { ModelViewLogin } from './ModelViewLogin'
 
@@ -141,7 +129,7 @@ export default function LoginScreen() {
           </Paragraph>
           <Button
             chromeless
-            onPress={() => router.push('/singup')}
+            onPress={() => router.push('/visualizarEvento')}
             size="$9"
             color="$color10"
             fontSize="$5"
