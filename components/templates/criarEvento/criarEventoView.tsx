@@ -10,6 +10,7 @@ import {
   H3,
   Form,
   Spinner,
+  H2,
 } from 'tamagui'
 import {
   Edit3,
@@ -27,34 +28,7 @@ import { esportes } from '@/mock/esportes'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { CriarEventoModelView } from './criarEventoModelView'
 import { BasketballLoading } from '@/components/atoms/loading/basketball'
-import { ConvidadosForm } from '@/components/organisms/formConvidados'
 
-function Convidados() {
-  const listaConvidados: string[] = ['']
-  return (
-    <YStack>
-      {listaConvidados.map((convidadeo, index) => {
-        return (
-          <YStack gap="$1" key={index}>
-            <Label htmlFor="titulo" color="$color" alignItems="center">
-              <Edit3 size={16} color="$borderColorFocus" /> {`Convidado ${index}`}
-            </Label>
-            <Input
-              id="titulo"
-              height="$9"
-              autoCapitalize="none"
-              keyboardType="email-address"
-              borderColor={'$borderColorFocus'}
-              color="$color"
-            />
-          </YStack>
-        )
-      })}
-      <Button onPress={() => {}}>Adicionar Convidado</Button>
-      <Button onPress={() => {}}>Cencelar convites</Button>
-    </YStack>
-  )
-}
 
 function CriarEventoView() {
   const {
@@ -66,11 +40,7 @@ function CriarEventoView() {
     hour,
     isLoading,
     selectedSports,
-    openConvites,
-    setOpenConvites,
     setSelectedSports,
-    setListaConvidados,
-    listaConvidados,
     setShowTimePicker,
     onDateChange,
     setShowDatePicker,
@@ -80,11 +50,10 @@ function CriarEventoView() {
 
   return (
     <LayoutComponent>
-      <ScrollView width="100%" contentContainerStyle={{ paddingBottom: 50 }}>
         <XStack alignItems="center" marginBottom={8}>
-          <H3 color="$color10" fontFamily="$body" fontWeight="700" textTransform="uppercase">
+          <H2 color="$color10" fontFamily="$body" fontWeight="700" textTransform="uppercase">
             Criar Novo Evento{' '}
-          </H3>
+          </H2>
           <Swords size={30} color="$color10" />
         </XStack>
 
@@ -308,27 +277,6 @@ function CriarEventoView() {
             />
           </YStack>
 
-          {openConvites ? (
-            <ConvidadosForm
-              listaConvidados={listaConvidados}
-              setListaConvidados={setListaConvidados}
-              setOpenConvites={setOpenConvites}
-            />
-          ) : (
-            <Button
-              height="$9"
-              onPress={() => setOpenConvites(true)}
-              disabled={isLoading}
-              backgroundColor={isLoading ? '$backgroundPress' : '$color9'}
-              color={isLoading ? '$color' : '$background'}
-              fontFamily="$body"
-              fontWeight="bold"
-              pressStyle={{ backgroundColor: '$color11' }}
-            >
-              CONVIDAR JOGADORES
-            </Button>
-          )}
-
           <Button
             height="$9"
             // onPress={()=>handleSubmit()}
@@ -343,7 +291,6 @@ function CriarEventoView() {
             {isLoading ? 'Criando...' : 'CRIAR EVENTO'}
           </Button>
         </Form>
-      </ScrollView>
     </LayoutComponent>
   )
 }

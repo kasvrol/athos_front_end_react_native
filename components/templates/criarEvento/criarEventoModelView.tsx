@@ -17,8 +17,6 @@ export const CriarEventoModelView = () => {
 
   const router = useRouter()
   const [showDatePicker, setShowDatePicker] = useState(false)
-  const [openConvites, setOpenConvites] = useState(false)
-  const [listaConvidados, setListaConvidados] = useState<string[]>([''])
   const [isLoading, setIsLoading] = useState(false)
   const [showTimePicker, setShowTimePicker] = useState(false)
   const [date, setDate] = useState<Date>(new Date())
@@ -104,28 +102,23 @@ export const CriarEventoModelView = () => {
     //criarEvento
 
     setIsLoading(false)
-    router.push('/(tabs)/recommendations')
+    router.push('/(tabs)/recomendacoes')
   }
 
   return {
-    initialValues,
     errors,
     adress,
     date,
     showDatePicker,
-    isLoading,
     showTimePicker,
     hour,
-    openConvites,
-    setOpenConvites,
+    isLoading,
+    selectedSports,
+    setSelectedSports,
     setShowTimePicker,
     onDateChange,
     setShowDatePicker,
     validacaoCampos,
     onTimeChange,
-    selectedSports,
-    setSelectedSports,
-    setListaConvidados,
-    listaConvidados,
   }
 }
