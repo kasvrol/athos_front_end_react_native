@@ -34,7 +34,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="championships"
+        name="campeonatos"
         options={{
           title: 'Campeonatos',
           tabBarIcon: ({ color, size }) => (
@@ -45,7 +45,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="recommendations"
+        name="recomendacoes"
         options={{
           title: 'Recomendações',
           tabBarIcon: ({ color, size }) => (

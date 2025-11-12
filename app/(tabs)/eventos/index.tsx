@@ -1,5 +1,5 @@
 import ListarEventosView from '@/components/templates/listarEventos/listarEventosView'
 
-export default function CriarEventoScreen() {
+export default function ListarEventosScreen() {
   return <ListarEventosView />
 }
