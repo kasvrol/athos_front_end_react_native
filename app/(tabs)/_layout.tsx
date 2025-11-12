@@ -1,52 +1,69 @@
 // app/(tabs)/_layout.tsx
 import React from 'react'
 import { Tabs } from 'expo-router'
-import { BarChart, CalendarSearch, Home, Menu, Star, Trophy } from '@tamagui/lucide-icons'
+import { CalendarSearch, Menu, Star, Trophy } from '@tamagui/lucide-icons'
+import { useTheme, Text, YStack } from 'tamagui'
 
 export default function TabLayout() {
-  const activeColor = '#FFD700'
-  const inactiveColor = '#FFFFFF'
-  const backgroundColor = '#005A9C'
+  const theme = useTheme()
 
   return (
     <Tabs
       screenOptions={{
-        tabBarStyle: {
-          backgroundColor: backgroundColor,
-          borderTopColor: '#E0E0E0',
-          borderTopWidth: 1,
-        },
-        tabBarInactiveTintColor: inactiveColor,
-        tabBarActiveTintColor: activeColor,
         headerShown: false,
+        tabBarStyle: {
+          backgroundColor: theme.background.val,
+          borderTopColor: theme.borderColor.val,
+          borderTopWidth: 3,
+          height: 80,
+        },
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: theme.color9.val,
+        tabBarInactiveTintColor: theme.color6.val,
       }}
     >
       <Tabs.Screen
-        name="events"
+        name="eventos"
         options={{
           title: 'Eventos',
-          tabBarIcon: ({ color, size }) => <CalendarSearch color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <YStack alignItems="center" justifyContent="center">
+              <CalendarSearch color={color} size={size} />
+            </YStack>
+          ),
         }}
       />
       <Tabs.Screen
         name="championships"
         options={{
           title: 'Campeonatos',
-          tabBarIcon: ({ color, size }) => <Trophy color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <YStack alignItems="center" justifyContent="center">
+              <Trophy color={color} size={size} />
+            </YStack>
+          ),
         }}
       />
       <Tabs.Screen
         name="recommendations"
         options={{
           title: 'Recomendações',
-          tabBarIcon: ({ color, size }) => <Star color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <YStack alignItems="center" justifyContent="center">
+              <Star color={color} size={size} />
+            </YStack>
+          ),
         }}
       />
       <Tabs.Screen
         name="menu"
         options={{
           title: 'Menu',
-          tabBarIcon: ({ color, size }) => <Menu color={color} size={size} />,
+          tabBarIcon: ({ color, size }) => (
+            <YStack alignItems="center" justifyContent="center">
+              <Menu color={color} size={size} />
+            </YStack>
+          ),
         }}
       />
     </Tabs>
