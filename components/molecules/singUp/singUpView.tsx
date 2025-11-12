@@ -2,11 +2,10 @@ import React, { Dispatch, ReactNode } from 'react'
 import { YStack, XStack, Button, Text } from 'tamagui'
 import { useSignupViewModel } from './signupViewModel'
 import { UserInformations } from '@/utils/interfaces/user'
-import { BasketballLoading } from '../atoms/loading/basketball'
 import { router } from 'expo-router'
-import { CanceledButton } from '../atoms/buttons/canceledButton'
 import { SingUpViewProps } from '@/utils/types/user'
-import { isLoading } from 'expo-font'
+import { CanceledButton } from '@/components/atoms/buttons/canceledButton'
+import { BasketballLoading } from '@/components/atoms/loading/basketball'
 
 export default function SignupScreen(props: SingUpViewProps) {
   const { currentStep, isThereUser, handleNext, handleBack, setIsButtonDisabled } =
