@@ -1,6 +1,6 @@
-import LayoutComponent from '@/components/atoms/layout'
+import LayoutDefault from '@/components/atoms/layoutDefault'
 import { ListarHistorico } from '@/components/templates/listarHistorico'
-import { BicepsFlexed, Dumbbell } from '@tamagui/lucide-icons'
+import { Dumbbell } from '@tamagui/lucide-icons'
 import { useState } from 'react'
 import { Button, H2, XStack, YStack } from 'tamagui'
 
@@ -12,18 +12,18 @@ enum SecaoUsuario {
 export default function HistoricoScreen() {
   const [section, setSection] = useState<SecaoUsuario>(SecaoUsuario.PARTICIPANTE)
   return (
-    <LayoutComponent>
+    <LayoutDefault>
       <XStack
-        marginVertical={'$3'}
-        alignItems="center"
         justifyContent="center"
-        gap={'$1'}
-        width={'100%'}
+        alignItems="center"
+        gap={'$3'}
+        marginBottom={20}
+        marginTop={50}
       >
-        <H2 color="$color10" fontFamily={'$body'} fontWeight={'700'}>
+        <H2 color="$color10" fontFamily={'$body'} fontWeight={'700'} textAlign="center">
           Histórico
         </H2>
-        <Dumbbell color={'$color10'} />
+        <Dumbbell color="$color10" />
       </XStack>
 
       <XStack width={'100%'} alignItems="center" justifyContent="center" gap={'$2'}>
@@ -63,6 +63,6 @@ export default function HistoricoScreen() {
           <ListarHistorico secao={SecaoUsuario.ORGANIZADOR} />
         )}
       </YStack>
-    </LayoutComponent>
+    </LayoutDefault>
   )
 }
