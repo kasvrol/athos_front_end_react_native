@@ -1,5 +1,5 @@
 import React from 'react'
-import { YStack, ListItem, Separator, Text } from 'tamagui'
+import { YStack, ListItem, Separator, Text, XStack, H2 } from 'tamagui'
 import { ExternalPathString, RelativePathString, useRouter } from 'expo-router'
 import { History, Bell, User } from '@tamagui/lucide-icons'
 import LayoutDefault from '@/components/atoms/layoutDefault'
@@ -14,15 +14,17 @@ export default function MenuScreen() {
   return (
     <LayoutDefault>
       <YStack flex={1} paddingTop="$4" gap="$3" alignItems="center">
-        <Text
-          fontSize="$7"
-          fontWeight="bold"
-          color="$color10"
-          marginBottom="$4"
-          paddingHorizontal="$4"
+        <XStack
+          justifyContent="center"
+          alignItems="center"
+          gap={'$3'}
+          marginBottom={20}
+          marginTop={50}
         >
-          Menu
-        </Text>
+          <H2 color="$color10" fontFamily={'$body'} fontWeight={'700'} textAlign="center">
+            Menu
+          </H2>
+        </XStack>
 
         <ListItem
           hoverTheme
@@ -30,7 +32,9 @@ export default function MenuScreen() {
           title="Perfil"
           icon={<User size="$5" color="$colorFocus" />}
           onPress={() =>
-            handleNavigation('/visualizarPerfil' as RelativePathString | ExternalPathString)
+            handleNavigation(
+              '/(tabs)/menu/visualizarPerfil' as RelativePathString | ExternalPathString,
+            )
           }
           paddingVertical="$3"
           paddingHorizontal="$4"
@@ -44,7 +48,9 @@ export default function MenuScreen() {
           pressTheme
           title="Histórico de Jogos"
           icon={<History size="$5" color="$colorFocus" />}
-          onPress={() => handleNavigation('/historico' as RelativePathString | ExternalPathString)}
+          onPress={() =>
+            handleNavigation('/(tabs)/menu/historico' as RelativePathString | ExternalPathString)
+          }
           paddingVertical="$3"
           paddingHorizontal="$4"
           backgroundColor="$background"
@@ -58,7 +64,7 @@ export default function MenuScreen() {
           title="Notificações"
           icon={<Bell size="$5" color="$colorFocus" />}
           onPress={() =>
-            handleNavigation('/notificacoes' as RelativePathString | ExternalPathString)
+            handleNavigation('/(tabs)/menu/notificacoes' as RelativePathString | ExternalPathString)
           }
           paddingVertical="$3"
           paddingHorizontal="$4"
