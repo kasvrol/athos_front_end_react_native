@@ -10,20 +10,24 @@ import {
   Watch,
 } from '@tamagui/lucide-icons'
 import dayjs from 'dayjs'
-import { YStack, XStack, Text } from 'tamagui'
+import { YStack, XStack, Text, H3 } from 'tamagui'
 
 export const EventScreen = ({ dadosEvento }: EventoScreenProps) => {
   return (
-    <YStack gap={'$4'}>
-      <Text
-        fontSize="$5"
-        fontWeight={'500'}
-        color={'$borderColorFocus'}
+    <YStack gap={'$4'} paddingVertical="$4" paddingHorizontal="$3" width={'100%'}>
+      <XStack
+        justifyContent="center"
+        alignItems="center"
+        gap={'$3'}
+        marginBottom={20}
+        marginTop={50}
         width={'100%'}
-        textAlign="center"
       >
-        {dadosEvento.titulo}
-      </Text>
+        <H3 color="$borderColorFocus" width={'100%'} fontWeight={'500'} textAlign="center">
+          {dadosEvento.titulo}
+        </H3>
+      </XStack>
+
       <XStack alignItems="center" gap="$2" justifyContent="space-between">
         <XStack alignItems="center" gap="$2" justifyContent="flex-start">
           <Dribbble fontSize="$1" color={'$borderColorFocus'} />
