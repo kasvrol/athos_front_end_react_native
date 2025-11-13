@@ -1,10 +1,12 @@
-import LayoutComponent from '@/components/atoms/layout'
+import LayoutDefault from '@/components/atoms/layoutDefault'
 import { BasketballLoading } from '@/components/atoms/loading/basketball'
 import { CardEvento } from '@/components/organisms/cardEvento'
 import HeaderEventosCampeonatosView from '@/components/organisms/headerEventosCampeonatos'
 import { todosEventos } from '@/mock/eventosEsportivos'
-import { useEffect, useState } from 'react'
-import { H2, ScrollView, Text, YStack } from 'tamagui'
+import { Medal } from '@tamagui/lucide-icons'
+import { ExternalPathString, RelativePathString } from 'expo-router'
+import React, { useEffect, useState } from 'react'
+import { H2, Text, XStack, YStack } from 'tamagui'
 
 function ListarEventosView() {
   const [eventos, setEventos] = useState<any[]>([])
@@ -19,19 +21,22 @@ function ListarEventosView() {
   }, [])
 
   return (
-    <ScrollView backgroundColor={'$background'} padding={'$2'}>
-      <H2
-        color="$color10"
-        fontFamily={'$body'}
-        fontWeight={'700'}
-        textAlign="center"
-        marginVertical={'$3'}
+    <LayoutDefault>
+      <XStack
+        justifyContent="center"
+        alignItems="center"
+        gap={'$3'}
+        marginBottom={20}
+        marginTop={50}
       >
-        Lista de Eventos
-      </H2>
+        <H2 color="$color10" fontFamily={'$body'} fontWeight={'700'} textAlign="center">
+          Eventos
+        </H2>
+        <Medal color="$color10" />
+      </XStack>
       <YStack>
         <HeaderEventosCampeonatosView
-          routerButton={'/(tabs)/criarEvento'}
+          routerButton={'/(tabs)/eventos/criarEvento' as RelativePathString | ExternalPathString}
           titleButton="CRIAR EVENTO"
         />
       </YStack>
@@ -46,7 +51,7 @@ function ListarEventosView() {
           <Text>Nenhum evento encontrado.</Text>
         )}
       </YStack>
-    </ScrollView>
+    </LayoutDefault>
   )
 }
 
