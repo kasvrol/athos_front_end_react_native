@@ -4,10 +4,10 @@ import LayoutComponent from '@/components/atoms/layout';
 import { mockCampeonatos } from '@/mock/campeonatos';
 import { BasketballLoading } from '@/components/atoms/loading/basketball'; 
 import HeaderEventosCampeonatosView from '@/components/organisms/headerEventosCampeonatos'; 
-import { CardCampeonato } from '@/components/organisms/cardCampeonato';
 import { Trophy } from '@tamagui/lucide-icons';
 import { ExternalPathString, RelativePathString } from 'expo-router';
 import { Campeonato } from '@/utils/interfaces/campeonatos';
+import { CardCampeonato } from '@/components/organisms/cardCampeonato';
 
 
 export default function ListarCampeonatos() {
