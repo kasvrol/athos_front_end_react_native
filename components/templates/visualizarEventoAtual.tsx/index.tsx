@@ -7,7 +7,7 @@ import { eventosCompletos, participantesEvento } from '@/mock/eventosEsportivos'
 import { useUserStore } from '@/store/UserStore'
 import { EventoType, StatusEvento } from '@/utils/interfaces/eventos'
 import React, { useEffect, useState } from 'react'
-import { YStack} from 'tamagui'
+import { YStack } from 'tamagui'
 
 const eventoVazio: EventoType = {
   titulo: '',
@@ -25,7 +25,6 @@ const eventoVazio: EventoType = {
     avaliacaoOrganizador: 0.0,
   },
 }
-
 
 export default function VisualizarEventoAtual() {
   const [dadosEvento, setDadosEvento] = useState<EventoType>(eventoVazio)

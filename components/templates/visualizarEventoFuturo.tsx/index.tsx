@@ -47,13 +47,12 @@ export default function visualizarEventoFuturo() {
       {isLoading && <BasketballLoading />}
       <YStack paddingBottom={'$4'}>
         <EventScreen dadosEvento={dadosEventos} statusEvento={StatusEvento.PENDENTE} />
-        {user?.id ===
-          dadosEventos.organizador.idOrganizador && 
-            <ListarParticipantes
-              participants={participantesEvento}
-              statusEvento={StatusEvento.PENDENTE}
-            />
-          }
+        {user?.id === dadosEventos.organizador.idOrganizador && (
+          <ListarParticipantes
+            participants={participantesEvento}
+            statusEvento={StatusEvento.PENDENTE}
+          />
+        )}
         <ChoiceButton
           idCriador={dadosEventos.organizador.idOrganizador}
           idUser={user?.id!}
