@@ -8,11 +8,14 @@ import { Campeonato, CampeonatoStatus, Classificacao, Equipe, Partida } from '@/
 import { ListaPartida } from '@/components/organisms/listaPartidas';
 import { ClassificacaoTabela } from '@/components/organisms/classificacaoTabela';
 
+interface CampeonatoDetalheScreenProps{
+    id:string | string[]
+}
 
 
-export default function CampeonatoDetalheScreen() {
+
+export default function CampeonatoDetalheScreen({id}:CampeonatoDetalheScreenProps) {
     console.log('oiii')
-  const { id } = useLocalSearchParams();
   const router = useRouter();
   
   const user = { id: 'user-capitao-1' };
