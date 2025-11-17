@@ -48,7 +48,7 @@ export interface Partida {
   data: string
   horario: string
   fase: string
-  status: 'PENDENTE' | 'FINALIZADA'
+  status: CampeonatoStatus.EM_ANDAMENTO | CampeonatoStatus.FINALIZADO
 }
 
 export type CriarCampeonatoDTO = Omit<

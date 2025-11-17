@@ -1,4 +1,4 @@
-import { Partida } from '@/utils/interfaces/campeonatos'
+import { CampeonatoStatus, Partida } from '@/utils/interfaces/campeonatos'
 import dayjs from 'dayjs'
 import { Fragment } from 'react'
 import { Separator, XStack, YStack, Text, Button } from 'tamagui'
@@ -16,7 +16,7 @@ export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
         <YStack
           padding="$3"
           borderWidth={1}
-          borderColor={partida.status === 'FINALIZADA' ? '$color5' : '$borderColor'}
+          borderColor={partida.status === CampeonatoStatus.FINALIZADO ? '$color5' : '$borderColor'}
           borderRadius="$4"
           gap="$2"
         >
@@ -28,7 +28,7 @@ export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
               {partida.equipe1.nome}
             </Text>
             <Text fontSize="$6" fontWeight="bold">
-              {partida.status === 'FINALIZADA'
+              {partida.status === CampeonatoStatus.FINALIZADO
                 ? `${partida.placarEquipe1} x ${partida.placarEquipe2}`
                 : 'VS'}
             </Text>
@@ -36,8 +36,20 @@ export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
               {partida.equipe2.nome}
             </Text>
           </XStack>
-          {isOrganizador && partida.status === 'PENDENTE' && (
-            <Button size="$2" chromeless>
+
+          {isOrganizador && partida.status === CampeonatoStatus.EM_ANDAMENTO && (
+            <Button
+              size="$2"
+              chromeless
+              backgroundColor="$color4"
+              color={'white'}
+              borderRadius={'$3'}
+              height={'$10'}
+              minHeight={'$minWidth'}
+              minWidth={'$minWidth'}
+              fontSize={'$5'}
+              fontWeight={'500'}
+            >
               Editar Placar
             </Button>
           )}
