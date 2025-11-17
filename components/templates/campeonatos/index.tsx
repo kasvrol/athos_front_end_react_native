@@ -1,184 +1,269 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { Button, H2, H3, Paragraph, Spinner, Text, YStack, XStack, Separator } from 'tamagui';
-import LayoutDefault from '@/components/atoms/layoutDefault';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { mockCampeonatos, mockPartidas, mockEquipes, mockClassificacao } from '@/mock/campeonatos';
-import { BasketballLoading } from '@/components/atoms/loading/basketball';
-import { Campeonato, CampeonatoStatus, Classificacao, Equipe, Partida } from '@/utils/interfaces/campeonatos';
-import { ListaPartida } from '@/components/organisms/listaPartidas';
-import { ClassificacaoTabela } from '@/components/organisms/classificacaoTabela';
+import React, { useEffect, useMemo, useState } from 'react'
+import { Button, H2, H3, Paragraph, Spinner, Text, YStack, XStack, Separator } from 'tamagui'
+import LayoutDefault from '@/components/atoms/layoutDefault'
+import { useLocalSearchParams, useRouter } from 'expo-router'
+import { mockCampeonatos, mockPartidas, mockEquipes, mockClassificacao } from '@/mock/campeonatos'
+import { BasketballLoading } from '@/components/atoms/loading/basketball'
+import {
+  Campeonato,
+  CampeonatoStatus,
+  Classificacao,
+  Equipe,
+  Partida,
+} from '@/utils/interfaces/campeonatos'
+import { ListaPartida } from '@/components/organisms/listaPartidas'
+import { ClassificacaoTabela } from '@/components/organisms/classificacaoTabela'
+import { ConfirmButton } from '@/components/atoms/confirmButton'
+import { BadgePlus, BadgeX, BowArrow, TableOfContents } from '@tamagui/lucide-icons'
 
-interface CampeonatoDetalheScreenProps{
-    id:string | string[]
+interface CampeonatoDetalheScreenProps {
+  id: string | string[]
 }
 
+export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenProps) {
+  const router = useRouter()
 
+  const user = { id: 'user-capitao-1' }
 
-export default function CampeonatoDetalheScreen({id}:CampeonatoDetalheScreenProps) {
-    console.log('oiii')
-  const router = useRouter();
-  
-  const user = { id: 'user-capitao-1' };
-  
-  const [campeonato, setCampeonato] = useState<Campeonato | null>(null);
-  const [partidas, setPartidas] = useState<Partida[]>([]);
-  const [equipes, setEquipes] = useState<Equipe[]>([]);
-  const [classificacao, setClassificacao] = useState<Classificacao[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [campeonato, setCampeonato] = useState<Campeonato | null>(null)
+  const [partidas, setPartidas] = useState<Partida[]>([])
+  const [equipes, setEquipes] = useState<Equipe[]>([])
+  const [classificacao, setClassificacao] = useState<Classificacao[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState('')
 
-  const [localStatus, setLocalStatus] = useState<CampeonatoStatus | null>(null);
+  const [localStatus, setLocalStatus] = useState<CampeonatoStatus | null>(null)
 
-  const statusAtual = localStatus || campeonato?.status;
-  const isOrganizador = user?.id === campeonato?.organizadorId;
+  const statusAtual = localStatus || campeonato?.status
+  const isOrganizador = user?.id === campeonato?.organizadorId
 
   useEffect(() => {
-    setIsLoading(true);
-    setError('');
-    
+    setIsLoading(true)
+    setError('')
+
     setTimeout(() => {
       try {
-        const camp = mockCampeonatos.find(c => c.id === id);
+        const camp = mockCampeonatos.find(c => c.id === id)
         if (!camp) {
-          setError('Campeonato não encontrado.');
-          setIsLoading(false);
-          return;
+          setError('Campeonato não encontrado.')
+          setIsLoading(false)
+          return
         }
-        
-        setCampeonato(camp);
 
-        if (camp.status === CampeonatoStatus.EM_ANDAMENTO || camp.status === CampeonatoStatus.FINALIZADO) {
-          setPartidas(mockPartidas.filter(p => p.campeonatoId === id));
-          setClassificacao(mockClassificacao);
+        setCampeonato(camp)
+
+        if (
+          camp.status === CampeonatoStatus.EM_ANDAMENTO ||
+          camp.status === CampeonatoStatus.FINALIZADO
+        ) {
+          setPartidas(mockPartidas.filter(p => p.campeonatoId === id))
+          setClassificacao(mockClassificacao)
         }
-        
-        if (camp.status !== CampeonatoStatus.INSCRICOES_ABERTAS) {
-           setEquipes(mockEquipes.filter(e => e.campeonatoId === id));
-        }
-        
+
+        // if (camp.status !== CampeonatoStatus.EM_ANDAMENTO || CampeonatoStatus.INSCRICOES_FECHADAS) {
+        //  //  setEquipes(mockEquipes.filter(e => e.campeonatoId === id));
+        // }
       } catch (err) {
-        setError('Falha ao carregar detalhes.');
+        setError('Falha ao carregar detalhes.')
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
-    }, 500);
-  }, [id]);
+    }, 500)
+  }, [id])
 
   const handleUpdateStatus = async (novoStatus: CampeonatoStatus) => {
-    setIsLoading(true);
+    setIsLoading(true)
     setTimeout(() => {
-      setLocalStatus(novoStatus); 
-      
+      setLocalStatus(novoStatus)
+
       if (novoStatus === CampeonatoStatus.EM_ANDAMENTO) {
-         setPartidas(mockPartidas.filter(p => p.campeonatoId === id));
-         setClassificacao(mockClassificacao);
+        setPartidas(mockPartidas.filter(p => p.campeonatoId === id))
+        setClassificacao(mockClassificacao)
       }
-      setIsLoading(false);
-    }, 1000);
-  };
+      setIsLoading(false)
+    }, 1000)
+  }
 
   const handleGerarTabela = async () => {
-    setIsLoading(true);
-     setTimeout(() => {
-      alert('Tabela de partidas gerada! (Simulado)');
-      handleUpdateStatus(CampeonatoStatus.EM_ANDAMENTO);
-    }, 1200);
-  };
-
+    setIsLoading(true)
+    setTimeout(() => {
+      alert('Tabela de partidas gerada! (Simulado)')
+      handleUpdateStatus(CampeonatoStatus.EM_ANDAMENTO)
+    }, 1200)
+  }
 
   const renderContentByStatus = () => {
-    if (!campeonato) return null;
+    if (!campeonato) return null
 
     switch (statusAtual) {
       case CampeonatoStatus.INSCRICOES_ABERTAS:
         return (
           <YStack gap="$3" width="100%">
-            <Paragraph>{campeonato.descricao}</Paragraph>
-            <Button
-              backgroundColor="$color9"
-              color="$background"
-              onPress={() => router.push(`/(tabs)/campeonatos/inscrever?campId=${id}`)}
-            >
-              Inscrever Minha Equipe
-            </Button>
+            <Paragraph textAlign="justify" fontWeight={'500'} marginBottom={'$3'}>
+              {campeonato.descricao}
+            </Paragraph>
+            <ConfirmButton
+              functionButton={() => router.push(`/(tabs)/campeonatos/inscrever?campId=${id}`)}
+              titleButton={'INSCREVER MINHA EQUIPE'}
+              icon={<BadgePlus />}
+            />
+
             {isOrganizador && (
               <Button
                 backgroundColor="$borderColorError"
+                color={'white'}
+                borderRadius={'$3'}
+                height={'$10'}
+                minHeight={'$minWidth'}
+                minWidth={'$minWidth'}
+                fontSize={'$5'}
+                fontWeight={'500'}
                 onPress={() => handleUpdateStatus(CampeonatoStatus.INSCRICOES_FECHADAS)}
               >
-                Fechar Inscrições
+                FECHAR INSCRIÇÕES
+                <BadgeX />
               </Button>
             )}
           </YStack>
-        );
+        )
 
       case CampeonatoStatus.INSCRICOES_FECHADAS:
         return (
           <YStack gap="$3" width="100%">
-            <Paragraph>Inscrições encerradas. Aguardando geração da tabela e início.</Paragraph>
-            <H3>Equipes Inscritas ({equipes.length})</H3>
-            {equipes.map(e => <Text key={e.id}>- {e.nome}</Text>)}
-            
+            <Paragraph textAlign="justify" fontWeight={'500'} marginBottom={'$3'}>
+              Inscrições encerradas. Aguardando geração da tabela e início.
+            </Paragraph>
+            <H3
+              textAlign="center"
+              fontWeight={'500'}
+              color={'$borderColorFocus'}
+              marginBottom={'$3'}
+            >
+              Equipes Inscritas ({equipes.length})
+            </H3>
+            <YStack marginBottom={'$3'}>
+              {equipes.map(eqp => {
+                return (
+                  <XStack marginBottom={'$2'} gap={'$2'}>
+                    <BowArrow color={'$color4'} />
+                    <Text fontWeight={'500'} key={eqp.id}>
+                      {eqp.nome}
+                    </Text>
+                  </XStack>
+                )
+              })}
+            </YStack>
+
             {isOrganizador && (
-              <>
-                <Button onPress={handleGerarTabela}>Gerar Tabela de Partidas</Button>
-              </>
+              <YStack>
+                <Button
+                  backgroundColor="$color4"
+                  color={'white'}
+                  borderRadius={'$3'}
+                  height={'$10'}
+                  minHeight={'$minWidth'}
+                  minWidth={'$minWidth'}
+                  fontSize={'$5'}
+                  fontWeight={'500'}
+                  onPress={handleGerarTabela}
+                >
+                  GERAR TABELA DE PARTIDAS
+                  <TableOfContents />
+                </Button>
+              </YStack>
             )}
           </YStack>
-        );
+        )
 
       case CampeonatoStatus.EM_ANDAMENTO:
         return (
           <YStack gap="$4" width="100%">
             {isOrganizador && <Button onPress={() => {}}>Painel do Organizador</Button>}
-            <H3>Classificação</H3>
+            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
+              Classificação
+            </H3>
             <ClassificacaoTabela classificacao={classificacao} />
-            <H3>Partidas</H3>
+            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
+              Partidas
+            </H3>
             <ListaPartida partidas={partidas} isOrganizador={isOrganizador} />
           </YStack>
-        );
+        )
 
       case CampeonatoStatus.FINALIZADO:
         return (
-           <YStack gap="$4" width="100%">
-            <Paragraph>Este campeonato foi finalizado.</Paragraph>
-            <H3>Classificação Final</H3>
-            <ClassificacaoTabela classificacao={classificacao} />
-            <H3>Resultados</H3>
-            <ListaPartida partidas={partidas} isOrganizador={isOrganizador} />
-          </YStack>
-        );
-        
-      default:
-        return <Paragraph>Status desconhecido.</Paragraph>;
-    }
-  };
+          <YStack gap="$4" width="100%">
+            <XStack
+              justifyContent="center"
+              borderColor={'$borderColorError'}
+              alignItems="center"
+              marginBottom={'$3'}
+              height={'$9'}
+              borderWidth={1}
+              borderRadius={'$3'}
+              backgroundColor={'$backgroundError'}
+            >
+              <Paragraph textAlign="center" color={'$color1'} fontWeight={'700'}>
+                Este campeonato foi finalizado.
+              </Paragraph>
+            </XStack>
 
-  if (isLoading && !campeonato) return <BasketballLoading />;
-  if (error) return <Text color="$borderColorError">{error}</Text>;
-  if (!campeonato) return <Text>Campeonato não encontrado.</Text>;
+            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
+              Classificação Final
+            </H3>
+            <ClassificacaoTabela classificacao={classificacao} />
+            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
+              Resultados
+            </H3>
+            <ListaPartida partidas={[mockPartidas[0]]} isOrganizador={isOrganizador} />
+          </YStack>
+        )
+
+      default:
+        return (
+          <YStack gap="$3" width="100%">
+            <Paragraph textAlign="center" fontWeight={'500'}>
+              Status desconhecido.
+            </Paragraph>
+          </YStack>
+        )
+    }
+  }
+
+  if (isLoading && !campeonato) return <BasketballLoading />
+  if (error) return <Text color="$borderColorError">{error}</Text>
+  if (!campeonato) return <Text>Campeonato não encontrado.</Text>
 
   return (
     <LayoutDefault>
-      {/* <YStack flex={1} gap="$4" alignItems="center" position="relative">
-     
+      <YStack
+        flex={1}
+        gap="$4"
+        alignItems="center"
+        position="relative"
+        paddingBottom={'$6'}
+        paddingHorizontal="$2"
+      >
         {isLoading && (
           <YStack fullscreen ai="center" jc="center" backgroundColor="#00000090" zIndex={10}>
             <Spinner size="large" color="$color9" />
           </YStack>
         )}
-        <XStack marginTop={'$10'}>
-   <H2 color="$color10" fontFamily="$body" fontWeight="700">
-          {campeonato.nome}
-        </H2>
-        <Text fontSize="$5">Esporte: {campeonato.esporte}</Text>
-        </XStack>
-        
-     
-        
+        <YStack
+          justifyContent="center"
+          alignItems="center"
+          gap={'$3'}
+          marginTop={50}
+          marginBottom={20}
+        >
+          <H2 color="$color10" fontFamily="$body" fontWeight="700" textAlign="center">
+            {campeonato.nome}
+          </H2>
+          <Text fontSize="$5">Esporte: {campeonato.esporte}</Text>
+        </YStack>
+
         {renderContentByStatus()}
-      </YStack> */}
-      <p>oii</p>
+      </YStack>
     </LayoutDefault>
-  );
+  )
 }
