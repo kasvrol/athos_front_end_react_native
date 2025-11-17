@@ -1,5 +1,5 @@
 import { CanceledButton } from '@/components/atoms/buttons/canceledButton'
-import { ConfirmButton } from '@/components/atoms/buttons/confirmButton'
+import { ConfirmButton } from '@/components/atoms/confirmButton'
 import { Edit3, UserMinus2, UserPlus2 } from '@tamagui/lucide-icons'
 import { router } from 'expo-router'
 import { Dispatch, SetStateAction, useState } from 'react'
