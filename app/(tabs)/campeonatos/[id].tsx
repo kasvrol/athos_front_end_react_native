@@ -1,10 +1,8 @@
-import CampeonatoDetalheScreen from "@/components/templates/campeonatos";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import CampeonatoDetalheScreen from '@/components/templates/campeonatos'
+import { useLocalSearchParams, useRouter } from 'expo-router'
 
 export default function ChampionshipsScreen() {
-    const { id } = useLocalSearchParams();
+  const { id } = useLocalSearchParams()
 
-  return (
-   <CampeonatoDetalheScreen id={id}/>
-  )
+  return <CampeonatoDetalheScreen id={id} />
 }
