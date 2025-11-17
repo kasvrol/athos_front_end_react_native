@@ -5,7 +5,7 @@ interface ClassificacaoTabelaProps {
   classificacao: Classificacao[]
 }
 
-const ClassificacaoTabela = ({ classificacao }: ClassificacaoTabelaProps) => (
+export const ClassificacaoTabela = ({ classificacao }: ClassificacaoTabelaProps) => (
   <YStack width="100%" gap="$2">
     <XStack paddingHorizontal="$2">
       <Text flex={3} fontWeight="bold">
