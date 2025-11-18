@@ -26,7 +26,7 @@ export default function CheckEsportesScreen({
             borderRadius="$4"
             borderWidth={1}
             borderColor={isChecked ? '$colorFocus' : '$borderColor'}
-            backgroundColor={isChecked ? '$backgroundFocus' : 'transparent'}
+            backgroundColor={isChecked ? '$color3' : 'transparent'}
             pressStyle={{ backgroundColor: '$backgroundHover' }}
           >
             <Checkbox

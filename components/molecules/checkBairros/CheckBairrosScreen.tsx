@@ -11,7 +11,7 @@ export default function CheckBairros({
   const { toggleBairro } = CheckBairrosViewModel({ selectedBairros, setSelectedBairros })
 
   return (
-    <View maxHeight="50%">
+    <View>
       {bairros?.length && (
         <YStack>
           {message && (
@@ -19,7 +19,6 @@ export default function CheckBairros({
               {message}
             </Text>
           )}
-          <ScrollView>
             <XStack
               gap="$3"
               flexWrap="wrap"
@@ -28,7 +27,6 @@ export default function CheckBairros({
               borderRadius="$4"
               borderWidth={2}
               padding="$2"
-              height={260}
               overflow="scroll"
             >
               {bairros.map(bairro => {
@@ -45,7 +43,7 @@ export default function CheckBairros({
                     borderRadius="$4"
                     borderWidth={1}
                     borderColor={isChecked ? '$colorFocus' : '$borderColor'}
-                    backgroundColor={isChecked ? '$backgroundFocus' : 'transparent'}
+                    backgroundColor={isChecked ? '$color3' : 'transparent'}
                     pressStyle={{ backgroundColor: '$backgroundHover' }}
                   >
                     <Checkbox
@@ -61,7 +59,6 @@ export default function CheckBairros({
                 )
               })}
             </XStack>
-          </ScrollView>
         </YStack>
       )}
     </View>
