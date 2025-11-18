@@ -1,7 +1,7 @@
 import React from 'react'
 import { YStack, ListItem, Separator, Text, XStack, H2 } from 'tamagui'
 import { ExternalPathString, RelativePathString, useRouter } from 'expo-router'
-import { History, Bell, User } from '@tamagui/lucide-icons'
+import { History, Bell, User, Users } from '@tamagui/lucide-icons'
 import LayoutDefault from '@/components/atoms/layoutDefault'
 
 export default function MenuScreen() {
@@ -36,6 +36,19 @@ export default function MenuScreen() {
               '/(tabs)/menu/visualizarPerfil' as RelativePathString | ExternalPathString,
             )
           }
+          paddingVertical="$3"
+          paddingHorizontal="$4"
+          backgroundColor="$background"
+          borderBottomWidth={1}
+          borderColor="$borderColor"
+        />
+
+        <ListItem
+          hoverTheme
+          pressTheme
+          title="Minhas Equipes"
+          icon={<Users size="$5" color="$colorFocus" />}
+          onPress={() => handleNavigation('/(tabs)/menu/minhasEquipes' as RelativePathString | ExternalPathString)}
           paddingVertical="$3"
           paddingHorizontal="$4"
           backgroundColor="$background"
