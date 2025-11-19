@@ -98,7 +98,6 @@ export default function ManterUsuarioStep2Screen({
             padding={'$2'}
           >
             <CheckBairros
-              bairros={bairros}
               selectedBairros={selectedBairros}
               setSelectedBairros={setSelectedBairros}
             />

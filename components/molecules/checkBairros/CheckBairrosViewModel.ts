@@ -1,23 +1,30 @@
-import { bairros, CheckBairrosInterface } from '@/utils/interfaces/bairros'
-import { useState } from 'react'
+import { useLocalStore } from '@/store/LocalStore'
+import { CheckBairrosInterface } from '@/utils/interfaces/bairros'
+import { useEffect, useState } from 'react'
 
 export const CheckBairrosViewModel = ({
   selectedBairros,
   setSelectedBairros,
 }: CheckBairrosInterface) => {
-  const toggleBairro = (bairroName: string) => {
-    setSelectedBairros(currentSelected => {
-      const isSelected = currentSelected.includes(bairroName)
+  const { bairros: bairrosStore } = useLocalStore()
+  const [listaBairros, setListaBairros] = useState<any[]>(bairrosStore || [])
 
-      if (isSelected) {
-        return currentSelected.filter(name => name !== bairroName)
-      } else {
-        return [...currentSelected, bairroName]
-      }
-    })
+  useEffect(() => {
+     if (bairrosStore.length > 0) {
+         setListaBairros(bairrosStore)
+     }
+  }, [bairrosStore])
+  
+  const toggleBairro = (bairroNome: string) => {
+    if (selectedBairros.includes(bairroNome)) {
+      setSelectedBairros(selectedBairros.filter(b => b !== bairroNome))
+    } else {
+      setSelectedBairros([...selectedBairros, bairroNome])
+    }
   }
 
   return {
+    listaBairros,    
     toggleBairro,
   }
 }

@@ -14,14 +14,11 @@ export default function EditStep2({
 }: ManterUsuarioViewProps) {
   const [dataCEP, setDataCEP] = useState<any>(null)
   const [cep, setCEP] = useState<string>(values?.cep || '')
-  const [bairros, setBairros] = useState<any[]>([])
   const [selectedBairros, setSelectedBairros] = useState<string[]>(values?.bairros || [])
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   useEffect(() => {
-    setBairros(bairrosCuritiba)
-
     if (values?.cep) {
       handleCEP(values.cep)
     }
@@ -122,9 +119,8 @@ export default function EditStep2({
         </YStack>
       </Form>
 
+<Text>Selecione os bairros de interesse:</Text>
       <CheckBairros
-        message="Selecione os bairros de interesse:"
-        bairros={bairros}
         selectedBairros={selectedBairros}
         setSelectedBairros={setSelectedBairros}
       />

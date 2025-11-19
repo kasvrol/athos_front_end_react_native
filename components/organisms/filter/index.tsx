@@ -96,7 +96,6 @@ export function Buscador({ onFiltrar, onLimpar }: BuscadorProps) {
               padding={'$2'}
             >
               <CheckBairros
-                bairros={bairrosCuritiba}
                 selectedBairros={selectedBairros}
                 setSelectedBairros={setSelectedBairros}
               />

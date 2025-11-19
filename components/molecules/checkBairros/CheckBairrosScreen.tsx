@@ -3,18 +3,17 @@ import { CheckBairrosViewModel } from './CheckBairrosViewModel'
 import { CheckBairrosInterface } from '@/utils/interfaces/bairros'
 
 export default function CheckBairros({
-  bairros,
   selectedBairros,
   setSelectedBairros,
 }: CheckBairrosInterface) {
-  const { toggleBairro } = CheckBairrosViewModel({ selectedBairros, setSelectedBairros })
+  const { listaBairros, toggleBairro } = CheckBairrosViewModel({ selectedBairros, setSelectedBairros })
 
   return (
     <View>
-      {bairros?.length && (
+      {listaBairros?.length && (
         <YStack>
           <XStack gap="$3" flexWrap="wrap" justifyContent="flex-start">
-            {bairros.map(bairro => {
+            {listaBairros.map(bairro => {
               const isChecked = selectedBairros.includes(bairro.name)
 
               return (
