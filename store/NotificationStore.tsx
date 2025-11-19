@@ -1,28 +1,50 @@
+import { api } from '@/middleware/services/api';
 import { create } from 'zustand'
 
-type NotificationType = 'success' | 'error' | 'info' | 'warning'
-
-interface NotificationState {
-  visible: boolean
-  message: string
-  type: NotificationType
-  showNotification: (message: string, type: NotificationType) => void
-  hideNotification: () => void
+interface Notification {
+  id: string;
+  titulo: string;
+  mensagem: string;
+  lida: boolean;
+  data: string;
 }
 
-export const useNotificationStore = create<NotificationState>(set => ({
-  visible: false,
-  message: '',
-  type: 'info',
+interface NotificationState {
+  notifications: Notification[]
+  unreadCount: number
+  fetchNotifications: () => Promise<void>
+  markAsRead: (id: string) => void
+}
 
-  showNotification: (message, type) => {
-    set({ visible: true, message, type })
+export const useNotificationStore = create<NotificationState>((set, get) => ({
+  notifications: [],
+  unreadCount: 0,
 
-    // Auto-hide após 3 segundos
-    setTimeout(() => {
-      set({ visible: false })
-    }, 3000)
+  fetchNotifications: async () => {
+    try {
+      const response = await api.get('/api/notificacoes/')
+      const data = response.data
+      set({ 
+          notifications: data,
+          unreadCount: data.filter((n: Notification) => !n.lida).length
+      })
+    } catch (error) {
+      console.error('Erro ao buscar notificações', error)
+    }
   },
 
-  hideNotification: () => set({ visible: false }),
+  markAsRead: async (id) => {
+      // Opcional: Chamar endpoint de marcar como lida se existir
+      // await api.put(`/api/notificacoes/${id}/lida`)
+      
+      set(state => {
+          const updated = state.notifications.map(n => 
+              n.id === id ? { ...n, lida: true } : n
+          )
+          return {
+              notifications: updated,
+              unreadCount: updated.filter(n => !n.lida).length
+          }
+      })
+  }
 }))

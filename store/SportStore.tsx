@@ -1,16 +1,12 @@
 import { create } from 'zustand'
-import { UserData } from '@/utils/interfaces/user'
+import { Sport } from '@/utils/interfaces/esportes'
 
-interface UserStoreState {
-  user: UserData | null
-  setUser: (userData: UserData) => void
-  clearUser: () => void
+interface SportStoreState {
+  sports: Sport[]
+  setSports: (sports: Sport[]) => void
 }
 
-export const useUserStore = create<UserStoreState>(set => ({
-  user: null,
-
-  setUser: userData => set({ user: userData }),
-
-  clearUser: () => set({ user: null }),
+export const useSportStore = create<SportStoreState>(set => ({
+  sports: [],
+  setSports: (sports) => set({ sports }),
 }))
