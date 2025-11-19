@@ -25,6 +25,5 @@ export enum StatusEvento {
 
 export interface EventoScreenProps {
   dadosEvento: EventoType
-  participants: any
   statusEvento: StatusEvento
 }

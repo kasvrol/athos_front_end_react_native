@@ -23,11 +23,6 @@ export default function CheckBairros({
               gap="$3"
               flexWrap="wrap"
               justifyContent="flex-start"
-              borderColor="$borderColor"
-              borderRadius="$4"
-              borderWidth={2}
-              padding="$2"
-              overflow="scroll"
             >
               {bairros.map(bairro => {
                 const isChecked = selectedBairros.includes(bairro.name)
