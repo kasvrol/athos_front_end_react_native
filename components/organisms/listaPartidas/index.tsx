@@ -6,9 +6,10 @@ import { Separator, XStack, YStack, Text, Button } from 'tamagui'
 interface ListaPartida {
   partidas: Partida[]
   isOrganizador: boolean
+  onEditPress: (partida: Partida) => void
 }
 
-export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
+export const ListaPartida = ({ partidas, isOrganizador, onEditPress }: ListaPartida) => (
   <YStack gap="$3" width="100%">
     {partidas.map((partida, index) => (
       <Fragment key={partida.id}>
@@ -37,7 +38,6 @@ export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
             </Text>
           </XStack>
 
-          {isOrganizador && partida.status === CampeonatoStatus.EM_ANDAMENTO && (
             <Button
               size="$2"
               chromeless
@@ -49,10 +49,10 @@ export const ListaPartida = ({ partidas, isOrganizador }: ListaPartida) => (
               minWidth={'$minWidth'}
               fontSize={'$5'}
               fontWeight={'500'}
+              onPress={() => onEditPress(partida)}
             >
               Editar Placar
             </Button>
-          )}
         </YStack>
       </Fragment>
     ))}

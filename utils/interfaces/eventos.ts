@@ -4,7 +4,7 @@ interface OrganizadorEvento {
   avaliacaoOrganizador: number
 }
 
-export type EventoType = {
+export interface EventoType {
   titulo: string
   descricao: string
   esporte: string

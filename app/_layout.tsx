@@ -6,6 +6,8 @@ import * as SplashScreen from 'expo-splash-screen'
 import { Oswald_400Regular } from '@expo-google-fonts/oswald'
 import { Provider } from '@/components/tamagui-provider'
 import { useUserStore } from '@/store/UserStore'
+import '@/utils/notifications/notificationConfig';
+import { usePushNotifications } from '@/hooks/usePushNotifications'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -13,6 +15,11 @@ function RootLayoutNav() {
   const user = useUserStore(state => state.user)
   const router = useRouter()
   const segments = useSegments()
+  const { expoPushToken } = usePushNotifications();
+
+  useEffect(() => {
+    if(expoPushToken) console.log("Meu Token de Notificação:", expoPushToken);
+  }, [expoPushToken]);
 
   useEffect(() => {
     if ((segments as string[]).length === 0) {

@@ -2,7 +2,7 @@ export const todosEventos = [
   {
     titulo: 'Torneio de Futebol Society',
     esporte: 'Futebol',
-    data: '2025-11-06',
+    data: '2025-11-26',
     horario: '18:30',
     descricao:
       'Campeonato entre equipes locais em formato 7x7. Premiação para os três primeiros colocados.',

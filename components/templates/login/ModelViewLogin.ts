@@ -15,7 +15,6 @@ export const ModelViewLogin = () => {
   const theme = useTheme()
 
   const setUser = useUserStore(state => state.setUser)
-
   const handleLogin = async () => {
     setIsLoading(true)
     try {
@@ -28,7 +27,7 @@ export const ModelViewLogin = () => {
         }
         setUser(mockUserData)
         setIsLoading(false)
-        router.push('/(tabs)/menu')
+        router.push('/(tabs)/eventos')
       } else {
         setIsLoading(false)
         setError('Senha ou e-mail inválido')

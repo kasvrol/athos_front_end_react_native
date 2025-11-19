@@ -1,5 +1,5 @@
-import ListarEventosView from '@/components/templates/listarEventos/listarEventosView'
+import { AvaliarParticipante } from '@/components/organisms/avaliarParticipantes'
 
-export default function ListarEventosScreen() {
-  return <ListarEventosView />
+export default function AvaliarUsuario() {
+  return <AvaliarParticipante/>
 }

@@ -4,7 +4,6 @@ import { CheckBairrosInterface } from '@/utils/interfaces/bairros'
 
 export default function CheckBairros({
   bairros,
-  message,
   selectedBairros,
   setSelectedBairros,
 }: CheckBairrosInterface) {
@@ -14,11 +13,6 @@ export default function CheckBairros({
     <View>
       {bairros?.length && (
         <YStack>
-          {message && (
-            <Text fontWeight="500" mb="$2" fontSize="$4" textAlign="center" marginVertical="$4">
-              {message}
-            </Text>
-          )}
             <XStack
               gap="$3"
               flexWrap="wrap"

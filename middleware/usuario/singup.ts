@@ -50,7 +50,7 @@ export interface UsuarioBackDTO {
 }
 
 export const registerUser = async (dadosFront: any) => {
-  const url = `localhost:8080/api/auth/register`;
+  const url = `localhost/api/auth/register`;
 
   const payload = {
     id: null, 
@@ -69,22 +69,15 @@ export const registerUser = async (dadosFront: any) => {
   console.log("📦 Payload:", JSON.stringify(payload, null, 2));
 
   try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
+    const response = await axios.post(url, payload)
+console.log("✅ Resposta recebida:", response);
+    // if (response) {
+    //   const errorBody = await response
+    //   throw new Error(`Erro ${response.status}: ${errorBody}`);
+    // }
 
-    if (!response.ok) {
-      const errorBody = await response.text();
-      throw new Error(`Erro ${response.status}: ${errorBody}`);
-    }
-
-    const data = await response.json().catch(() => ({ success: true })); 
-    return data;
+    // const data = await response.data 
+    // return data;
 
   } catch (error) {
     console.error("❌ Erro no registro:", error);

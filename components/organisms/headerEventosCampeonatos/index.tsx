@@ -1,18 +1,18 @@
 import { Filter } from '@tamagui/lucide-icons'
 import { ExternalPathString, RelativePathString, router } from 'expo-router'
-import { useState } from 'react'
 import { Button, XStack } from 'tamagui'
 
 interface HeaderEventosCampeonatosProps {
   routerButton: RelativePathString | ExternalPathString
   titleButton: string
+  onToggleSearch: () => void // Nova prop
 }
 
 function HeaderEventosCampeonatosView({
   routerButton,
   titleButton,
+  onToggleSearch,
 }: HeaderEventosCampeonatosProps) {
-  const [openSearch, setOpenSearch] = useState<boolean>(false)
   return (
     <XStack
       height={'$10'}
@@ -35,18 +35,15 @@ function HeaderEventosCampeonatosView({
         {titleButton}
       </Button>
       <Button
-        onPress={() => {
-          setOpenSearch(!openSearch)
-        }}
+        onPress={onToggleSearch} // Chama a função recebida
         width={'30%'}
         height={'$9'}
         fontSize={'$4'}
         fontWeight={'500'}
         backgroundColor={'$color7'}
         color={'$color1'}
-      >
-        <Filter />
-      </Button>
+        icon={<Filter />}
+      />
     </XStack>
   )
 }

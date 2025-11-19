@@ -1,3 +1,4 @@
+// components/molecules/estrelas/index.tsx
 import { StarSelected } from '@/components/atoms/star'
 import { Dispatch, SetStateAction, useState } from 'react'
 import { XStack } from 'tamagui'
@@ -8,18 +9,28 @@ interface StarsProps {
 
 export const Stars = ({ setCount }: StarsProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(-1)
-  const arrayStars = new Array(5)
+  
+  // Array de 5 posições preenchido
+  const arrayStars = Array.from({ length: 5 })
 
   const onClickStar = (index: number) => {
-    setActiveIndex(prev => (prev === index ? -1 : index))
-    setCount((prev: number) => (prev === index ? -1 : index))
+    // Se clicar na mesma estrela já ativa, desmarca (volta para -1). Se não, marca até o índice.
+    const newValue = activeIndex === index ? -1 : index
+    setActiveIndex(newValue)
+    
+    // Define a nota (index 0 = nota 1, etc)
+    setCount(newValue + 1)
   }
 
   return (
-    <XStack>
-      {arrayStars.map((_, index) => {
-        return <StarSelected isActive={index <= activeIndex} onClick={onClickStar} />
-      })}
+    <XStack gap="$2" justifyContent="center" paddingVertical="$4">
+      {arrayStars.map((_, index) => (
+        <StarSelected 
+          key={index} 
+          isActive={index <= activeIndex} 
+          onPress={() => onClickStar(index)} 
+        />
+      ))}
     </XStack>
   )
 }

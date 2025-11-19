@@ -7,7 +7,6 @@ export type bairros = {
 
 export interface CheckBairrosInterface {
   bairros?: bairros[]
-  message?: string
   selectedBairros: any[]
   setSelectedBairros: Dispatch<SetStateAction<string[]>>
 }

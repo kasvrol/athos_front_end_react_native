@@ -121,7 +121,7 @@ export default function LoginScreen() {
               : undefined
           }
         >
-          {isLoading ? 'Entrando...' : 'Entrar'}
+          {isLoading ? 'ENTRANDO...' : 'ENTRAR'}
         </Button>
         <YStack gap="$1" alignItems="center">
           <Paragraph fontFamily="$body" fontWeight="500">
@@ -129,7 +129,7 @@ export default function LoginScreen() {
           </Paragraph>
           <Button
             chromeless
-            onPress={() => router.push('/visualizarEvento')}
+            onPress={() => router.push('/(auth)/singup')}
             size="$9"
             color="$color10"
             fontSize="$5"
