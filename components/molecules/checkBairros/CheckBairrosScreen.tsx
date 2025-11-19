@@ -13,41 +13,37 @@ export default function CheckBairros({
     <View>
       {bairros?.length && (
         <YStack>
-            <XStack
-              gap="$3"
-              flexWrap="wrap"
-              justifyContent="flex-start"
-            >
-              {bairros.map(bairro => {
-                const isChecked = selectedBairros.includes(bairro.name)
+          <XStack gap="$3" flexWrap="wrap" justifyContent="flex-start">
+            {bairros.map(bairro => {
+              const isChecked = selectedBairros.includes(bairro.name)
 
-                return (
-                  <XStack
-                    key={bairro.id}
-                    onPress={() => toggleBairro(bairro.name)}
-                    alignItems="center"
-                    gap="$3"
-                    paddingVertical="$2"
-                    paddingHorizontal="$3"
-                    borderRadius="$4"
-                    borderWidth={1}
-                    borderColor={isChecked ? '$colorFocus' : '$borderColor'}
-                    backgroundColor={isChecked ? '$color3' : 'transparent'}
-                    pressStyle={{ backgroundColor: '$backgroundHover' }}
+              return (
+                <XStack
+                  key={bairro.id}
+                  onPress={() => toggleBairro(bairro.name)}
+                  alignItems="center"
+                  gap="$3"
+                  paddingVertical="$2"
+                  paddingHorizontal="$3"
+                  borderRadius="$4"
+                  borderWidth={1}
+                  borderColor={isChecked ? '$colorFocus' : '$borderColor'}
+                  backgroundColor={isChecked ? '$color3' : 'transparent'}
+                  pressStyle={{ backgroundColor: '$backgroundHover' }}
+                >
+                  <Checkbox
+                    id={bairro.name}
+                    checked={isChecked}
+                    onCheckedChange={() => toggleBairro(bairro.name)}
+                    size="$4"
                   >
-                    <Checkbox
-                      id={bairro.name}
-                      checked={isChecked}
-                      onCheckedChange={() => toggleBairro(bairro.name)}
-                      size="$4"
-                    >
-                      <Checkbox.Indicator />
-                    </Checkbox>
-                    <Label htmlFor={bairro.name}>{bairro.name}</Label>
-                  </XStack>
-                )
-              })}
-            </XStack>
+                    <Checkbox.Indicator />
+                  </Checkbox>
+                  <Label htmlFor={bairro.name}>{bairro.name}</Label>
+                </XStack>
+              )
+            })}
+          </XStack>
         </YStack>
       )}
     </View>

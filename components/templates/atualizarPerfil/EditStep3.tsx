@@ -6,7 +6,7 @@ import { ManterUsuarioViewProps } from '@/utils/types/user'
 import { esportes } from '@/mock/esportes'
 
 interface EditStep3Props extends ManterUsuarioViewProps {
-    onFinalSubmit: () => void;
+  onFinalSubmit: () => void
 }
 
 export default function EditStep3({
@@ -14,9 +14,8 @@ export default function EditStep3({
   currentStep,
   values,
   setValues,
-  onFinalSubmit
+  onFinalSubmit,
 }: EditStep3Props) {
-  
   const [selectedSports, setSelectedSports] = useState<string[]>(values?.sportList || [])
   const [sportList, setSportList] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -35,21 +34,21 @@ export default function EditStep3({
 
     const finalValues = { ...values, sportList: selectedSports }
     setValues(finalValues)
-    
-    onFinalSubmit() 
+
+    onFinalSubmit()
   }
 
   return (
-    <EditProfileLayout 
-        isLoading={isLoading} 
-        onPress={handleSave}
-        onBack={() => setCurrentStep(currentStep - 1)}
-        isLastStep={true} 
+    <EditProfileLayout
+      isLoading={isLoading}
+      onPress={handleSave}
+      onBack={() => setCurrentStep(currentStep - 1)}
+      isLastStep={true}
     >
       <Text color="$colorFocus" fontWeight="600" mb="$2" fontSize="$6" textAlign="center">
         Seus esportes de interesse
       </Text>
-      
+
       <YStack maxHeight="75%">
         <CheckEsportesScreen
           setSelectedSports={setSelectedSports}

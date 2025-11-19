@@ -6,7 +6,7 @@ import { router } from 'expo-router'
 
 interface EditLayoutProps {
   children: React.ReactNode
-  onPress: () => void 
+  onPress: () => void
   onBack?: () => void
   isLoading: boolean
   isLastStep?: boolean
@@ -24,14 +24,14 @@ export default function EditProfileLayout(props: EditLayoutProps) {
   return (
     <ScrollView flex={1} marginBottom={20}>
       <YStack flex={1}>{props.children}</YStack>
-      
+
       <XStack width="100%" justifyContent="flex-end" marginVertical="$5">
         <CanceledButton
           disabled={props.isLoading}
           onPress={props.onBack || (() => router.back())}
           width="48%"
           message="Voltar"
-          display={'flex'} 
+          display={'flex'}
         />
         <Button
           disabled={props.isLoading}
@@ -39,7 +39,7 @@ export default function EditProfileLayout(props: EditLayoutProps) {
           height="$10"
           width="48%"
           minWidth="$minWidth"
-        backgroundColor="$color7"
+          backgroundColor="$color7"
           fontSize="$5"
           fontWeight="600"
         >

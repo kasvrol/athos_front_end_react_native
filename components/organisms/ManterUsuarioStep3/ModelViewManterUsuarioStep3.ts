@@ -37,12 +37,11 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
 
   const handleSubmit = async () => {
     if (selectedSports.length > 1) {
-      await registerUser({ ...props.values, sportList: selectedSports }
-);
+      await registerUser({ ...props.values, sportList: selectedSports })
 
       // Sucesso!
-      Alert.alert("Sucesso", "Conta criada com sucesso!");
-      router.replace('/login'); 
+      Alert.alert('Sucesso', 'Conta criada com sucesso!')
+      router.replace('/login')
     } else {
       setError('Selecione ao menos um esporte')
       return null

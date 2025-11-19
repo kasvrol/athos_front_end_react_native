@@ -1,18 +1,20 @@
-import { useState, useEffect, useRef } from 'react';
-import { Platform } from 'react-native';
-import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
-import Constants from 'expo-constants';
+import { useState, useEffect, useRef } from 'react'
+import { Platform } from 'react-native'
+import * as Device from 'expo-device'
+import * as Notifications from 'expo-notifications'
+import Constants from 'expo-constants'
 
 export function usePushNotifications() {
-  const [expoPushToken, setExpoPushToken] = useState<string | undefined>('');
-  const [notification, setNotification] = useState<Notifications.Notification | undefined>(undefined);
+  const [expoPushToken, setExpoPushToken] = useState<string | undefined>('')
+  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+    undefined,
+  )
 
-  const notificationListener = useRef<Notifications.Subscription | null>(null);
-  const responseListener = useRef<Notifications.Subscription | null>(null);
+  const notificationListener = useRef<Notifications.Subscription | null>(null)
+  const responseListener = useRef<Notifications.Subscription | null>(null)
 
   async function registerForPushNotificationsAsync() {
-    let token;
+    let token
 
     if (Platform.OS === 'android') {
       await Notifications.setNotificationChannelAsync('default', {
@@ -20,59 +22,60 @@ export function usePushNotifications() {
         importance: Notifications.AndroidImportance.MAX,
         vibrationPattern: [0, 250, 250, 250],
         lightColor: '#FF231F7C',
-      });
+      })
     }
 
     if (Device.isDevice) {
-      const { status: existingStatus } = await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      
+      const { status: existingStatus } = await Notifications.getPermissionsAsync()
+      let finalStatus = existingStatus
+
       if (existingStatus !== 'granted') {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
+        const { status } = await Notifications.requestPermissionsAsync()
+        finalStatus = status
       }
-      
+
       if (finalStatus !== 'granted') {
-        alert('Falha ao obter permissão para notificações push!');
-        return;
+        alert('Falha ao obter permissão para notificações push!')
+        return
       }
 
       try {
-          const projectId = Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
-          token = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
+        const projectId =
+          Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId
+        token = (await Notifications.getExpoPushTokenAsync({ projectId })).data
       } catch (e) {
-          token = (await Notifications.getExpoPushTokenAsync()).data;
+        token = (await Notifications.getExpoPushTokenAsync()).data
       }
     } else {
-      alert('Você precisa usar um dispositivo físico para receber notificações push');
+      alert('Você precisa usar um dispositivo físico para receber notificações push')
     }
 
-    return token;
+    return token
   }
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
 
     notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      setNotification(notification);
-    });
+      setNotification(notification)
+    })
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log('Usuário clicou na notificação:', response);
-    });
+      console.log('Usuário clicou na notificação:', response)
+    })
 
     return () => {
       if (notificationListener.current) {
-        notificationListener.current.remove();
+        notificationListener.current.remove()
       }
       if (responseListener.current) {
-        responseListener.current.remove();
+        responseListener.current.remove()
       }
-    };
-  }, []);
+    }
+  }, [])
 
   return {
     expoPushToken,
-    notification
+    notification,
   }
 }

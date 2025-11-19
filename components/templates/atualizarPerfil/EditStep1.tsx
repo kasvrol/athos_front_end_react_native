@@ -4,8 +4,12 @@ import EditProfileLayout from '@/components/templates/atualizarPerfil/EditProfil
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import { ModelViewLogin } from '@/components/organisms/ManterUsuarioStep1/ModelViewManterUsuarioStep1'
 
-export default function EditStep1({ setCurrentStep, currentStep, values, setValues }: ManterUsuarioViewProps) {
-
+export default function EditStep1({
+  setCurrentStep,
+  currentStep,
+  values,
+  setValues,
+}: ManterUsuarioViewProps) {
   const {
     nomeRef,
     emailRef,
@@ -14,7 +18,7 @@ export default function EditStep1({ setCurrentStep, currentStep, values, setValu
     showPassword,
     setShowPassword,
     handleSubmit,
-    isLoading
+    isLoading,
   } = ModelViewLogin({ setCurrentStep, currentStep, values, setValues })
 
   return (
@@ -31,7 +35,9 @@ export default function EditStep1({ setCurrentStep, currentStep, values, setValu
             color="white"
             autoCapitalize="words"
             defaultValue={values?.nome ?? ''} // Garante valor inicial
-            onChangeText={text => { nomeRef.current = text }}
+            onChangeText={text => {
+              nomeRef.current = text
+            }}
           />
         </YStack>
         <YStack>
@@ -46,12 +52,19 @@ export default function EditStep1({ setCurrentStep, currentStep, values, setValu
             keyboardType="email-address"
             defaultValue={values?.email ?? ''}
             autoCapitalize="none"
-            onChangeText={text => { emailRef.current = text }}
+            onChangeText={text => {
+              emailRef.current = text
+            }}
           />
         </YStack>
         <YStack>
           <Label htmlFor="senha">Senha</Label>
-          <XStack alignItems="center" borderWidth={1} borderColor={erro && !senhaRef.current ? '$borderColorError' : '$backgroundFocus'} borderRadius="$4">
+          <XStack
+            alignItems="center"
+            borderWidth={1}
+            borderColor={erro && !senhaRef.current ? '$borderColorError' : '$backgroundFocus'}
+            borderRadius="$4"
+          >
             <Input
               id="senha"
               height="$9"
@@ -59,7 +72,9 @@ export default function EditStep1({ setCurrentStep, currentStep, values, setValu
               borderWidth={0}
               backgroundColor="transparent"
               color="white"
-              onChangeText={text => { senhaRef.current = text }}
+              onChangeText={text => {
+                senhaRef.current = text
+              }}
               secureTextEntry={!showPassword}
             />
             <Square onPress={() => setShowPassword(!showPassword)} padding="$2" marginRight="$1">

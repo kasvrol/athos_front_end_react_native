@@ -33,14 +33,14 @@ export default function ManterUsuarioStep3Screen({
       <Text color="$colorFocus" fontWeight="600" mb="$2" fontSize="$6" textAlign="center">
         Selecione ao menos um esporte do seu interesse
       </Text>
-      <ScrollView 
-    height={250} 
-    nestedScrollEnabled={true} 
-   
-              borderColor="$borderColor"
-              borderRadius="$4"
-              borderWidth={2}
-              padding={'$2'}>
+      <ScrollView
+        height={250}
+        nestedScrollEnabled={true}
+        borderColor="$borderColor"
+        borderRadius="$4"
+        borderWidth={2}
+        padding={'$2'}
+      >
         <CheckEsportesScreen
           setSelectedSports={setSelectedSports}
           selectedSports={selectedSports}

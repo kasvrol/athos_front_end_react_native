@@ -48,7 +48,11 @@ export default function MenuScreen() {
           pressTheme
           title="Minhas Equipes"
           icon={<Users size="$5" color="$colorFocus" />}
-          onPress={() => handleNavigation('/(tabs)/menu/minhasEquipes' as RelativePathString | ExternalPathString)}
+          onPress={() =>
+            handleNavigation(
+              '/(tabs)/menu/minhasEquipes' as RelativePathString | ExternalPathString,
+            )
+          }
           paddingVertical="$3"
           paddingHorizontal="$4"
           backgroundColor="$background"

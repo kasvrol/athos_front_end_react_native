@@ -2,7 +2,7 @@ import type { SizeTokens } from 'tamagui'
 import { Label, RadioGroup, XStack } from 'tamagui'
 
 export function RadioGroupItemWithLabel(props: {
-    fontSize: string
+  fontSize: string
   size: SizeTokens
   value: string
   label: string

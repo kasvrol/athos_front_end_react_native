@@ -23,15 +23,20 @@ export default function AtualizarPerfil() {
   }, [user])
 
   const handleFinalSave = () => {
-    console.log("Salvando dados:", values);
-    if(user) {
-        setUser({ ...user, ...values });
+    console.log('Salvando dados:', values)
+    if (user) {
+      setUser({ ...user, ...values })
     }
-    alert("Perfil atualizado!");
-    router.back();
+    alert('Perfil atualizado!')
+    router.back()
   }
 
-  if (!values) return <LayoutComponent><Text>Carregando...</Text></LayoutComponent>;
+  if (!values)
+    return (
+      <LayoutComponent>
+        <Text>Carregando...</Text>
+      </LayoutComponent>
+    )
 
   return (
     <LayoutComponent>
@@ -50,20 +55,20 @@ export default function AtualizarPerfil() {
 
       {currentStep === 2 && (
         <EditStep2
-            setCurrentStep={setCurrentStep}
-            currentStep={currentStep}
-            values={values}
-            setValues={setValues}
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+          values={values}
+          setValues={setValues}
         />
       )}
 
       {currentStep === 3 && (
         <EditStep3
-            setCurrentStep={setCurrentStep}
-            currentStep={currentStep}
-            values={values}
-            setValues={setValues}
-            onFinalSubmit={handleFinalSave} 
+          setCurrentStep={setCurrentStep}
+          currentStep={currentStep}
+          values={values}
+          setValues={setValues}
+          onFinalSubmit={handleFinalSave}
         />
       )}
     </LayoutComponent>

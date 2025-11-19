@@ -38,48 +38,47 @@ export const postInformationUser = async (user: any) => {
 }
 
 export interface UsuarioBackDTO {
-  id: string | null;
-  nome: string;
-  email: string;
-  cpf: string | null;
-  foto: string | null;
-  dtCadastro: string; 
-  cep: string;
-  bairros: string[];
-  esportes: string[];
+  id: string | null
+  nome: string
+  email: string
+  cpf: string | null
+  foto: string | null
+  dtCadastro: string
+  cep: string
+  bairros: string[]
+  esportes: string[]
 }
 
 export const registerUser = async (dadosFront: any) => {
-  const url = `localhost/api/auth/register`;
+  const url = `192.168.1.23/api/auth/register`
 
   const payload = {
-    id: null, 
+    id: null,
     nome: dadosFront.nome,
     email: dadosFront.email,
-    senha: dadosFront.senha, 
-    cpf: null, 
-    foto: null, 
+    senha: dadosFront.senha,
+    cpf: null,
+    foto: null,
     dtCadastro: new Date().toISOString().split('T')[0],
-    cep: dadosFront.cep, 
+    cep: dadosFront.cep,
     bairros: dadosFront.bairros,
-    esportes: dadosFront.sportList
-  };
+    esportes: dadosFront.sportList,
+  }
 
-  console.log("📡 Enviando request para:", url);
-  console.log("📦 Payload:", JSON.stringify(payload, null, 2));
+  console.log('📡 Enviando request para:', url)
+  console.log('📦 Payload:', JSON.stringify(payload, null, 2))
 
   try {
     const response = await axios.post(url, payload)
-console.log("✅ Resposta recebida:", response);
+    console.log('✅ Resposta recebida:', response)
     // if (response) {
     //   const errorBody = await response
     //   throw new Error(`Erro ${response.status}: ${errorBody}`);
     // }
 
-    // const data = await response.data 
+    // const data = await response.data
     // return data;
-
   } catch (error) {
-    console.error("❌ Erro no registro:", error);
+    console.error('❌ Erro no registro:', error)
   }
-};
+}

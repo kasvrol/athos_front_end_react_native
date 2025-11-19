@@ -31,7 +31,9 @@ export default function ListarCampeonatos() {
           <Trophy color="$color10" />
         </XStack>
         <HeaderEventosCampeonatosView
-          routerButton={'/(tabs)/campeonatos/criarCampeonato' as RelativePathString | ExternalPathString}
+          routerButton={
+            '/(tabs)/campeonatos/criarCampeonato' as RelativePathString | ExternalPathString
+          }
           titleButton="CRIAR CAMPEONATO"
         />
 

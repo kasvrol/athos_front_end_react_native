@@ -38,21 +38,21 @@ export const ListaPartida = ({ partidas, isOrganizador, onEditPress }: ListaPart
             </Text>
           </XStack>
 
-            <Button
-              size="$2"
-              chromeless
-              backgroundColor="$color4"
-              color={'white'}
-              borderRadius={'$3'}
-              height={'$10'}
-              minHeight={'$minWidth'}
-              minWidth={'$minWidth'}
-              fontSize={'$5'}
-              fontWeight={'500'}
-              onPress={() => onEditPress(partida)}
-            >
-              Editar Placar
-            </Button>
+          <Button
+            size="$2"
+            chromeless
+            backgroundColor="$color4"
+            color={'white'}
+            borderRadius={'$3'}
+            height={'$10'}
+            minHeight={'$minWidth'}
+            minWidth={'$minWidth'}
+            fontSize={'$5'}
+            fontWeight={'500'}
+            onPress={() => onEditPress(partida)}
+          >
+            Editar Placar
+          </Button>
         </YStack>
       </Fragment>
     ))}

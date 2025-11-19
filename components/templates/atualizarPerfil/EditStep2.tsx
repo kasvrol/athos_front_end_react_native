@@ -21,32 +21,32 @@ export default function EditStep2({
 
   useEffect(() => {
     setBairros(bairrosCuritiba)
-    
+
     if (values?.cep) {
-       handleCEP(values.cep)
+      handleCEP(values.cep)
     }
   }, [])
 
   const transformAdressData = async (cepDigitado: string) => {
     setIsLoading(true)
     try {
-        const response: any = await getAdress(cepDigitado)
-        if (response) {
-            setDataCEP(response)
-        } else {
-            setError('CEP não encontrado.')
-        }
+      const response: any = await getAdress(cepDigitado)
+      if (response) {
+        setDataCEP(response)
+      } else {
+        setError('CEP não encontrado.')
+      }
     } catch (e) {
-        setError('Erro ao buscar CEP.')
+      setError('Erro ao buscar CEP.')
     } finally {
-        setIsLoading(false)
+      setIsLoading(false)
     }
   }
 
   const handleCEP = async (text: string) => {
     setCEP(text)
     const rawCep = text.replace(/[^\w\s]/gi, '')
-    
+
     if (rawCep.length === 8) {
       await transformAdressData(rawCep)
     }
@@ -59,13 +59,13 @@ export default function EditStep2({
     }
 
     setValues({ ...values, cep, bairros: selectedBairros })
-    
+
     setCurrentStep(currentStep + 1)
   }
 
   return (
-    <EditProfileLayout 
-      isLoading={isLoading} 
+    <EditProfileLayout
+      isLoading={isLoading}
       onPress={handleSubmit}
       onBack={() => setCurrentStep(currentStep - 1)}
     >
@@ -98,11 +98,11 @@ export default function EditStep2({
             color="$color"
             maxLength={8}
           />
-           {error && (
-              <Text color="$red10" fontSize="$3" marginVertical="$2">
-                {error}
-              </Text>
-            )}
+          {error && (
+            <Text color="$red10" fontSize="$3" marginVertical="$2">
+              {error}
+            </Text>
+          )}
         </YStack>
 
         <YStack gap="$1">

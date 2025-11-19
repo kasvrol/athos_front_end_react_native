@@ -14,28 +14,28 @@ export const NotificationComponent = () => {
           bg: '$color9',
           text: '$background',
           icon: <CheckCircle color="$background" />,
-          borderColor: '$color10'
+          borderColor: '$color10',
         }
       case 'error':
         return {
-          bg: '$backgroundError', 
+          bg: '$backgroundError',
           text: '$colorError',
           icon: <XCircle color="$colorError" />,
-          borderColor: '$borderColorError'
+          borderColor: '$borderColorError',
         }
       case 'warning':
         return {
-          bg: '#FFF8E1', 
+          bg: '#FFF8E1',
           text: '#FF8F00',
           icon: <AlertTriangle color="#FF8F00" />,
-          borderColor: '#FFD54F'
+          borderColor: '#FFD54F',
         }
-      default: 
+      default:
         return {
           bg: '$backgroundPress',
           text: '$color',
           icon: <Info color="$color" />,
-          borderColor: '$borderColor'
+          borderColor: '$borderColor',
         }
     }
   }
@@ -45,7 +45,7 @@ export const NotificationComponent = () => {
   return (
     <YStack
       position="absolute"
-      top={60} 
+      top={60}
       left={20}
       right={20}
       zIndex={9999}
@@ -71,21 +71,15 @@ export const NotificationComponent = () => {
       >
         <XStack gap="$3" alignItems="center" flex={1}>
           {config.icon}
-          <Text 
-            color={config.text} 
-            fontSize="$4" 
-            fontWeight="600"
-            flex={1}
-            numberOfLines={2}
-          >
+          <Text color={config.text} fontSize="$4" fontWeight="600" flex={1} numberOfLines={2}>
             {message}
           </Text>
         </XStack>
-        
-        <Button 
-          size="$2" 
-          circular 
-          chromeless 
+
+        <Button
+          size="$2"
+          circular
+          chromeless
           onPress={hideNotification}
           color={config.text}
           opacity={0.7}

@@ -65,9 +65,8 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
         }
 
         if (camp.status !== CampeonatoStatus.INSCRICOES_ABERTAS) {
-           setEquipes(mockEquipes.filter(e => e.campeonatoId === id));
+          setEquipes(mockEquipes.filter(e => e.campeonatoId === id))
         }
-        
       } catch (err) {
         setError('Falha ao carregar detalhes.')
       } finally {
@@ -102,20 +101,27 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
     setModalVisible(true)
   }
 
-  const handleSavePartida = (partidaId: string, placar1: number, placar2: number, finalizado: boolean) => {
-    setPartidas(prev => prev.map(p => {
-      if (p.id === partidaId) {
-        return {
-          ...p,
-          placarEquipe1: placar1,
-          placarEquipe2: placar2,
-          status: finalizado ? CampeonatoStatus.FINALIZADO : CampeonatoStatus.EM_ANDAMENTO
+  const handleSavePartida = (
+    partidaId: string,
+    placar1: number,
+    placar2: number,
+    finalizado: boolean,
+  ) => {
+    setPartidas(prev =>
+      prev.map(p => {
+        if (p.id === partidaId) {
+          return {
+            ...p,
+            placarEquipe1: placar1,
+            placarEquipe2: placar2,
+            status: finalizado ? CampeonatoStatus.FINALIZADO : CampeonatoStatus.EM_ANDAMENTO,
+          }
         }
-      }
-      return p
-    }))
-    
-    alert("Partida atualizada com sucesso!")
+        return p
+      }),
+    )
+
+    alert('Partida atualizada com sucesso!')
   }
 
   const renderContentByStatus = () => {
@@ -206,22 +212,21 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
         return (
           <YStack gap="$4" width="100%">
             {statusAtual === CampeonatoStatus.FINALIZADO && (
-   <XStack
-              justifyContent="center"
-              borderColor={'$borderColorError'}
-              alignItems="center"
-              marginBottom={'$3'}
-              height={'$9'}
-              borderWidth={1}
-              borderRadius={'$3'}
-              backgroundColor={'$backgroundError'}
-            >
-              <Paragraph textAlign="center" color={'$color1'} fontWeight={'700'}>
-                Este campeonato foi finalizado.
-              </Paragraph>
-            </XStack>
+              <XStack
+                justifyContent="center"
+                borderColor={'$borderColorError'}
+                alignItems="center"
+                marginBottom={'$3'}
+                height={'$9'}
+                borderWidth={1}
+                borderRadius={'$3'}
+                backgroundColor={'$backgroundError'}
+              >
+                <Paragraph textAlign="center" color={'$color1'} fontWeight={'700'}>
+                  Este campeonato foi finalizado.
+                </Paragraph>
+              </XStack>
             )}
-         
 
             <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
               Classificação
@@ -230,11 +235,11 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
             <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
               Partidas
             </H3>
-            <ListaPartida 
-                        partidas={partidas} 
-                        isOrganizador={isOrganizador} 
-                        onEditPress={handleEditMatch} 
-                    />
+            <ListaPartida
+              partidas={partidas}
+              isOrganizador={isOrganizador}
+              onEditPress={handleEditMatch}
+            />
           </YStack>
         )
 
@@ -284,10 +289,10 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
         {renderContentByStatus()}
 
         <ModalGerenciarPartida
-            visible={modalVisible}
-            partida={selectedPartida}
-            onClose={() => setModalVisible(false)}
-            onSave={handleSavePartida}
+          visible={modalVisible}
+          partida={selectedPartida}
+          onClose={() => setModalVisible(false)}
+          onSave={handleSavePartida}
         />
       </YStack>
     </LayoutDefault>

@@ -21,7 +21,7 @@ interface BuscadorProps {
 }
 
 export function Buscador({ onFiltrar, onLimpar }: BuscadorProps) {
-  const [date, setDate] = useState<Date | undefined>(undefined)  
+  const [date, setDate] = useState<Date | undefined>(undefined)
   const [selectedBairros, setSelectedBairros] = useState<string[]>([])
   const [selectedSports, setSelectedSports] = useState<string[]>([])
 
@@ -51,7 +51,7 @@ export function Buscador({ onFiltrar, onLimpar }: BuscadorProps) {
       elevation="$4"
       marginBottom="$4"
       zIndex={10}
-      position='absolute'
+      position="absolute"
     >
       <H4 fontWeight={'500'} color="$color2" textTransform="uppercase" textAlign="center">
         Filtrar Eventos
@@ -59,81 +59,81 @@ export function Buscador({ onFiltrar, onLimpar }: BuscadorProps) {
 
       <ScrollView maxHeight={400} showsVerticalScrollIndicator={false}>
         <YStack gap="$4">
-            <YStack gap="$2">
-                <RadioGroup aria-labelledby="Ordenar por:" defaultValue="data" name="form">
-      <YStack width={300} alignItems="center" gap="$3">
-        <RadioGroupItemWithLabel size={7} value="data" label="Data" fontSize="$3"/>
-        <RadioGroupItemWithLabel size={7} value="nome" label="Nome" fontSize="$3"/>
-      </YStack>
-    </RadioGroup>
-               
-            </YStack>
+          <YStack gap="$2">
+            <RadioGroup aria-labelledby="Ordenar por:" defaultValue="data" name="form">
+              <YStack width={300} alignItems="center" gap="$3">
+                <RadioGroupItemWithLabel size={7} value="data" label="Data" fontSize="$3" />
+                <RadioGroupItemWithLabel size={7} value="nome" label="Nome" fontSize="$3" />
+              </YStack>
+            </RadioGroup>
+          </YStack>
 
-            <YStack gap="$2">
-                <Label fontFamily="$body" color="$color">Esportes</Label>
-                 <ScrollView 
-    height={350} 
-    nestedScrollEnabled={true} 
-   
+          <YStack gap="$2">
+            <Label fontFamily="$body" color="$color">
+              Esportes
+            </Label>
+            <ScrollView
+              height={350}
+              nestedScrollEnabled={true}
               borderColor="$borderColor"
               borderRadius="$4"
               borderWidth={2}
               padding={'$2'}
->
-                      <CheckEsportesScreen 
-                    sportList={esportes}
-                    selectedSports={selectedSports}
-                    setSelectedSports={setSelectedSports}
-                />
-                </ScrollView>
-               
-            </YStack>
+            >
+              <CheckEsportesScreen
+                sportList={esportes}
+                selectedSports={selectedSports}
+                setSelectedSports={setSelectedSports}
+              />
+            </ScrollView>
+          </YStack>
 
-            <YStack gap="$2">
-                <Label fontFamily="$body" color="$color">Bairros</Label>
-                <ScrollView 
-    height={350} 
-    nestedScrollEnabled={true} 
-   
+          <YStack gap="$2">
+            <Label fontFamily="$body" color="$color">
+              Bairros
+            </Label>
+            <ScrollView
+              height={350}
+              nestedScrollEnabled={true}
               borderColor="$borderColor"
               borderRadius="$4"
               borderWidth={2}
               padding={'$2'}
->
-                     <CheckBairros 
-                        bairros={bairrosCuritiba}
-                        selectedBairros={selectedBairros} 
-                        setSelectedBairros={setSelectedBairros}
-                     />
-                </ScrollView>
-            </YStack>
+            >
+              <CheckBairros
+                bairros={bairrosCuritiba}
+                selectedBairros={selectedBairros}
+                setSelectedBairros={setSelectedBairros}
+              />
+            </ScrollView>
+          </YStack>
         </YStack>
       </ScrollView>
 
       <XStack gap="$3" marginTop="$2">
         <Button
-            flex={1}
-            onPress={handleClear}
-            backgroundColor="$backgroundPress"
-            borderColor="$borderColorError"
-            borderWidth={1}
-            color="$colorError"
-            fontWeight={'700'} 
-             height={'$9'}
-             fontSize={'$4'}
+          flex={1}
+          onPress={handleClear}
+          backgroundColor="$backgroundPress"
+          borderColor="$borderColorError"
+          borderWidth={1}
+          color="$colorError"
+          fontWeight={'700'}
+          height={'$9'}
+          fontSize={'$4'}
         >
-            LIMPAR
+          LIMPAR
         </Button>
         <Button
-            flex={1}
-            onPress={handleSearch}
-            backgroundColor="$color9"
-            color="$background"
-             height={'$9'}
-             fontWeight={'700'} 
-             fontSize={'$4'}
+          flex={1}
+          onPress={handleSearch}
+          backgroundColor="$color9"
+          color="$background"
+          height={'$9'}
+          fontWeight={'700'}
+          fontSize={'$4'}
         >
-            BUSCAR
+          BUSCAR
         </Button>
       </XStack>
     </YStack>

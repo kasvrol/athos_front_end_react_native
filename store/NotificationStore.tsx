@@ -10,14 +10,14 @@ interface NotificationState {
   hideNotification: () => void
 }
 
-export const useNotificationStore = create<NotificationState>((set) => ({
+export const useNotificationStore = create<NotificationState>(set => ({
   visible: false,
   message: '',
   type: 'info',
 
   showNotification: (message, type) => {
     set({ visible: true, message, type })
-    
+
     // Auto-hide após 3 segundos
     setTimeout(() => {
       set({ visible: false })

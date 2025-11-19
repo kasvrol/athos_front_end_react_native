@@ -16,18 +16,18 @@ enum TipoRecomendacao {
 export default function RecommendationsScreen() {
   const user = useUserStore(state => state.user)
   const [isLoading, setIsLoading] = useState(true)
-  
+
   const [activeTab, setActiveTab] = useState<TipoRecomendacao>(TipoRecomendacao.EVENTOS)
-  
+
   const [eventosRecomendados, setEventosRecomendados] = useState<typeof todosEventos>([])
   const [campeonatosRecomendados, setCampeonatosRecomendados] = useState<typeof mockCampeonatos>([])
 
   useEffect(() => {
     setIsLoading(true)
     setTimeout(() => {
-      setEventosRecomendados(todosEventos.slice(0, 5)) 
+      setEventosRecomendados(todosEventos.slice(0, 5))
       setCampeonatosRecomendados([mockCampeonatos[0]])
-      
+
       setIsLoading(false)
     }, 800)
   }, [user])
@@ -35,20 +35,20 @@ export default function RecommendationsScreen() {
   return (
     <LayoutDefault>
       {/* Cabeçalho */}
-      <XStack
-        justifyContent="center"
-        alignItems="center"
-        gap="$3"
-        marginTop={50}
-        marginBottom={10}
-      >
+      <XStack justifyContent="center" alignItems="center" gap="$3" marginTop={50} marginBottom={10}>
         <H2 color="$color10" fontFamily="$body" fontWeight="700" textAlign="center">
           Para Você
         </H2>
         <Star color="$color10" fill="currentColor" />
       </XStack>
 
-      <XStack width={'100%'} alignItems="center" justifyContent="center" gap={'$2'} marginBottom="$4">
+      <XStack
+        width={'100%'}
+        alignItems="center"
+        justifyContent="center"
+        gap={'$2'}
+        marginBottom="$4"
+      >
         <Button
           backgroundColor={activeTab === TipoRecomendacao.EVENTOS ? '$color9' : '$color6'}
           borderWidth={1}
@@ -82,39 +82,37 @@ export default function RecommendationsScreen() {
       {isLoading ? (
         <YStack flex={1} justifyContent="center" alignItems="center" height={300}>
           <Spinner size="large" color="$color9" />
-          <Text color="$color" marginTop="$4">Carregando recomendações...</Text>
+          <Text color="$color" marginTop="$4">
+            Carregando recomendações...
+          </Text>
         </YStack>
       ) : (
         <YStack gap="$4" paddingBottom="$8">
-          
           {activeTab === TipoRecomendacao.EVENTOS && (
             <YStack gap="$3">
-               {eventosRecomendados.length > 0 ? (
-                  eventosRecomendados.map((evento, index) => (
-                    <CardEvento key={index} {...evento} />
-                  ))
-                ) : (
-                  <Text color="$color5" textAlign="center" marginTop="$4">
-                    Nenhum evento recomendado encontrado.
-                  </Text>
-                )}
+              {eventosRecomendados.length > 0 ? (
+                eventosRecomendados.map((evento, index) => <CardEvento key={index} {...evento} />)
+              ) : (
+                <Text color="$color5" textAlign="center" marginTop="$4">
+                  Nenhum evento recomendado encontrado.
+                </Text>
+              )}
             </YStack>
           )}
 
           {activeTab === TipoRecomendacao.CAMPEONATOS && (
             <YStack gap="$3">
-                {campeonatosRecomendados.length > 0 ? (
-                  campeonatosRecomendados.map((camp) => (
-                    <CardCampeonato key={camp.id} campeonato={camp} />
-                  ))
-                ) : (
-                   <Text color="$color5" textAlign="center" marginTop="$4">
-                     Nenhum campeonato recomendado encontrado.
-                   </Text>
-                )}
+              {campeonatosRecomendados.length > 0 ? (
+                campeonatosRecomendados.map(camp => (
+                  <CardCampeonato key={camp.id} campeonato={camp} />
+                ))
+              ) : (
+                <Text color="$color5" textAlign="center" marginTop="$4">
+                  Nenhum campeonato recomendado encontrado.
+                </Text>
+              )}
             </YStack>
           )}
-
         </YStack>
       )}
     </LayoutDefault>

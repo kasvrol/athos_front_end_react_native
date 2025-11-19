@@ -11,9 +11,9 @@ import { Modal } from 'react-native'
 import { Buscador } from '@/components/organisms/filter'
 
 function ListarEventosView() {
-  const [todos, setTodos] = useState<any[]>([]) 
-  const [eventosFiltrados, setEventosFiltrados] = useState<any[]>([]) 
-  
+  const [todos, setTodos] = useState<any[]>([])
+  const [eventosFiltrados, setEventosFiltrados] = useState<any[]>([])
+
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showFilter, setShowFilter] = useState<boolean>(false)
 
@@ -26,17 +26,18 @@ function ListarEventosView() {
 
   const handleFiltrar = (filtros: { data?: string; locais: string[]; esportes: string[] }) => {
     setIsLoading(true)
-    
+
     const filtrados = todos.filter(evento => {
-        const matchEsporte = filtros.esportes.length === 0 || filtros.esportes.includes(evento.esporte)
-        
-        const matchLocal = filtros.locais.length === 0 || filtros.locais.some(bairro => 
-            evento.endereco.toLowerCase().includes(bairro.toLowerCase())
-        )
+      const matchEsporte =
+        filtros.esportes.length === 0 || filtros.esportes.includes(evento.esporte)
 
-        const matchData = !filtros.data || evento.data === filtros.data
+      const matchLocal =
+        filtros.locais.length === 0 ||
+        filtros.locais.some(bairro => evento.endereco.toLowerCase().includes(bairro.toLowerCase()))
 
-        return matchEsporte && matchLocal && matchData
+      const matchData = !filtros.data || evento.data === filtros.data
+
+      return matchEsporte && matchLocal && matchData
     })
 
     setEventosFiltrados(filtrados)
@@ -45,8 +46,8 @@ function ListarEventosView() {
   }
 
   const handleLimpar = () => {
-      setEventosFiltrados(todos)
-      setShowFilter(false)
+    setEventosFiltrados(todos)
+    setShowFilter(false)
   }
 
   return (
@@ -76,40 +77,34 @@ function ListarEventosView() {
         animationType="fade"
         transparent={true}
         visible={showFilter}
-        onRequestClose={() => setShowFilter(false)} 
+        onRequestClose={() => setShowFilter(false)}
       >
         <YStack
-            flex={1}
-            justifyContent="center"
-            alignItems="center"
-            backgroundColor="rgba(0,0,0,0.7)"
-            padding="$4"
+          flex={1}
+          justifyContent="center"
+          alignItems="center"
+          backgroundColor="rgba(0,0,0,0.7)"
+          padding="$4"
         >
-            <Buscador onFiltrar={handleFiltrar} onLimpar={handleLimpar} />
-            
-           
-            <Text 
-                onPress={() => setShowFilter(false)} 
-                color="white" 
-                marginTop="$4" 
-                fontWeight="bold"
-            >
-                Fechar
-            </Text>
+          <Buscador onFiltrar={handleFiltrar} onLimpar={handleLimpar} />
+
+          <Text onPress={() => setShowFilter(false)} color="white" marginTop="$4" fontWeight="bold">
+            Fechar
+          </Text>
         </YStack>
       </Modal>
 
       {isLoading ? (
-         <BasketballLoading />
+        <BasketballLoading />
       ) : (
         <YStack flex={1}>
-            {eventosFiltrados.length > 0 ? (
+          {eventosFiltrados.length > 0 ? (
             eventosFiltrados.map((evento, index) => <CardEvento key={index} {...evento} />)
-            ) : (
+          ) : (
             <Text textAlign="center" marginTop="$4" fontSize="$5" color="$color">
-                Nenhum evento encontrado com esses filtros.
+              Nenhum evento encontrado com esses filtros.
             </Text>
-            )}
+          )}
         </YStack>
       )}
     </LayoutDefault>
