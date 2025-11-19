@@ -1,7 +1,9 @@
-import { postInformationUser } from '@/middleware/usuario/singup'
+import { registerUser } from '@/middleware/usuario/singup'
 import { esportes } from '@/mock/esportes'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
+import { router } from 'expo-router'
 import { useEffect, useState } from 'react'
+import { Alert } from 'react-native'
 
 export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
   const [selectedSports, setSelectedSports] = useState<string[]>([])
@@ -15,7 +17,7 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
     // if(buscarEsportes.length){
     //   setSportList(buscarEsportes.length)
     // }else{
-    //   setErrorMap('Erro em buscar esportes. Por favor, tente novamente em breve.')
+    //   setError('Erro em buscar esportes. Por favor, tente novamente em breve.')
     // }
     setSportList(esportes)
     setIsLoading(false)
@@ -33,9 +35,14 @@ export const ModelViewThirdPage = (props: ManterUsuarioViewProps) => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (selectedSports.length > 1) {
-      return { ...props.values, sportList: selectedSports }
+      await registerUser({ ...props.values, sportList: selectedSports }
+);
+
+      // Sucesso!
+      Alert.alert("Sucesso", "Conta criada com sucesso!");
+      router.replace('/login'); 
     } else {
       setError('Selecione ao menos um esporte')
       return null

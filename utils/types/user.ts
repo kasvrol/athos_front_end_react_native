@@ -1,8 +1,8 @@
-import { Dispatch } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 export type SingUpViewProps = {
   children: React.ReactNode
-  onPress: () => boolean | null
+  onPress: () => boolean | null | Promise<boolean | null | undefined | void>;
   isLoading: boolean
   values: any
   setValues: Dispatch<any>
@@ -23,4 +23,5 @@ export type ManterUsuarioViewProps = {
   setCurrentStep: Dispatch<number>
   values: any
   setValues: Dispatch<any>
+  handleNext?:()=>void
 }

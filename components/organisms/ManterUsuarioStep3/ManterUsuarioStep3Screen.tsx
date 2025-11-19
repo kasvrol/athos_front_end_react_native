@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, YStack } from 'tamagui'
+import { ScrollView, Text, YStack } from 'tamagui'
 import { ModelViewThirdPage } from './ModelViewManterUsuarioStep3'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
 import CheckEsportesScreen from '@/components/molecules/checkEsportes/CheckEsportesScreen'
@@ -33,13 +33,20 @@ export default function ManterUsuarioStep3Screen({
       <Text color="$colorFocus" fontWeight="600" mb="$2" fontSize="$6" textAlign="center">
         Selecione ao menos um esporte do seu interesse
       </Text>
-      <YStack maxHeight="75%">
+      <ScrollView 
+    height={250} 
+    nestedScrollEnabled={true} 
+   
+              borderColor="$borderColor"
+              borderRadius="$4"
+              borderWidth={2}
+              padding={'$2'}>
         <CheckEsportesScreen
           setSelectedSports={setSelectedSports}
           selectedSports={selectedSports}
           sportList={sportList}
         />
-      </YStack>
+      </ScrollView>
     </SignupScreen>
   )
 }

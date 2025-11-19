@@ -36,3 +36,57 @@ export const getBairros = async (ibgeCode: string) => {
 export const postInformationUser = async (user: any) => {
   return await postRequest('', user)
 }
+
+export interface UsuarioBackDTO {
+  id: string | null;
+  nome: string;
+  email: string;
+  cpf: string | null;
+  foto: string | null;
+  dtCadastro: string; 
+  cep: string;
+  bairros: string[];
+  esportes: string[];
+}
+
+export const registerUser = async (dadosFront: any) => {
+  const url = `localhost:8080/api/auth/register`;
+
+  const payload = {
+    id: null, 
+    nome: dadosFront.nome,
+    email: dadosFront.email,
+    senha: dadosFront.senha, 
+    cpf: null, 
+    foto: null, 
+    dtCadastro: new Date().toISOString().split('T')[0],
+    cep: dadosFront.cep, 
+    bairros: dadosFront.bairros,
+    esportes: dadosFront.sportList
+  };
+
+  console.log("📡 Enviando request para:", url);
+  console.log("📦 Payload:", JSON.stringify(payload, null, 2));
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.text();
+      throw new Error(`Erro ${response.status}: ${errorBody}`);
+    }
+
+    const data = await response.json().catch(() => ({ success: true })); 
+    return data;
+
+  } catch (error) {
+    console.error("❌ Erro no registro:", error);
+  }
+};

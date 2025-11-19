@@ -20,6 +20,7 @@ export default function ManterUsuarioStep2Screen({
     error,
     isLoading,
     handleSubmit,
+    isButtonDisabled
   } = ManterUsuarioStep2({ setCurrentStep, currentStep, values, setValues })
 
   const props = {
@@ -29,10 +30,12 @@ export default function ManterUsuarioStep2Screen({
     setValues,
     setCurrentStep,
     currentStep,
+    isButtonDisabled
   }
 
   return (
     <SignupScreen {...props}>
+      <ScrollView >
       <Text
         color="$color10"
         textAlign="center"
@@ -51,7 +54,7 @@ export default function ManterUsuarioStep2Screen({
           <Input
             id="cep"
             onChangeText={(text: string) => handleCEP(text)}
-            value={cep ? cep : ''}
+            value={cep || ''}
             height="$9"
             fontSize="$3"
             placeholder="00000000"
@@ -81,14 +84,30 @@ export default function ManterUsuarioStep2Screen({
           />
         </YStack>
       </Form>
-      <CheckBairros
-        message={
-          ' Selecione ao menos um bairro que você possui interesse em participar de equipes:'
-        }
+      <Text fontWeight="500" mb="$2" fontSize="$4" textAlign="center" marginVertical="$4">
+Selecione ao menos um bairro que você possui interesse em participar de equipes:
+      </Text>
+
+      {bairros.length > 0 && !isLoading && (
+<ScrollView 
+    height={250} 
+    nestedScrollEnabled={true} 
+   
+              borderColor="$borderColor"
+              borderRadius="$4"
+              borderWidth={2}
+              padding={'$2'}>
+
+<CheckBairros
         bairros={bairros}
         selectedBairros={selectedBairros}
         setSelectedBairros={setSelectedBairros}
       />
+              </ScrollView>
+
+      )} 
+      </ScrollView>
+      
     </SignupScreen>
   )
 }

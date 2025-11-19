@@ -1,7 +1,7 @@
 import { getAdress, getBairros } from '@/middleware/usuario/singup'
 import { bairrosCuritiba } from '@/mock/bairrosCuritiba'
 import { ManterUsuarioViewProps } from '@/utils/types/user'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export const ManterUsuarioStep2 = ({
   setCurrentStep,
@@ -16,47 +16,51 @@ export const ManterUsuarioStep2 = ({
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [selectedBairros, setSelectedBairros] = useState<string[]>([])
 
+   const isButtonDisabled = selectedBairros.length === 0
+
   const buscarBairros = async (ibgeCode: string) => {
-    //const response = await getBairros(ibgeCode)
-
-    if (true) {
-      setBairros(bairrosCuritiba)
-      return null
+  try {
+    const response = await getBairros(ibgeCode)
+    
+    if (response?.bairros) {
+      setBairros(response.bairros)
+      setError(null)
+      return
     }
-
-    //setIsButtonDisabled(true)
+    
+    setBairros(bairrosCuritiba)
+  } catch (err) {
     setError('Erro ao buscar bairros da sua região. Tente novamente mais tarde.')
   }
+}
 
-  const transformAdressData = async (cep: string) => {
-    setIsLoading(true)
-    const response: any = await getAdress(cep)
+ const transformAdressData = async (cep: string) => {
+  setIsLoading(true)
+  try {
+    const response = await getAdress(cep)
+    console.log(response)
 
-    if (response) {
+    if (response?.ibge) {
       setDataCEP(response)
+      setError(null)
       await buscarBairros(response.ibge)
-      setIsLoading(false)
-      return null
+    } else {
+      setError('Erro ao buscar seu CEP. Tente novamente mais tarde.')
     }
-
-    //setIsButtonDisabled(true)
-    setIsLoading(false)
+  } catch (err) {
     setError('Erro ao buscar seu CEP. Tente novamente mais tarde.')
+  } finally {
+    setIsLoading(false)
   }
+}
 
   const handleCEP = async (value?: any) => {
-    setCEP(value)
-    const cepArray = value
-      .trim()
-      .replace(/[^\w\s]/gi, '')
-      .split('')
+   setCEP(value)
+  const cleaned = value.replace(/\D/g, '')
 
-    if (cepArray.length == 8) {
+  if (cleaned.length == 8) {
       transformAdressData(
-        cepArray
-          .join()
-          .replace(/[^\w\s]/gi, '')
-          .trim(),
+        cleaned
       )
     }
   }
@@ -73,7 +77,6 @@ export const ManterUsuarioStep2 = ({
     return true
   }
 
-  //setIsButtonDisabled(selectedBairros.length == 0)
 
   return {
     handleCEP,
@@ -85,5 +88,6 @@ export const ManterUsuarioStep2 = ({
     selectedBairros,
     isLoading,
     error,
+    isButtonDisabled
   }
 }

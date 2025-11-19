@@ -8,7 +8,7 @@ import { CanceledButton } from '@/components/atoms/buttons/canceledButton'
 import { BasketballLoading } from '@/components/atoms/loading/basketball'
 
 export default function SignupScreen(props: SingUpViewProps) {
-  const { currentStep, isThereUser, handleNext, handleBack, setIsButtonDisabled } =
+  const { currentStep, handleNext, handleBack, setIsButtonDisabled } =
     useSignupViewModel({
       onPress: props.onPress,
       values: props.values,
@@ -27,14 +27,15 @@ export default function SignupScreen(props: SingUpViewProps) {
 
   return (
     <YStack>
-      <YStack>{props.children}</YStack>
-      <XStack width="100%" justifyContent="flex-end" marginVertical="$5">
+      <YStack maxHeight={'85%'} minHeight={'60%'}>{props.children}</YStack>
+      <YStack height={'15%'}>
+         <XStack width="100%" justifyContent="flex-end" marginVertical="$5">
         <CanceledButton
           disabled={props.isLoading}
           onPress={handleBack}
           width="48%"
           message="Voltar"
-          display={currentStep === 1 && !isThereUser ? 'none' : 'flex'}
+          display={currentStep === 1? 'none' : 'flex'}
         />
         <Button
           disabled={props.isLoading}
@@ -42,7 +43,7 @@ export default function SignupScreen(props: SingUpViewProps) {
           height="$10"
           width="48%"
           minWidth="$minWidth"
-          backgroundColor="$backgroundFocus"
+          backgroundColor="$color4"
           fontSize="$5"
           fontWeight="600"
         >
@@ -60,11 +61,13 @@ export default function SignupScreen(props: SingUpViewProps) {
           fontWeight="600"
           color="$color10"
           onPress={() => router.push('/login')}
-          display={currentStep !== 1 || isThereUser ? 'none' : 'flex'}
+          display={currentStep !== 1 ? 'none' : 'flex'}
         >
           Já tem uma conta? Faça login
         </Button>
       </XStack>
+      </YStack>
+     
     </YStack>
   )
 }

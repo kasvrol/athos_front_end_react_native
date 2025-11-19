@@ -5,12 +5,9 @@ import { router } from 'expo-router'
 
 export function useSignupViewModel({
   onPress,
-  values,
-  setValues,
   setCurrentStep,
   currentStep,
 }: SingUpModelViewProps) {
-  const [isThereUser, setIsThereUser] = useState<any>(null)
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [submitError, setSubmitError] = useState<string | null>(null)
 
@@ -27,23 +24,13 @@ export function useSignupViewModel({
       return
     }
 
-    if (currentStep == 3 && isThereUser) {
+    if (currentStep == 3) {
       const result = onPress()
       if (result) {
-        await handleSubmit({ ...isThereUser, ...result })
+        await handleSubmit({...result })
       }
       return
     }
-
-    if (currentStep == 3 && !isThereUser) {
-      const result = onPress()
-      // if(result){
-      //   await handleSubmit(result)
-      // }
-      router.push('/criarEvento')
-    }
-
-    return
   }
 
   const handleBack = () => {
@@ -56,7 +43,6 @@ export function useSignupViewModel({
   return {
     currentStep,
     submitError,
-    isThereUser,
     isButtonDisabled,
     setIsButtonDisabled,
     handleNext,

@@ -1,4 +1,4 @@
-import { Input, Label, XStack, YStack, Text, Square } from 'tamagui'
+import { Input, Label, XStack, YStack, Text, Square, ScrollView } from 'tamagui'
 import { ModelViewLogin } from './ModelViewManterUsuarioStep1'
 import { router } from 'expo-router'
 import { Eye, EyeOff } from '@tamagui/lucide-icons'
