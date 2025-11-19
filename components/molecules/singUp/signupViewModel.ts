@@ -1,17 +1,12 @@
 import { useEffect, useState } from 'react'
 import { SingUpModelViewProps } from '@/utils/types/user'
-import { postInformationUser } from '@/middleware/usuario/singup'
 import { router } from 'expo-router'
 
 export function useSignupViewModel({ onPress, setCurrentStep, currentStep }: SingUpModelViewProps) {
   const [isButtonDisabled, setIsButtonDisabled] = useState(true)
   const [submitError, setSubmitError] = useState<string | null>(null)
 
-  const handleSubmit = async (user: any) => {
-    const result = await postInformationUser(user)
-    return result
-  }
-
+  
   const handleNext = async () => {
     setSubmitError(null)
 
@@ -21,10 +16,7 @@ export function useSignupViewModel({ onPress, setCurrentStep, currentStep }: Sin
     }
 
     if (currentStep == 3) {
-      const result = onPress()
-      if (result) {
-        await handleSubmit({ ...result })
-      }
+      await onPress()
       return
     }
   }
