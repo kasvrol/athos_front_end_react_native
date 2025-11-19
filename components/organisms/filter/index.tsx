@@ -1,12 +1,8 @@
 import { useState } from 'react'
 import { Button, H4, Label, ScrollView, YStack, XStack, RadioGroup } from 'tamagui'
-import { Calendar as CalendarIcon } from '@tamagui/lucide-icons'
-import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/datetimepicker'
-import { Platform } from 'react-native'
 import CheckBairros from '@/components/molecules/checkBairros/CheckBairrosScreen'
 import CheckEsportesScreen from '@/components/molecules/checkEsportes/CheckEsportesScreen'
 import { bairrosCuritiba } from '@/mock/bairrosCuritiba'
-import { esportes } from '@/mock/esportes'
 import { RadioGroupItemWithLabel } from '@/components/atoms/radioGroup'
 
 interface Filtros {
@@ -81,7 +77,6 @@ export function Buscador({ onFiltrar, onLimpar }: BuscadorProps) {
               padding={'$2'}
             >
               <CheckEsportesScreen
-                sportList={esportes}
                 selectedSports={selectedSports}
                 setSelectedSports={setSelectedSports}
               />

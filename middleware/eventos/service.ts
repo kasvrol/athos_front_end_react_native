@@ -29,4 +29,14 @@ export const participarEvento = async (inscricaoData: { eventoId: number }) => {
         console.error('Erro ao se inscrever:', error);
         throw error;
     }
-}
+};
+
+export const getMeusEventos = async (): Promise<any[]> => {
+  try {
+    const response = await api.get('/api/inscricoes/');
+    return response.data;
+  } catch (error) {
+    console.error('Erro ao buscar histórico:', error);
+    return [];
+  }
+};

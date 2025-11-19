@@ -6,7 +6,6 @@ export type Sport = {
 }
 
 export interface CheckEsportesScreenProps {
-  sportList: Sport[]
   selectedSports: string[]
   setSelectedSports: Dispatch<SetStateAction<string[]>>
 }

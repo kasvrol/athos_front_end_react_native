@@ -116,7 +116,6 @@ function CriarEventoView() {
             }
           >
             <CheckEsportesScreen
-              sportList={esportes}
               selectedSports={selectedSports}
               setSelectedSports={setSelectedSports}
             />

@@ -4,15 +4,15 @@ import { CheckEsportesViewModel } from './CheckEsportesViewModel'
 import { CheckEsportesScreenProps } from '@/utils/interfaces/esportes'
 
 export default function CheckEsportesScreen({
-  sportList,
   selectedSports,
   setSelectedSports,
 }: CheckEsportesScreenProps) {
-  const { toggleSport } = CheckEsportesViewModel({ setSelectedSports })
+  const { toggleSport,
+    listaEsportes } = CheckEsportesViewModel({ setSelectedSports })
 
   return (
     <XStack gap="$3" flexWrap="wrap" justifyContent="flex-start" borderColor={'$colorFocus'}>
-      {sportList.map(sport => {
+      {listaEsportes.map(sport => {
         const isChecked = selectedSports.includes(sport.name)
 
         return (

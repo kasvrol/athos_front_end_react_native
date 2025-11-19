@@ -230,7 +230,6 @@ export default function FormCampeonato() {
               }
             >
               <CheckEsportesScreen
-                sportList={esportes}
                 selectedSports={selectedSports}
                 setSelectedSports={setSelectedSports}
               />

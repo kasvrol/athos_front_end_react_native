@@ -53,7 +53,6 @@ export default function EditStep3({
         <CheckEsportesScreen
           setSelectedSports={setSelectedSports}
           selectedSports={selectedSports}
-          sportList={sportList}
         />
       </YStack>
     </EditProfileLayout>

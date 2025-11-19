@@ -44,7 +44,6 @@ export default function ManterUsuarioStep3Screen({
         <CheckEsportesScreen
           setSelectedSports={setSelectedSports}
           selectedSports={selectedSports}
-          sportList={sportList}
         />
       </ScrollView>
     </SignupScreen>
