@@ -15,6 +15,7 @@ import { ListaPartida } from '@/components/organisms/listaPartidas'
 import { ClassificacaoTabela } from '@/components/organisms/classificacaoTabela'
 import { ConfirmButton } from '@/components/atoms/confirmButton'
 import { BadgePlus, BadgeX, BowArrow, TableOfContents } from '@tamagui/lucide-icons'
+import { ModalGerenciarPartida } from '@/components/organisms/modalGerenciarPartida'
 
 interface CampeonatoDetalheScreenProps {
   id: string | string[]
@@ -24,6 +25,9 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
   const router = useRouter()
 
   const user = { id: 'user-capitao-1' }
+
+  const [modalVisible, setModalVisible] = useState(false)
+  const [selectedPartida, setSelectedPartida] = useState<Partida | null>(null)
 
   const [campeonato, setCampeonato] = useState<Campeonato | null>(null)
   const [partidas, setPartidas] = useState<Partida[]>([])
@@ -60,9 +64,10 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
           setClassificacao(mockClassificacao)
         }
 
-        // if (camp.status !== CampeonatoStatus.EM_ANDAMENTO || CampeonatoStatus.INSCRICOES_FECHADAS) {
-        //  //  setEquipes(mockEquipes.filter(e => e.campeonatoId === id));
-        // }
+        if (camp.status !== CampeonatoStatus.INSCRICOES_ABERTAS) {
+           setEquipes(mockEquipes.filter(e => e.campeonatoId === id));
+        }
+        
       } catch (err) {
         setError('Falha ao carregar detalhes.')
       } finally {
@@ -92,6 +97,27 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
     }, 1200)
   }
 
+  const handleEditMatch = (partida: Partida) => {
+    setSelectedPartida(partida)
+    setModalVisible(true)
+  }
+
+  const handleSavePartida = (partidaId: string, placar1: number, placar2: number, finalizado: boolean) => {
+    setPartidas(prev => prev.map(p => {
+      if (p.id === partidaId) {
+        return {
+          ...p,
+          placarEquipe1: placar1,
+          placarEquipe2: placar2,
+          status: finalizado ? CampeonatoStatus.FINALIZADO : CampeonatoStatus.EM_ANDAMENTO
+        }
+      }
+      return p
+    }))
+    
+    alert("Partida atualizada com sucesso!")
+  }
+
   const renderContentByStatus = () => {
     if (!campeonato) return null
 
@@ -103,7 +129,7 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
               {campeonato.descricao}
             </Paragraph>
             <ConfirmButton
-              functionButton={() => router.push(`/(tabs)/campeonatos/inscrever?campId=${id}`)}
+              functionButton={() => router.push(`/(tabs)/campeonatos/criarEquipe?campId=${id}`)}
               titleButton={'INSCREVER MINHA EQUIPE'}
               icon={<BadgePlus />}
             />
@@ -176,24 +202,11 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
         )
 
       case CampeonatoStatus.EM_ANDAMENTO:
-        return (
-          <YStack gap="$4" width="100%">
-            {isOrganizador && <Button onPress={() => {}}>Painel do Organizador</Button>}
-            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
-              Classificação
-            </H3>
-            <ClassificacaoTabela classificacao={classificacao} />
-            <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
-              Partidas
-            </H3>
-            <ListaPartida partidas={partidas} isOrganizador={isOrganizador} />
-          </YStack>
-        )
-
       case CampeonatoStatus.FINALIZADO:
         return (
           <YStack gap="$4" width="100%">
-            <XStack
+            {statusAtual === CampeonatoStatus.FINALIZADO && (
+   <XStack
               justifyContent="center"
               borderColor={'$borderColorError'}
               alignItems="center"
@@ -207,15 +220,21 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
                 Este campeonato foi finalizado.
               </Paragraph>
             </XStack>
+            )}
+         
 
             <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
-              Classificação Final
+              Classificação
             </H3>
             <ClassificacaoTabela classificacao={classificacao} />
             <H3 textAlign="center" fontWeight={'500'} color={'$borderColorFocus'}>
-              Resultados
+              Partidas
             </H3>
-            <ListaPartida partidas={[mockPartidas[0]]} isOrganizador={isOrganizador} />
+            <ListaPartida 
+                        partidas={partidas} 
+                        isOrganizador={isOrganizador} 
+                        onEditPress={handleEditMatch} 
+                    />
           </YStack>
         )
 
@@ -263,6 +282,13 @@ export default function CampeonatoDetalheScreen({ id }: CampeonatoDetalheScreenP
         </YStack>
 
         {renderContentByStatus()}
+
+        <ModalGerenciarPartida
+            visible={modalVisible}
+            partida={selectedPartida}
+            onClose={() => setModalVisible(false)}
+            onSave={handleSavePartida}
+        />
       </YStack>
     </LayoutDefault>
   )
