@@ -45,6 +45,7 @@ function CriarEventoView() {
     setShowDatePicker,
     validacaoCampos,
     onTimeChange,
+    onSubmit
   } = CriarEventoModelView()
 
   return (
@@ -278,7 +279,7 @@ function CriarEventoView() {
 
         <Button
           height="$9"
-          // onPress={()=>handleSubmit()}
+          onPress={()=>onSubmit()}
           disabled={isLoading}
           backgroundColor={isLoading ? '$backgroundPress' : '$color9'}
           color={isLoading ? '$color' : '$background'}

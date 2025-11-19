@@ -1,7 +1,7 @@
 import { Dispatch } from 'react'
 
 export interface UserLogin {
-  login: string
+  email: string
   password: string
 }
 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useRouter } from 'expo-router'
 import { getAdress } from '@/middleware/usuario/singup'
 import { DateTimePickerEvent } from '@react-native-community/datetimepicker'
+import { createEvento } from '@/middleware/eventos/service'
 
 export const CriarEventoModelView = () => {
   const initialValues = {
@@ -97,12 +98,29 @@ export const CriarEventoModelView = () => {
     }
   }
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     setIsLoading(true)
-    //criarEvento
+    
+    try {
+        const payload = {
+            titulo: initialValues.titulo, 
+            descricao: initialValues.descricao,
+            dataHora: date.toISOString(),
+            endereco: adress.endereco,
+            bairro: adress.bairro,
+            cidade: adress.cidade,
+            cep: initialValues.cep,
+            esporte: selectedSports[0], 
+            maxParticipantes: 20,
+        }
 
-    setIsLoading(false)
-    router.push('/(tabs)/recomendacoes')
+        await createEvento(payload)
+        router.push('/(tabs)/eventos') // Volta para lista
+    } catch (e) {
+        alert('Erro ao criar evento')
+    } finally {
+        setIsLoading(false)
+    }
   }
 
   return {
@@ -120,5 +138,6 @@ export const CriarEventoModelView = () => {
     setShowDatePicker,
     validacaoCampos,
     onTimeChange,
+    onSubmit
   }
 }

@@ -1,16 +1,16 @@
 import { create } from 'zustand'
-import { UserData } from '@/utils/interfaces/user'
 
-interface UserStoreState {
-  user: UserData | null
-  setUser: (userData: UserData) => void
-  clearUser: () => void
+interface Bairro {
+  id: number
+  name: string
 }
 
-export const useUserStore = create<UserStoreState>(set => ({
-  user: null,
+interface LocalStoreState {
+  bairros: Bairro[]
+  setBairros: (bairros: Bairro[]) => void
+}
 
-  setUser: userData => set({ user: userData }),
-
-  clearUser: () => set({ user: null }),
+export const useLocalStore = create<LocalStoreState>(set => ({
+  bairros: [],
+  setBairros: (bairros) => set({ bairros }),
 }))
