@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { H2, Text, XStack, YStack } from 'tamagui'
 import { Modal } from 'react-native'
 import { Buscador } from '@/components/organisms/filter'
+import { getAllEventos } from '@/middleware/eventos/service'
 
 function ListarEventosView() {
   const [todos, setTodos] = useState<any[]>([])
@@ -17,25 +18,38 @@ function ListarEventosView() {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [showFilter, setShowFilter] = useState<boolean>(false)
 
-  useEffect(() => {
+  const fetchData = async () => {
     setIsLoading(true)
-    setTodos(todosEventos)
-    setEventosFiltrados(todosEventos)
-    setIsLoading(false)
+    try {
+        const data = await getAllEventos()
+        setTodos(data)
+        setEventosFiltrados(data)
+    } catch (e) {
+        console.log("Erro ao carregar eventos")
+    } finally {
+        setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
   }, [])
 
   const handleFiltrar = (filtros: { data?: string; locais: string[]; esportes: string[] }) => {
     setIsLoading(true)
 
     const filtrados = todos.filter(evento => {
+      const esporteNome = typeof evento.esporte === 'string' ? evento.esporte : evento.esporte?.nome;
+      
       const matchEsporte =
-        filtros.esportes.length === 0 || filtros.esportes.includes(evento.esporte)
+        filtros.esportes.length === 0 || filtros.esportes.includes(esporteNome)
 
       const matchLocal =
         filtros.locais.length === 0 ||
-        filtros.locais.some(bairro => evento.endereco.toLowerCase().includes(bairro.toLowerCase()))
+        filtros.locais.some(bairro => evento.endereco?.toLowerCase().includes(bairro.toLowerCase()) || evento.bairro?.toLowerCase().includes(bairro.toLowerCase()))
 
-      const matchData = !filtros.data || evento.data === filtros.data
+      const eventoData = evento.dataHora ? new Date(evento.dataHora).toLocaleDateString('pt-BR') : evento.data
+      const matchData = !filtros.data || eventoData === filtros.data
 
       return matchEsporte && matchLocal && matchData
     })

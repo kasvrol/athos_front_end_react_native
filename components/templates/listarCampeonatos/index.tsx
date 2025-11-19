@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { H2, ScrollView, Text, XStack, YStack } from 'tamagui'
 import LayoutComponent from '@/components/atoms/layout'
-import { mockCampeonatos } from '@/mock/campeonatos'
 import { BasketballLoading } from '@/components/atoms/loading/basketball'
 import HeaderEventosCampeonatosView from '@/components/organisms/headerEventosCampeonatos'
 import { Trophy } from '@tamagui/lucide-icons'
 import { ExternalPathString, RelativePathString } from 'expo-router'
 import { Campeonato } from '@/utils/interfaces/campeonatos'
 import { CardCampeonato } from '@/components/organisms/cardCampeonato'
+import { getAllCampeonatos } from '@/middleware/campeonato/service'
 
 export default function ListarCampeonatos() {
   const [campeonatos, setCampeonatos] = useState<Campeonato[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const [error, setError] = useState<string>('')
 
   useEffect(() => {
-    setIsLoading(true)
-    setError('')
-    setCampeonatos(mockCampeonatos)
-    setIsLoading(false)
+    const fetchCamp = async () => {
+        setIsLoading(true)
+        try {
+            const data = await getAllCampeonatos()
+            setCampeonatos(data)
+        } catch(err) {
+            setError('Erro ao carregar campeonatos.')
+        } finally {
+            setIsLoading(false)
+        }
+    }
+    fetchCamp()
   }, [])
 
   return (

@@ -1,4 +1,5 @@
 import { CardEvento } from '@/components/organisms/cardEvento'
+import { getMeusEventos } from '@/middleware/eventos/service'
 import { todosEventos } from '@/mock/eventosEsportivos'
 import { useEffect, useState } from 'react'
 import { YStack, Text, ScrollView } from 'tamagui'
@@ -13,31 +14,38 @@ interface ListarHistoricoProps {
 }
 
 export const ListarHistorico = ({ secao }: ListarHistoricoProps) => {
-  const [eventos, setEventos] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [error, setError] = useState<string>('')
+  const [historico, setHistorico] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    setIsLoading(true)
-    //const todosEventos = buscarEventos()
-    setEventos(todosEventos)
-    setIsLoading(false)
+    const fetchHistory = async () => {
+        setIsLoading(true)
+        try {
+            const data = await getMeusEventos()
+            setHistorico(data)
+        } catch (err) {
+            console.log(err)
+        } finally {
+            setIsLoading(false)
+        }
+    }
+    fetchHistory()
   }, [])
 
   return (
     <ScrollView>
       {secao === SecaoUsuario.ORGANIZADOR ? (
         <YStack>
-          {!error && !isLoading && eventos.length > 0 ? (
-            eventos.map((evento, index) => <CardEvento key={index} {...evento} />)
+          { !isLoading && historico.length > 0 ? (
+            historico.map((evento, index) => <CardEvento key={index} {...evento} />)
           ) : (
             <Text>Nenhum evento encontrado.</Text>
           )}
         </YStack>
       ) : (
         <YStack>
-          {!error && !isLoading && eventos.length > 0 ? (
-            eventos.map((evento, index) => <CardEvento key={index} {...evento} />)
+          {!isLoading && historico.length > 0 ? (
+            historico.map((evento, index) => <CardEvento key={index} {...evento} />)
           ) : (
             <Text>Nenhum evento encontrado.</Text>
           )}
